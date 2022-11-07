@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{parent()}} | Accueil{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+    
+    <main class="example-wrapper">
+        <section>
+
+            <h1>TRT Conseil</h1>
+            <h2>{{ titlepage }}</h2>
+
+        </section>
+
+        <section>
+
+            <p>TRT Cnseil est une agence de recrutement spécialisée dans l'hottellerie et restauration. Fondée en 2014, la société s'est agrandie au fil des ans et possède dorénavant plus de 12 centres dispersés aux quatre coins de la France.</p>
+            <p>Nous sommes là pour vous aider dans vos recherches.</p>
+
+        </section>
+
+        <section>
+
+            <p>Plusieurs choix sont à votre disposition :</p>
+            <ul>
+                <li>En agence, sur Rendez-vous, avec un de nos conseillers.</li>
+                <li>En créant un compte sur notre site</li>
+            <ul>
+            <p> Une fois la création de votre compte validé, vous pouvez déposer votre offre d'emploi ou postuler pour une annonce.</p>
+
+            <div class="btnCreate">
+            
+                <button class="btn btn-primary" alt="Créer un compte" title="Créer un compte" type="submit">Créer un compte</button>
+                <button class="btn btn-primary" alt="Connectez-vous à votre espace" title="Connectez-vous à votre espace" type="submit">Connectez-vous</button>
+
+            </div>
+
+
+            <p>Actuellement, nous avons "METTRE LE NBRE TOTAL ANNONCES" d'offres d'emploi et "METTRE TOTAL DE CANDIDATE" candidats.</p>
+        </section>
+
+
+    </main>
+{% endblock %}
