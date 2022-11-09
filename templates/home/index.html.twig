@@ -1,14 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} {{parent()}} | Accueil{% endblock %}
+{% block title %}Accueil | {{parent()}}{% endblock %}
+
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-    
-    <main class="example-wrapper">
+{% block header %}
+	{{ parent() }}
+{% endblock %}
+
+
+    <main class="container-fluid mt-3">
+        <div class="btnCreate">
+
+<a href="{{ path('register') }}" type="button" class="btn btn-info" alt="Créer un compte" title="Créer un compte" type="submit">Créer un compte</ahref="#"type="button">
+
+            <a href="#" type="button" class="btn btn-info" alt="Connectez-vous à votre espace" title="Connectez-vous à votre espace" type="submit">Connectez-vous</a href="#" type="button">
+
+        </div>
+
         <section>
 
             <h1>TRT Conseil</h1>
@@ -29,15 +38,10 @@
             <ul>
                 <li>En agence, sur Rendez-vous, avec un de nos conseillers.</li>
                 <li>En créant un compte sur notre site</li>
-            <ul>
+            </ul>
             <p> Une fois la création de votre compte validé, vous pouvez déposer votre offre d'emploi ou postuler pour une annonce.</p>
 
-            <div class="btnCreate">
             
-                <button class="btn btn-primary" alt="Créer un compte" title="Créer un compte" type="submit">Créer un compte</button>
-                <button class="btn btn-primary" alt="Connectez-vous à votre espace" title="Connectez-vous à votre espace" type="submit">Connectez-vous</button>
-
-            </div>
 
 
             <p>Actuellement, nous avons "METTRE LE NBRE TOTAL ANNONCES" d'offres d'emploi et "METTRE TOTAL DE CANDIDATE" candidats.</p>
