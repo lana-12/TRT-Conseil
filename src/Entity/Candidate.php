@@ -30,8 +30,9 @@ class Candidate
     #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Apply::class)]
     private Collection $applies;
 
-    #[ORM\ManyToOne(inversedBy: 'Candidate')]
+    #[ORM\ManyToOne(inversedBy: 'Candidates')]
     private ?User $user = null;
+
 
     public function __construct()
     {
@@ -132,4 +133,5 @@ class Candidate
 
         return $this;
     }
+
 }

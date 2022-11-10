@@ -58,7 +58,7 @@ class RegistrationType extends AbstractType
                     'label'=> 'Confirmer le mot de passe',
                 'constraints' => [
                     new NotBlank(['message' => 'Veuillez saisir le même mot de passe!']),
-                    new Length(['min' => 8, 'max' => 100, 'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',]),
+                    new Length(['min' => 6, 'max' => 100, 'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',]),
                     ]
                 ],
             ]);

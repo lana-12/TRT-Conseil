@@ -1,14 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CandidateController!{% endblock %}
+{% block title %}Candidats | {{ parent() }}{% endblock %}
 
 {% block body %}
-{% block header %}
 	{{ parent() }}
-{% endblock %}
 
 
-<main class="example-wrapper">
+<main class="container">
     <h2>{{ titlepage }}! </h2>
 
     AVOIR LORS DU LA VALIDATION PAR EMAIL LE REDIRIGER VER PROFIL-NEW

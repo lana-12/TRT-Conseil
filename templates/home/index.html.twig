@@ -4,23 +4,27 @@
 
 
 {% block body %}
-{% block header %}
 	{{ parent() }}
-{% endblock %}
 
-
-    <main class="container-fluid mt-3">
+    <main class="container mt-3">
         <div class="btnCreate">
+{% if app.user %}
 
-<a href="{{ path('register') }}" type="button" class="btn btn-info" alt="Créer un compte" title="Créer un compte" type="submit">Créer un compte</ahref="#"type="button">
+    <p>
+    {{ app.user.Active ? 'active': 'inactive'}}
+    {{ app.user.email}}
+    </p>
+
+    {% else %}
+            <a href="{{ path('app_register') }}" type="button" class="btn btn-info" alt="Créer un compte" title="Créer un compte" type="submit">Créer un compte</ahref="#"type="button">
 
             <a href="#" type="button" class="btn btn-info" alt="Connectez-vous à votre espace" title="Connectez-vous à votre espace" type="submit">Connectez-vous</a href="#" type="button">
+{% endif %}
 
         </div>
 
         <section>
 
-            <h1>TRT Conseil</h1>
             <h2>{{ titlepage }}</h2>
 
         </section>

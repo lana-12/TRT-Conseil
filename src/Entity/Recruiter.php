@@ -36,6 +36,7 @@ class Recruiter
     #[ORM\ManyToOne(inversedBy: 'Recruiters')]
     private ?User $user = null;
 
+
     public function __construct()
     {
         $this->jobOffers = new ArrayCollection();
@@ -147,4 +148,5 @@ class Recruiter
 
         return $this;
     }
+
 }

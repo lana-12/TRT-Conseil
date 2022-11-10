@@ -10,42 +10,49 @@
 					<li class="nav-item">
 						<a class="nav-link active" aria-current="page" href="{{ path('home') }}" alt="Retour vers Accueil" title="Retour vers Accueil">Accueil</a>
 					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							Recruteurs
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-							<li>
-								<a class="dropdown-item" href="#">Profil</a>
-							</li>
-							<li>
-								<a class="dropdown-item" href="{{ path('recruiter') }}">Annonce</a>
-							</li>
-							{# <li>
-								<a class="dropdown-item" href="#">Something else here</a>
-							</li> #}
-						</ul>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							Candidats
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-							<li>
-								<a class="dropdown-item" href="#">Profil</a>
-							</li>
-							<li>
-								<a class="dropdown-item" href="{{ path('candidate') }}">Annonce</a>
-							</li>
-							{# <li>
-								<a class="dropdown-item" href="#">Something else here</a>
-							</li> #}
-						</ul>
+					<li class="nav-item">
+						<a class="nav-link "  href="{{ path('jobOffer') }}" alt="Liste d'offres d'emploi" title="Liste d'offres d'emploi">Offres d'emploi</a>
 					</li>
 					<li class="nav-item">
+						<a class="nav-link "  href="{{ path('candidate') }}" alt="Liste des candidats" title="Liste des candidats">Candidatures</a>
+					</li>
+					<li class="nav-item ">
 						<a class="nav-link" href="{{ path('contact') }}" alt="Formulaire de contact" title="Formulaire de contact">Contact</a>
 					</li>
 				</ul>
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+				{% if app.user %}
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle active" href="#" aria-current="page" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mon Compte</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+							<li>
+								<a class="dropdown-item" href="{{ path('profilR')}}">Profil</a>
+							</li>
+
+							{% if is_granted('ROLE_RECRUITER') %}
+								<li>
+									<a class="dropdown-item" href="#" alt="Accéder aux annonces" title="Accéder aux annonces">Annonce</a>
+								</li>
+							{% endif %}
+
+							<li>
+								<a class="dropdown-item" href="{{ path('app_logout') }}" alt="Me déconnecter" title="Me déconnecter">Me Déconnecter</a>
+							</li>
+						</ul>
+					</li>
+				{% else %}
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_register') }}" alt="Lien pour créer un compte" title="Lien pour créer un compte">M'inscrire</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_login') }}" alt="Vous connectez" title="Vous connectez">Me connecter</a>
+					</li>
+				{% endif %}
+				</ul>
+
+
+
 			</div>
 		</div>
 	</nav>

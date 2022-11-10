@@ -1,61 +1,44 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 
-{% block title %}S'inscrire |
-	{{parent()}}
-{% endblock %}
-
-
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
-<style>
-	.example-wrapper {
-		margin: 1em auto;
-		max-width: 800px;
-		width: 95%;
-		font: 18px / 1.5 sans-serif;
-	}
-	.example-wrapper code {
-		background: #F5F5F5;
-		padding: 2px 6px;
-	}
-</style>
-
-    <main class="example-wrapper">
-
-        <h2>Création d'un compte de connexion</h2>
-{% for message in app.flashes('success') %}
-	<div class="alert alert-success mt-4 text-center">
-		{{ message }}
-	</div>
-
-{% endfor %}
+{{ parent() }}
 
 
-		{{ form_start(formRegister)}}	
+    <section class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Inscription</h1>
 
-<div class="form-group">
-{{ form_row(formRegister.type, {'label':'Vous êtes un : ',}) }}
-</div>
+                {# {% for message in app.flashes('success') %}
+                    <div class="alert alert-success mt-4 text-center">
+                        {{ message }}
+                    </div>
+                {% endfor %} #}
 
-<div class="form-group">
-    {{ form_row(formRegister.email, {'label':'Email','attr': {'placeholder':'exemple@exemple.fr'}}) }}
-</div>
+            {{ form_start(registrationForm) }}
 
-<div class="form-group  ">
-	{{ form_row(formRegister.password,) }}
+                <fieldset class="mb-3">
+                    <legend>Mon Compte de connexion</legend>
+                        {{ form_row(registrationForm.type,{'label':'Vous êtes un : ',}) }}
+                        {{ form_row(registrationForm.email, {'label':'E-mail','attr': {'placeholder':'exemple@exemple.fr'}}) }}
+                        {{ form_row(registrationForm.password, {
+                                label: 'Mot de passe'
+                            }) }}
+                        {{ form_row(registrationForm.rgpdConsent, {
+                                label: 'En m\'inscrivant sur ce site, j\'accepte voir ce que je mets'
+                            }) }}
+                
+                </fieldset>
 
-</div>
+                <button type="submit" class="btn btn-lg btn-info my-3">M'inscrire</button>
+                {{ form_end(registrationForm) }}
+                
+            </div>
 
+        </div>
+    </section>
 
-
-
-<button class="btn btn-primary  mx-auto m-5" type='submit'>{{ button_label|default('Enregistrer')}}</button>
-
-
-{{ form_rest(formRegister) }}
-
-
-
-
-    </main>
+    
 {% endblock %}

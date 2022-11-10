@@ -17,4 +17,12 @@ class RecruiterController extends AbstractController
             'titlepage' => 'Recruiter',
         ]);
     }
+    
+    #[Route('/profil', name: 'profilR')]
+    public function profil(): Response
+    {
+        return $this->render('recruiter/profil.html.twig', [
+            'titlepage' => 'Profil',
+        ]);
+    }
 }
