@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil |
+	{{parent()}}
+{% endblock %}
+
+
+{% block body %}
+	{{ parent() }}
+
+	<main class="container mt-3">
+
+
+		<section class="container">
+			<div class="row">
+				<div class="col">
+					<h2>{{ titlepage }}</h2>
+
+					{# {% for message in app.flashes('success') %}
+															<div class="alert alert-success mt-4 text-center">
+																{{ message }}
+															</div>
+														{% endfor %} #}
+
+					{{ form_start(candidateForm) }}
+
+					<fieldset class="mb-3">
+						<legend>Mon Compte de connexion</legend>
+						{{ form_row(candidateForm.firstname,{'label':'Nom ',}) }}
+
+						{{ form_row(candidateForm.lastname, {'label':'Prénom'}) }}
+						
+						{{ form_row(candidateForm.cv, {
+										label: 'CV'}) }}
+
+                        {# <div>
+						{{ form_row(candidateForm.cvFile, {
+										label: 'CV'}) }}
+                        </div> #}
+					{# {% if app.user %}
+						{{ form_row(candidateForm.user, {
+										label: 'Compte utilisateur',value: '{{ app.user.email }}'
+															}) }}
+
+					{% endif %}
+					#}
+
+				</fieldset>
+
+				<button type="submit" class="btn btn-lg btn-info my-3">Enregistrer</button>
+				{{ form_end(candidateForm) }}
+
+			</div>
+
+		</div>
+	</section>
+
+</main>{% endblock %}
+

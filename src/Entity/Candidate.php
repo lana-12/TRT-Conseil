@@ -2,12 +2,19 @@
 
 namespace App\Entity;
 
-use App\Repository\CandidateRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Vich\UploaderBundle\Mapping\Annotation\Uploadable;
+use App\Entity\Apply;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CandidateRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: CandidateRepository::class)]
+// #[Vich\Uploadable]
+
+
 class Candidate
 {
     #[ORM\Id]
@@ -24,7 +31,7 @@ class Candidate
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $cv = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable:true)]
     private ?bool $active = null;
 
     #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Apply::class)]

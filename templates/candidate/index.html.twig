@@ -11,5 +11,16 @@
 
     AVOIR LORS DU LA VALIDATION PAR EMAIL LE REDIRIGER VER PROFIL-NEW
 
+<pre>
+    {{ dump(candidates) }}
+</pre>
+<div>
+{% for candidate in candidates %}
+    
+    {{ candidate.cv}}
+<a href="{{ asset('uploads/cvs/' ~ candidate.cv ) }} " target="_blank">Voir le CV</a>
+{% endfor %}
+</div>
+
 </main>
 {% endblock %}

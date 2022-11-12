@@ -80,7 +80,7 @@ class RegistrationController extends AbstractController
             $this->addFlash('info', 'Un email d\'Activation vous attend dans votre boîte Mail, cliquez sur le lien que vous avez reçu');
 
 
-            
+            // a rechercher c'est koi ???
             return $userAuthenticator->authenticateUser(
                 $user,
                 $authenticator,
