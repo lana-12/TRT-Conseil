@@ -26,7 +26,6 @@ class JWTService
         
         }
 
-
         //on encode en base64 json
         $base64Header = base64_encode(json_encode($header));
         $base64Payload = base64_encode(json_encode($payload));
@@ -52,7 +51,6 @@ class JWTService
     }
 
     //on verifie que le token est valide (crrectement former)
-
     public function isValid(string $token): bool
     {
         return preg_match(
@@ -62,7 +60,6 @@ class JWTService
         
     }
 
-    
     //on récupère le payload pour savoir si expirer
     public function getPayload(string $token): array
     {
@@ -89,8 +86,6 @@ class JWTService
         
     }
 
-    
-    
     //on verifie si token a expiré
     public function isExpired(string $token): bool
     {
@@ -112,8 +107,6 @@ class JWTService
         //Regénérer un token de verification
         $verifToken = $this->generate($header, $payload, $secret, 0);
 
-        
-    
         return $token === $verifToken;
         
     }

@@ -21,7 +21,7 @@
 
                 <fieldset class="mb-3">
                     <legend>Mon Compte de connexion</legend>
-                        {{ form_row(registrationForm.type,{'label':'Vous êtes un : ',}) }}
+                        {{ form_row(registrationForm.roles,{'label':'Vous êtes un : ',}) }}
                         {{ form_row(registrationForm.email, {'label':'E-mail','attr': {'placeholder':'exemple@exemple.fr'}}) }}
                         {{ form_row(registrationForm.password, {
                                 label: 'Mot de passe'

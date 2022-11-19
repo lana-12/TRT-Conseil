@@ -9,7 +9,7 @@
 <main class="container">
     <h2>{{ titlepage }}! </h2>
 
-    AVOIR LORS DU LA VALIDATION PAR EMAIL LE REDIRIGER VER PROFIL-NEW
+    {# {% if app.user %}
 
 <pre>
     {{ dump(candidates) }}
@@ -21,6 +21,8 @@
 <a href="{{ asset('uploads/cvs/' ~ candidate.cv ) }} " target="_blank">Voir le CV</a>
 {% endfor %}
 </div>
-
+{% else %}
+aucun cv
+    {% endif %} #}
 </main>
 {% endblock %}

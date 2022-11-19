@@ -13,6 +13,12 @@
     <p>
     {{ app.user.Active ? 'active': 'inactive'}}
     {{ app.user.email}}
+    {{ app.user.type}}
+
+    <pre>
+        {{ dump(app.user) }}
+    </pre>
+    
     </p>
 
     {% else %}

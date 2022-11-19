@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Consultant |
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	{{ parent() }}
+
+	<main class="container">
+
+
+{% if accounts %} 
+	<div class="accounts">
+		<h1>Comptes à valider</h1>
+
+		{% for account in accounts %}
+
+		{# {% for row in array %}
+			
+		{% endfor %} #}
+			<div class="account row">
+				<div class="col-8 text-center">
+					{{ account.email }}
+					{# {{account.}} #}
+				</div>
+				<div class="col-4">
+					{# <a href="#" type="button" class="btn btn-primary btn-sm">VALIDER</a> #}
+<a href="{{ path('active', { id : account.id }) }}" type="button" class="btn btn-primary btn-sm">VALIDER</a>
+
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	{# {% include "_partials/_footer.html.twig" %} #}
+{% else %}
+	<div class="alert alert-success" role="alert">
+		<div class="alert-message">
+			Aucun compte à valider.
+		</div>
+	</div>
+	
+{% endif %}
+
+</section>
+
+
+
+	</main>
+{% endblock %}
+

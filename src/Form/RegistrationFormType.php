@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -21,14 +22,14 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('type', ChoiceType::class, [
+            ->add('roles', ChoiceType::class, [
                 'attr' => [
                     'class' => ''
                 ],
                 'expanded' => true,
                 'choices' => [
-                    'Candidat' => 'candidate',
-                    'Recruteur' => 'recruiter',
+                    'Candidat' => 'ROLE_CANDIDATE',
+                    'Recruteur' => 'ROLE_RECRUITER',
                 ],
                 'multiple' => false,
                 'required' => true,
@@ -86,23 +87,18 @@ class RegistrationFormType extends AbstractType
                     ]
                 ],
             ]);
-            // ->add('plainPassword', PasswordType::class, [
-            //     // instead of being set onto the object directly,
-            //     // this is read and encoded in the controller
-            //     'mapped' => false,
-            //     'attr' => ['autocomplete' => 'new-password'],
-            //     'constraints' => [
-            //         new NotBlank([
-            //             'message' => 'Please enter a password',
-            //         ]),
-            //         new Length([
-            //             'min' => 6,
-            //             'minMessage' => 'Your password should be at least {{ limit }} characters',
-            //             // max length allowed by Symfony for security reasons
-            //             'max' => 4096,
-            //         ]),
-            //     ],
-            // ]);
+        // Permet la manipulation an array
+        $builder->get('roles')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($rolesAsArray) {
+                    // transform the array to a string
+                    return implode(', ', $rolesAsArray);
+                },
+                function ($rolesAsString) {
+                    // transform the string back to an array
+                    return explode(', ', $rolesAsString);
+                }
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver): void

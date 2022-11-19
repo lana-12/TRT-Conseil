@@ -26,13 +26,21 @@
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle active" href="#" aria-current="page" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mon Compte</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-							<li>
-								<a class="dropdown-item" href="{{ path('profilR')}}">Profil</a>
-							</li>
-
 							{% if is_granted('ROLE_RECRUITER') %}
 								<li>
+									<a class="dropdown-item" alt="Accéder à votre profil" title="Accéder à votre profil" href="{{ path('profilR')}}">Profil</a>
+								</li>
+
+								<li>
 									<a class="dropdown-item" href="#" alt="Accéder aux annonces" title="Accéder aux annonces">Annonce</a>
+								</li>
+							{% elseif is_granted('ROLE_CANDIDATE') %}
+								<li>
+									<a class="dropdown-item" alt="Accéder à votre profil" title="Accéder à votre profil" href="{{ path('profilC')}}">Profil</a>
+								</li>
+
+								<li>
+									<a class="dropdown-item" href="#" alt="Postuler à une annonce" title="Postuler à une annonce">Postuler</a>
 								</li>
 							{% endif %}
 

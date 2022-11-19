@@ -1,0 +1,13 @@
+<h1>Activation de votre compte</h1>
+<p>Bonjour {{user.email}}</p>
+<p>Nous avons le plaisir de vous annoncer que votre compte, sur le site TRT Conseil, est bien activé.</p>
+<p> En cliquant sur le lien ci-dessous, vous confirmez votre inscription et vous pouvez accéder à tous nos services.</p>
+<p>Vous devez compléter votre profil avant de poster une annonce.</p>
+
+<p>
+	<a href="{{ absolute_url(path('verify_user', {token:token})) }}">{{ absolute_url(path('verify_user', {token:token})) }}</a>
+</p>
+
+<p>Ce lien expirera dans 3 heures</p>
+<p>Cordialement</p>
+<p>L'equipe TRT Coneil</p>
