@@ -17,8 +17,8 @@ class Apply
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?bool $active = null;
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $active = false;
 
     #[ORM\ManyToOne(targetEntity: JobOffer::class,inversedBy: 'Applies')]
     #[ORM\JoinColumn(nullable: false)]

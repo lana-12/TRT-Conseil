@@ -15,9 +15,7 @@
     {{ app.user.email}}
     {{ app.user.type}}
 
-    <pre>
-        {{ dump(app.user) }}
-    </pre>
+    
     
     </p>
 
@@ -54,9 +52,10 @@
             
 
 
-            <p>Actuellement, nous avons "METTRE LE NBRE TOTAL ANNONCES" d'offres d'emploi et "METTRE TOTAL DE CANDIDATE" candidats.</p>
+            {# <p>Actuellement, nous avons {{ countJobOffer }} d'offres d'emploi et {{  countApply }} candidats.</p> #}
         </section>
 
 
     </main>
 {% endblock %}
+

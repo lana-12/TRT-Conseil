@@ -46,6 +46,12 @@ class RegistrationController extends AbstractController
                 $user->addCandidate($candidate);
             }
 
+            
+            $recruiters = $user->getRecruiters();
+            foreach ($recruiters as $recruiter){
+                $user->addRecruiter($recruiter);
+            }
+
             $this->addFlash('success', 'Votre compte de connexion a bien été créé');
             $entityManager->persist($user);
             $entityManager->flush();
@@ -70,7 +76,9 @@ class RegistrationController extends AbstractController
                 $user->getEmail(),
                 'Création de compte sur le site TRT Conseil',
                 'register',
-                compact('user')
+                [
+                    'user'=> $user,
+                ]
             );
             return $this->redirectToRoute('home');
         }

@@ -39,6 +39,18 @@ class ApplyRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Return count Apply
+     */
+    public function countApply()
+    {
+        return $this->createQueryBuilder('a')
+                    ->select('COUNT(a.id)')
+                    ->getQuery()
+                    ->getResult();
+    }
+    
+
 //    /**
 //     * @return Apply[] Returns an array of Apply objects
 //     */

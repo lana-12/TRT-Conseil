@@ -17,6 +17,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class RecruiterController extends AbstractController
 {
+    public function __construct(
+        private EntityManagerInterface $em,
+        private  SendMailService $mail,
+    )
+    {}
     #[Route('/', name: 'recruiter')]
     public function index(): Response
     {
@@ -25,43 +30,43 @@ class RecruiterController extends AbstractController
         ]);
     }
     
+    
     #[Route('/profil', name: 'profilR')]
-    public function profil(Request $request,EntityManagerInterface $entityManager, SendMailService $mail,): Response
+    public function profil(Request $request, Recruiter $recruiter=null): Response
     {
-        
-        $recruiter = new Recruiter();
-
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        } else {
+            
+        if(!$recruiter){
+            $recruiter = new Recruiter();
+        }
+        $recruiter->setUser($this->getUser());
         $form = $this->createForm(RecruiterType::class, $recruiter);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
 
-            $this->addFlash('success', 'Votre demande a bien été pris en compte, un consultant doit valider votre compte pour déposer une annonce.');
-            // $entityManager->persist($recruiter);
-            // $entityManager->flush();
-// dd($recruiter);
-            // on envoi le mail
-            // $mail->send(
-            //     'no-reply@trt-conseil.fr',
-            //     $recruiter->$this->getEmail(),
-            //     'Activation de votre compte sur le site TRT Conseil',
-            //     'register',
-            //     // deux facon pour le context => array with le contenu du recruiter
-            //     // [
-            //     //     'recruiter'=> $recruiter
-            //     // ] ou 
-            //     compact('recruiter', 'token')
-            // );
-            // $this->addFlash('info', 'Votre demande a bien été pris en compte, lorsque votre compte sera actif vous recevrez un email de confirmation.');
+            $recruiter->setActive(true);            
+            $this->em->persist($recruiter);
+            $this->em->flush();
+            
+            $this->addFlash('success', 'Profil modifié, vous pouvez maintenant déposer une annonce.');
         }
-
-
-
-
-        
+    }
         return $this->render('recruiter/profil.html.twig', [
             'titlepage' => 'Profil',
             'recruiterForm'=> $form->createView(),
         ]);
     }
+
+    
+    #[Route('/mesannonces', name: 'jobOffers')]
+    public function createJobOffer(): Response
+    {
+        return $this->render('recruiter/index.html.twig', [
+            'titlepage' => 'Recruiter',
+        ]);
+    }
+    
 }

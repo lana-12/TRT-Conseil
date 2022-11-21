@@ -38,6 +38,16 @@ class JobOfferRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    /**
+     * Return count jobOffer
+     */
+    public function countJobOffer()
+    {
+        return $this->createQueryBuilder('j')
+                    ->select('COUNT(j.id)')
+                    ->getQuery()
+                    ->getResult();
+    }
 
 //    /**
 //     * @return JobOffer[] Returns an array of JobOffer objects

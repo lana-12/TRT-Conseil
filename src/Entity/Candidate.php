@@ -2,17 +2,18 @@
 
 namespace App\Entity;
 
-use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Vich\UploaderBundle\Mapping\Annotation\Uploadable;
 use App\Entity\Apply;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CandidateRepository;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Vich\UploaderBundle\Mapping\Annotation\Uploadable;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+#[UniqueEntity(fields: ['lastname'], message: 'Un compte a déjà été créé avec ce nom')]
 #[ORM\Entity(repositoryClass: CandidateRepository::class)]
-// #[Vich\Uploadable]
 
 
 class Candidate
@@ -25,7 +26,7 @@ class Candidate
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 50, nullable: true)]
+    #[ORM\Column(length: 50, nullable: true, unique:true)]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255, nullable: true)]

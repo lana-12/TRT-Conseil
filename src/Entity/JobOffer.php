@@ -25,8 +25,8 @@ class JobOffer
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content = null;
 
-    #[ORM\Column]
-    private ?bool $active = null;
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $active = false;
 
     #[ORM\ManyToOne(inversedBy: 'jobOffers')]
     #[ORM\JoinColumn(nullable: false)]
