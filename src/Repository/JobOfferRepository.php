@@ -49,6 +49,14 @@ class JobOfferRepository extends ServiceEntityRepository
                     ->getResult();
     }
 
+    public function displayRecruiter($id)
+    {
+        return $this->createQueryBuilder('j')
+                    ->andWhere('j.recruiter = :id')
+                    ->setParameter('id', $id)
+                    ->getQuery()
+                    ->getOneOrNullResult();
+    }
 //    /**
 //     * @return JobOffer[] Returns an array of JobOffer objects
 //     */

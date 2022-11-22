@@ -12,17 +12,14 @@
         <h3>Vous pouvez validez : </h3>
 
         <ul>
-<a href="{{ path('valid_account') }}">
-
-<li>Des comptes de connexion</li></a>
-
-
-                
+            <li>
+                <a href="{{ path('valid_account') }}">Des comptes de connexion</a>
+            </li>
+            <li>Des candidatures</li>
+            <li>
+                <a href="{{ path('valid_jobOffer') }}">Des Offres d'emploi</li>
             </li>
 
-            <li>Des recruteurs/entreprises</li>
-            <li>Des candidatures</li>
-            <li>Des Offres d'emploi</li>
         </ul>
 {# <a href="{{ path('app_consultant_accounts') }}">des comptes utilisateur</a>
 <span class="bubble bubble-blue">{{

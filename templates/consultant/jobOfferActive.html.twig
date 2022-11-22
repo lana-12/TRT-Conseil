@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Consultant |
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	{{ parent() }}
+
+	<main class="container">
+
+
+		{% if jobOffers %}
+			<div class="jobOffers">
+				<h1>Offre d'emploi à valider</h1>
+
+				{% for jobOffer in jobOffers %}
+
+					{# {% for row in array %}
+								
+							{% endfor %} #}
+					<div class="jobOffer row">
+						<div class="col-8 text-center">
+							{{ jobOffer.title }}
+							<pre>
+{{ dump(jobOffer) }}
+
+                            </pre>
+							{# {{jobOffer.}} #}
+						</div>
+						<div
+							class="col-4">
+							{# <a href="#" type="button" class="btn btn-primary btn-sm">VALIDER</a> #}
+                {# <a href="{{ path('active', { id : jobOffer.id }) }}" type="button" class="btn btn-primary btn-sm">VALIDER</a> #}
+
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+			{# {% include "_partials/_footer.html.twig" %} #}
+		{% else %}
+			<div class="alert alert-success" role="alert">
+				<div class="alert-message">
+					Aucune annonces à valider.
+				</div>
+			</div>
+
+		{% endif %}
+
+	</section>
+
+
+</main>{% endblock %}
+

@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\JobOffer;
 use App\Entity\User;
 use App\Service\JWTService;
 use App\Service\SendMailService;
 use App\Repository\UserRepository;
+use App\Repository\JobOfferRepository;
+use App\Repository\RecruiterRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +21,7 @@ class ConsultantController extends AbstractController
 {
     public function __construct(
         private UserRepository $userRepo,
+        private JobOfferRepository $jobOfferRepo,
         private ManagerRegistry $doctrine,
         private EntityManagerInterface $em,
         private SendMailService $mail,
@@ -43,10 +47,8 @@ class ConsultantController extends AbstractController
         // } else {
 
         //     //Mettre tout le code que j'ai créer ci-dessous  ici
-
+        $accounts = $this->userRepo->findBy(['active' => false]);
         // }
-        $accounts =
-        $this->userRepo->findBy(['active' => false]);
 
         
         return $this->render('consultant/accountUser.html.twig', [
@@ -57,15 +59,13 @@ class ConsultantController extends AbstractController
 
     
     #[Route('/activer/{id}', name: 'active')]
-    public function actived(User $user): Response
+    public function activedAccount(User $user): Response
     {      
     /**
      * @var User $user
      */
         $user->setActive(true);
-
         $this->em->flush();
-
         $this->addFlash('success', 'Compte activé');
 
         //On génère le JWT de l'user 
@@ -93,10 +93,64 @@ class ConsultantController extends AbstractController
             compact('user', 'token')
         );
         $this->addFlash('info', 'Un email d\'Activation a bien été envoyé.');
-
-
-        
-
         return $this->redirectToRoute('valid_account');
+    }
+
+
+    
+
+    #[Route('/validation-offre', name: 'valid_jobOffer')]
+    public function actifJobOffer(): Response
+    {
+        // if (!$this->getUser()) {
+        //     return $this->redirectToRoute('app_login');
+        // } else {
+
+        //     //Mettre tout le code que j'ai créer ci-dessous  ici
+        $jobOffers = $this->jobOfferRepo->findBy(['active' => false]);
+        // }
+
+
+        return $this->render('consultant/jobOfferActive.html.twig', [
+            'titlepage' => 'Validez les offres d\'emploi',
+            'jobOffers' => $jobOffers,
+        ]);
+    }
+    #[Route('/activer/{id}', name: 'active')]
+    public function activedJobOffer(JobOffer $jobOffer): Response
+    {
+        /**
+         * @var User $user
+         */
+        $jobOffer->setActive(true);
+        $this->em->flush();
+        $this->addFlash('success', 'Annonce activée');
+
+        //On génère le JWT de l'user 
+        // On crée le header
+        // $header = [
+        //     'type' => 'JWT',
+        //     'alg' => 'HS256'
+        // ];
+
+        // //On crée le payload
+        // $payload = [
+        //     'user_id' => $user->getId()
+        // ];
+
+        // //On génère le token 
+        // $token = $this->jwt->generate($header, $payload, $this->getParameter('app.jwtsecret'));
+
+        // // dd($token);
+
+        // $this->mail->send(
+        //     'no-reply@trt-conseil.fr',
+        //     $user->getEmail(),
+        //     'Activation de votre compte sur le site TRT Conseil',
+        //     'activeAccount',
+        //     compact('user', 'token')
+        // );
+        $this->addFlash('info', 'Un email d\'Activation a bien été envoyé.');
+        return $this->redirectToRoute('valid_jobOffer');
     }
 }

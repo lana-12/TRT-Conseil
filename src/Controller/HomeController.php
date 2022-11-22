@@ -25,6 +25,7 @@ class HomeController extends AbstractController
         
         $countJobOffer = $this->jobOfferRepo->countJobOffer();
         $countApply = $this->applyRepo->countApply();
+        
         return $this->render('home/index.html.twig', [
             'titlepage' => 'Page d\'accueil',
             'countApply'=> $countApply,

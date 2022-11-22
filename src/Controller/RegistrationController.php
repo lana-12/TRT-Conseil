@@ -26,10 +26,9 @@ class RegistrationController extends AbstractController
     ){}
     
     #[Route('/inscription', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager, JWTService $jwt): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
-
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
         
@@ -53,6 +52,7 @@ class RegistrationController extends AbstractController
             }
 
             $this->addFlash('success', 'Votre compte de connexion a bien été créé');
+            $this->addFlash('info', 'Un consultant va valider votre compte, surveillez votre messagerie');
             $entityManager->persist($user);
             $entityManager->flush();
             
@@ -78,6 +78,7 @@ class RegistrationController extends AbstractController
                 'register',
                 [
                     'user'=> $user,
+                    'token'=> null,
                 ]
             );
             return $this->redirectToRoute('home');
