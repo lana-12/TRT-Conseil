@@ -42,16 +42,13 @@ class RecruiterController extends AbstractController
             //if user->getRecruiters() ==""
             $recruiters = $user->getRecruiters();
             $this->array->arrayEmpty($recruiters);
-            if($recruiters == true){
+            if($recruiters === true){
                 $this->addFlash('alert', 'Vous devez mettre votre profil à jour.');
             return $this->redirectToRoute('profilR');
             }
             $profil='profil ok mettre description du recruteur';
+            
 
-
-
-
-        
         return $this->render('recruiter/index.html.twig', [
             'titlepage' => 'Mon Espace',
         ]);
@@ -109,15 +106,10 @@ class RecruiterController extends AbstractController
         $user = $this->getUser();
         $recruiters = $user->getRecruiters();
         $this->array->arrayEmpty($recruiters);
-        if($recruiters == true){
+        if($recruiters === true){
             $this->addFlash('alert', 'Vous devez mettre votre profil à jour.');
         return $this->redirectToRoute('profilR');
         }
-
-
-
-
-
         return $this->render('recruiter/index.html.twig', [
             'titlepage' => 'Recruiter',
         ]);

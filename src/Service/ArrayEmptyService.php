@@ -10,8 +10,8 @@ class ArrayEmptyService
 {
     public function arrayEmpty($array): bool
     {
-        if (!empty($tab)){
-            foreach ($tab as $valeur){
+        if (!empty($array)){
+            foreach ($array as $valeur){
                 if ($valeur !== null){
                     return false;
                     }

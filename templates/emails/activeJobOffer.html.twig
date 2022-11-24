@@ -1,0 +1,16 @@
+<h1>Activation de votre annonce</h1>
+<p>Bonjour
+	{{name}}
+    </p>
+<p>Nous avons le plaisir de vous annoncer que votre annonce, sur le site TRT Conseil, est bien activée.</p>
+<p>
+	En cliquant sur le lien ci-dessous, vous confirmez votre annonce.</p>
+
+<p>
+	<a href="{{ absolute_url(path('verify_user', {token:token})) }}">{{ absolute_url(path('verify_user', {token:token})) }}</a>
+</p>
+
+<p>Ce lien expirera dans 3 heures</p>
+<p>Cordialement</p>
+<p>L'equipe TRT Coneil</p>
+

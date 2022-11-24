@@ -108,48 +108,49 @@ class ConsultantController extends AbstractController
 
         //     //Mettre tout le code que j'ai créer ci-dessous  ici
         $jobOffers = $this->jobOfferRepo->findBy(['active' => false]);
+        
         // }
-
 
         return $this->render('consultant/jobOfferActive.html.twig', [
             'titlepage' => 'Validez les offres d\'emploi',
             'jobOffers' => $jobOffers,
         ]);
     }
+    
     #[Route('/activer/{id}', name: 'active')]
     public function activedJobOffer(JobOffer $jobOffer): Response
     {
-        /**
-         * @var User $user
-         */
         $jobOffer->setActive(true);
+        $mail = $jobOffer->getRecruiter()->getUser()->getEmail();
+        $name = $jobOffer->getRecruiter()->getNameCompany();
+        $userId= $jobOffer->getRecruiter()->getUser()->getId();
         $this->em->flush();
         $this->addFlash('success', 'Annonce activée');
 
-        //On génère le JWT de l'user 
+        // On génère le JWT de l'user 
         // On crée le header
-        // $header = [
-        //     'type' => 'JWT',
-        //     'alg' => 'HS256'
-        // ];
+        $header = [
+            'type' => 'JWT',
+            'alg' => 'HS256'
+        ];
 
-        // //On crée le payload
-        // $payload = [
-        //     'user_id' => $user->getId()
-        // ];
+        //On crée le payload
+        $payload = [
+            'user_id' => $userId
+        ];
 
-        // //On génère le token 
-        // $token = $this->jwt->generate($header, $payload, $this->getParameter('app.jwtsecret'));
+        //On génère le token 
+        $token = $this->jwt->generate($header, $payload, $this->getParameter('app.jwtsecret'));
 
-        // // dd($token);
+        // dd($token);
 
-        // $this->mail->send(
-        //     'no-reply@trt-conseil.fr',
-        //     $user->getEmail(),
-        //     'Activation de votre compte sur le site TRT Conseil',
-        //     'activeAccount',
-        //     compact('user', 'token')
-        // );
+        $this->mail->send(
+            'no-reply@trt-conseil.fr',
+            $mail,
+            'Votre Annonce a bien été activé',
+            'activeJobOffer',
+            compact('name', 'token')
+        );
         $this->addFlash('info', 'Un email d\'Activation a bien été envoyé.');
         return $this->redirectToRoute('valid_jobOffer');
     }
