@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonces | {{ parent() }}
+{% endblock %}
+
+{% block body %}
+		{{ parent() }}
+
+	<main class="container">
+		<h2>{{ titlepage }} !</h2>
+
+<p>ici id_jobOffer</p>
+
+{% for candidate in candidates %}
+<p>ici id_candidate</p>
+	{{candidate.id}}
+<p>ici Email_candidate</p>
+	{{user.email}}
+{% endfor %}
+
+
+<p>ici Email_recruteur</p>
+
+
+
+
+	</main>
+{% endblock %}
+

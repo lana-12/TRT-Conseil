@@ -6,7 +6,7 @@
 // use Symfony\Component\HttpFoundation\File\UploadedFile;
 // use Symfony\Component\String\Slugger\SluggerInterface;
 
-// class FileUploader
+// class FileUploaderService
 // {
 //     private $targetDirectory;
 //     private $slugger;

@@ -7,8 +7,11 @@
 		{{ parent() }}
 
 	<main class="container">
-		<h2>{{ titlepage }}!
+		<h2>{{ titlepage }} !
 		</h2>
+
+
+
 {% for joboffer in joboffers %}
 
 	<h3>{{ joboffer.title }}</h3>
@@ -16,8 +19,20 @@
 
 <p>{{ joboffer.content }}</p>
 
-<a href="#" class="btn btn-primary btn-sm" type="button" alt="Cliquez ici pour postuler" title="Cliquez ici pour postuler">Postuler</a>
-	
+{% if app.user %}
+{# LIEN TEST #}
+<a href="{{ path('apply', { id : joboffer.id }) }}" type="button" class="btn btn-primary btn-sm">Postuler</a>
+
+
+
+{# <a href="{{ path('active')}}" class="btn btn-primary btn-sm" type="button" alt="Cliquez ici pour postuler" title="Cliquez ici pour postuler">Postuler</a> #}
+{% else %}
+<div class="alert alert-success mt-4 text-center">
+	<p>Vous devez être connecté pour postuler à une annonce !!</p>
+</div>
+
+{% endif %}
+
 {% endfor %}
 
 	</main>

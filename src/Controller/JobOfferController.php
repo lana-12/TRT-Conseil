@@ -29,6 +29,7 @@ class JobOfferController extends AbstractController
     public function index(): Response
     {
         $jobOffers = $this->jobOfferRepo->findAll();
+        dump($jobOffers);
         return $this->render('jobOffer/index.html.twig', [
             'titlepage' => 'Offres d\'emploi',
             'joboffers'=> $jobOffers,

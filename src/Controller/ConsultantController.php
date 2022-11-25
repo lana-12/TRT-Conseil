@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Apply;
 use App\Entity\JobOffer;
 use App\Entity\User;
+use App\Repository\ApplyRepository;
 use App\Service\JWTService;
 use App\Service\SendMailService;
 use App\Repository\UserRepository;
@@ -22,6 +24,7 @@ class ConsultantController extends AbstractController
     public function __construct(
         private UserRepository $userRepo,
         private JobOfferRepository $jobOfferRepo,
+        private ApplyRepository $applyRepo,
         private ManagerRegistry $doctrine,
         private EntityManagerInterface $em,
         private SendMailService $mail,
@@ -58,7 +61,7 @@ class ConsultantController extends AbstractController
     }
 
     
-    #[Route('/activer/{id}', name: 'active')]
+    #[Route('/activer/compte/{id}', name: 'active_user')]
     public function activedAccount(User $user): Response
     {      
     /**
@@ -117,7 +120,7 @@ class ConsultantController extends AbstractController
         ]);
     }
     
-    #[Route('/activer/{id}', name: 'active')]
+    #[Route('/activer/offre/{id}', name: 'active_joboffer')]
     public function activedJobOffer(JobOffer $jobOffer): Response
     {
         $jobOffer->setActive(true);
@@ -153,5 +156,64 @@ class ConsultantController extends AbstractController
         );
         $this->addFlash('info', 'Un email d\'Activation a bien été envoyé.');
         return $this->redirectToRoute('valid_jobOffer');
+    }
+
+    
+    #[Route('/validation-candidature', name: 'valid_apply')]
+    public function actifApply(): Response
+    {
+        // if (!$this->getUser()) {
+        //     return $this->redirectToRoute('app_login');
+        // } else {
+
+        //     //Mettre tout le code que j'ai créer ci-dessous  ici
+        $applies = $this->applyRepo->findBy(['active' => false]);
+        // }
+        
+        return $this->render('consultant/applyActive.html.twig', [
+            'titlepage' => 'Validez les postulants',
+            'applies' => $applies,
+        ]);
+    }
+    
+    #[Route('/activer/candidature/{id}', name: 'active_apply')]
+    public function activedApply(Apply $apply): Response
+    {
+        // $apply = $this->applyRepo->find($id);
+        $apply->setActive(true);
+        // $mail = $jobOffer->getRecruiter()->getUser()->getEmail();
+        // $name = $jobOffer->getRecruiter()->getNameCompany();
+        // $userId= $jobOffer->getRecruiter()->getUser()->getId();
+        $this->em->persist($apply);
+        $this->em->flush();
+        $this->addFlash('success', 'Annonce activée');
+
+        // // On génère le JWT de l'user 
+        // // On crée le header
+        // $header = [
+        //     'type' => 'JWT',
+        //     'alg' => 'HS256'
+        // ];
+
+        // //On crée le payload
+        // $payload = [
+        //     'user_id' => $userId
+        // ];
+
+        // //On génère le token 
+        // $token = $this->jwt->generate($header, $payload, $this->getParameter('app.jwtsecret'));
+
+        // // dd($token);
+
+        // $this->mail->send(
+        //     'no-reply@trt-conseil.fr',
+        //     $mail,
+        //     'Votre Annonce a bien été activé',
+        //     'activeJobOffer',
+        //     compact('name', 'token')
+        // );
+        // $this->addFlash('info', 'Un email d\'Activation a bien été envoyé.');
+        return $this->redirectToRoute('valid_apply');
+        
     }
 }

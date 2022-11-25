@@ -14,7 +14,7 @@
 						<a class="nav-link "  href="{{ path('jobOffer') }}" alt="Liste d'offres d'emploi" title="Liste d'offres d'emploi">Offres d'emploi</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link "  href="{{ path('candidate') }}" alt="Liste des candidats" title="Liste des candidats">Candidatures</a>
+						<a class="nav-link "  href="{{ path('candidacy') }}" alt="Liste des candidats" title="Liste des candidats">Candidatures</a>
 					</li>
 					<li class="nav-item ">
 						<a class="nav-link" href="{{ path('contact') }}" alt="Formulaire de contact" title="Formulaire de contact">Contact</a>
@@ -44,11 +44,14 @@
 
 							{% elseif is_granted('ROLE_CANDIDATE') %}
 								<li>
-									<a class="dropdown-item" alt="Accéder à votre profil" title="Accéder à votre profil" href="{{ path('profilC')}}">Profil</a>
+									<a class="dropdown-item" alt="Accéder à votre profil" title="Accéder à votre profil" href="{{ path('candidate')}}">Mon Espace</a>
+								</li>
+								<li>
+									<a class="dropdown-item" alt="Accéder à votre profil" title="Accéder à votre profil" href="{{ path('profilC')}}">Mon Profil</a>
 								</li>
 
 								<li>
-									<a class="dropdown-item" href="#" alt="Postuler à une annonce" title="Postuler à une annonce">Postuler</a>
+									<a class="dropdown-item" href="#" alt="Postuler à une annonce" title="Postuler à une annonce">Mes Annonces</a>
 								</li>
 							{% endif %}
 

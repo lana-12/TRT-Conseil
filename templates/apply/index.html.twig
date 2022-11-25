@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonces | {{ parent() }}
+{% endblock %}
+
+{% block body %}
+		{{ parent() }}
+
+	<main class="container">
+		<h2>{{ titlepage }} !</h2>
+
+
+
+{% for candidate in candidates %}
+
+<h3>{{ candidate.firstname }}</h3>
+
+<h4>{{ candidate.lastname }}</h4>
+
+{% if app.user %}
+
+<p>
+<a href=" {{ asset('uploads/cvs/' ~ candidate.cv ) }} " target=" _blank" class="btn btn-primary btn-sm" type="button" alt="Cliquez ici pour Voir le cv" title="Cliquez ici pour Voir le cv">Voir le cv</a>
+
+</p>
+{% else %}
+<div class="alert alert-success mt-4 text-center">
+	<p>Vous devez être connecté pour accéder au cv !!</p>
+</div>
+
+
+{% endif %}
+{% endfor %}
+
+
+	</main>
+{% endblock %}
+

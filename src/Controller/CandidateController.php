@@ -5,10 +5,11 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Candidate;
 use App\Form\CandidateType;
-use App\Repository\UserRepository;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManager;
 use App\Service\SendMailService;
+use App\Repository\UserRepository;
+use App\Service\ArrayEmptyService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,35 +28,50 @@ class CandidateController extends AbstractController
         private ManagerRegistry $doctrine,
         private SendMailService $mail,
         private UserRepository $userRepo,
+        private ArrayEmptyService $array,
     ) {
     }
     #[Route('/', name: 'candidate')]
     public function index(): Response
     {
-        if (!$this->getUser()) {
+        /**
+         * @var User $user
+         */
+        $user= $this->getUser();
+        if (!$user) {
             return $this->redirectToRoute('app_login');
-        } else {
-            $repository = $this->doctrine->getRepository(Candidate::class);
-            $candidates = $repository->findAll();
-
+        } 
+        
+        $candidates = $user->getCandidates();
+        $this->array->arrayEmpty($candidates);
+        if($candidates === true){
+            // $candidate = $user->getCandidates();
+            $this->addFlash('alert', 'Vous devez mettre votre profil à jour.');
+            return $this->redirectToRoute('profilC');
         }
+            
+            dump($this->array->arrayEmpty($candidates));
+        
+        // dump($candidate);
+
+        
         
         return $this->render('candidate/index.html.twig', [
-            'titlepage' => 'Candidat',
-            'candidates'=> $candidates,
+            'titlepage' => 'Mon espace',
+            // 'candidates'=> $candidates,
+            // 'candidate'=> $candidate,
         ]);
     }
 
 
     #[Route('/profil', name: 'profilC')]
     public function profil(Request $request, SluggerInterface $slugger, Candidate $candidate=null, User $user=null): Response
-    {
-
-        
+    {        
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         } else {
 
+            
         if (!$candidate) {
             $candidate = new Candidate();
         }

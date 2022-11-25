@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Candidats | {{ parent() }}{% endblock %}
+{% block title %}Candidatures | {{ parent() }}{% endblock %}
 
 {% block body %}
 	{{ parent() }}
@@ -9,16 +9,23 @@
 <main class="container">
     <h2>{{ titlepage }}! </h2>
 
-    {# {% if app.user %}
+    {# {% if app.user %} #}
 
-<pre>
+{# <pre>
     {{ dump(candidates) }}
-</pre>
-<div>
+</pre> #}
+{# <pre>
+    {{ dump(candidate) }}
+</pre> #}
+{# <div>
 {% for candidate in candidates %}
     
+{{ candidate.firstname}}
+
+{{ candidate.lastname}}
+
     {{ candidate.cv}}
-<a href="{{ asset('uploads/cvs/' ~ candidate.cv ) }} " target="_blank">Voir le CV</a>
+<p><a href="{{ asset('uploads/cvs/' ~ candidate.cv ) }} " target="_blank">Voir le CV</a></p>
 {% endfor %}
 </div>
 {% else %}
