@@ -1,0 +1,33 @@
+<h1>Candidature</h1>
+<p>Bonjour, un candidat vient de postuler à votre annonce : </p>
+<ul>
+	<li>{{ jobOffer.title }}</li>
+	<li>{{ jobOffer.content }}</li>
+</ul>
+<p>Candidat :</p>
+{# mettre le firstname
+mettre le lastname
+mettre le cv #}
+<p>
+	{{ candidate.lastname|upper }}
+</p>
+
+<p> {{candidate.firstname|capitalize}} </p>
+<p>{{candidate.user.email}}</p>
+
+{# <p>
+	<a href="{{ asset('uploads/cvs/' ~ candidate.cv ) }} " target="_blank">Voir le CV</a>
+</p> #}
+
+</p>
+<p>Nous vous remercions de votre confiance.</p>
+<p>Cordialement</p>
+<p>L'equipe TRT Conseil</p>
+<p>
+<a href="{{ absolute_url(path('jobOffers')) }}">Voir mes annonces</a>
+
+	-
+<a href="{{ absolute_url(path('recruiter')) }}">Voir les candidatures</a>
+
+</p>
+

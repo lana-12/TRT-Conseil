@@ -168,8 +168,10 @@ class ConsultantController extends AbstractController
 
         //     //Mettre tout le code que j'ai créer ci-dessous  ici
         $applies = $this->applyRepo->findBy(['active' => false]);
-        // }
         
+dump($applies);
+        // }
+    
         return $this->render('consultant/applyActive.html.twig', [
             'titlepage' => 'Validez les postulants',
             'applies' => $applies,
@@ -181,9 +183,11 @@ class ConsultantController extends AbstractController
     {
         // $apply = $this->applyRepo->find($id);
         $apply->setActive(true);
-        // $mail = $jobOffer->getRecruiter()->getUser()->getEmail();
-        // $name = $jobOffer->getRecruiter()->getNameCompany();
-        // $userId= $jobOffer->getRecruiter()->getUser()->getId();
+        $mail = $apply->getJobOffer()->getRecruiter()->getUser()->getEmail();
+        $recruiter = $apply->getJobOffer()->getRecruiter();
+        $jobOffer = $apply->getJobOffer();
+        $userId= $apply->getJobOffer()->getRecruiter()->getUser()->getId();
+        $candidate = $apply->getCandidate();
         $this->em->persist($apply);
         $this->em->flush();
         $this->addFlash('success', 'Annonce activée');
@@ -203,16 +207,17 @@ class ConsultantController extends AbstractController
         // //On génère le token 
         // $token = $this->jwt->generate($header, $payload, $this->getParameter('app.jwtsecret'));
 
-        // // dd($token);
+        // dd($token);
 
-        // $this->mail->send(
-        //     'no-reply@trt-conseil.fr',
-        //     $mail,
-        //     'Votre Annonce a bien été activé',
-        //     'activeJobOffer',
-        //     compact('name', 'token')
-        // );
-        // $this->addFlash('info', 'Un email d\'Activation a bien été envoyé.');
+        $this->mail->send(
+            'no-reply@trt-conseil.fr',
+            $mail,
+            'Candidature',
+            'recruiter',
+            compact('recruiter', 'candidate', 'jobOffer'),
+            $candidate->getCv(),
+        );
+        $this->addFlash('info', 'Un email a bien été envoyé au recruteur.');
         return $this->redirectToRoute('valid_apply');
         
     }
