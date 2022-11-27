@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Candidate;
 use App\Form\CandidateType;
-use App\Service\FileUploader;
 use Doctrine\ORM\EntityManager;
 use App\Service\SendMailService;
 use App\Repository\UserRepository;
