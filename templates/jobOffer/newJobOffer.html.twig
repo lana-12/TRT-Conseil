@@ -7,37 +7,42 @@
 
 {% block body %}
 {{ parent() }}
+<body class="post">
+	
+	<main class="container mt-3">
 
-<main class="container mt-3">
 
+		<section class="container">
+			<div class="row">
+				<div class="col">
+					<h2>{{ titlepage }}</h2>
+						<p>Pour que votre annonce soit validé, veuillez indiquer dans la description les horaires de travail et le salaire.</p>
 
-	<section class="container">
-		<div class="row">
-			<div class="col">
-				<h2>{{ titlepage }}</h2>
-					<p>Pour que votre annonce soit validé, veuillez indiquer dans la description les horaires de travail et le salaire.</p>
+					{{ form_start(form) }}
 
-				{{ form_start(form) }}
+					<fieldset class="mb-3">
+						<legend>Mon Annonce</legend>
+						{{ form_row(form.title,{'label':'Titre de l\'offre',}) }}
 
-				<fieldset class="mb-3">
-					<legend>Mon Annonce</legend>
-					{{ form_row(form.title,{'label':'Titre de l\'offre',}) }}
+							{{ form_row(form.city, {'label':'Ville','attr': {'placeholder':'Montpellier'}}) }}
 
-						{{ form_row(form.city, {'label':'Ville','attr': {'placeholder':'Montpellier'}}) }}
+							{{ form_row(form.content, {
+											label: 'Description','attr': {'placeholder':'Tapez votre texte ici...'}
+										}) }}
 
-						{{ form_row(form.content, {
-										label: 'Description','attr': {'placeholder':'Tapez votre texte ici...'}
-									}) }}
+					</fieldset>
 
-				</fieldset>
+					<button type="submit" class="btn btn-sm btn-info my-3">Enregistrer</button>
+					{{ form_end(form) }}
 
-				<button type="submit" class="btn btn-lg btn-info my-3">Enregistrer</button>
-				{{ form_end(form) }}
+				</div>
 
 			</div>
+		</section>
 
-		</div>
-	</section>
+	</main>
+</body>
 
-</main>{% endblock %}
+
+{% endblock %}
 

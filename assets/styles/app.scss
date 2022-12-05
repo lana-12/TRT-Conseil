@@ -3,10 +3,13 @@
 // Folder tools
 
 // Folder generals
-@import "./generals/reset.sass";
 @import "./generals/body.sass";
+@import "./generals/reset.sass";
+@import "./generals/variables.sass";
+@import "./generals/class.sass";
 
 // Folder components
 
 // Folder pages
 @import "./pages/home.sass";
+@import "./pages/espace.sass";

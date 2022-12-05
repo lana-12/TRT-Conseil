@@ -4,7 +4,7 @@
 
 {% block body %}
 	{{ parent() }}
-
+<body class="compte">
     <main class="container">
     
         <section>
@@ -30,33 +30,44 @@
 
         <h2>{{ titlepage }}</h2>
 
-        <section>
         <pre>
             {{ dump(user) }}
         </pre>
-        {# {% if recruiters %} #}
-            {% for recruiter in recruiters %}
-            <div class="card">
-                <h5 class="card-header text-center"> {{ recruiter.nameCompany }}</h5>
-                <div class="card-body">
-                    <h5 class="card-title">{{ recruiter.address }}</h5>
-                    <p class="card-text"> {{ recruiter.zipcode }}, {{ recruiter.city }}</p>
-                </div>
-                <div class="text-end m-4">
-                    <a href="{{ path('editR',{'id': recruiter.id })}}" class="btn btn-sm btn-warning ">Modifier</a>
-                </div>
+        <section class="espace">
 
-            </div>
+            <div class="row">
+                <div class="col-12">
+
+            {# {% if recruiters %} #}
+            {% for recruiter in recruiters %}
+                <div class="card text-white bg-dark" style="max-width: 18rem;">
+
+                    <h5 class="card-header center">
+                        {{ recruiter.nameCompany }}</h5>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ recruiter.address }}</h5>
+                        <p class="card-text">
+                            {{ recruiter.zipcode }},
+                            {{ recruiter.city }}</p>
+                    </div>
+                    <div class="text-end m-4">
+                        <a href="{{ path('editR',{'id': recruiter.id })}}" class="btn btn-sm btn-warning ">Modifier</a>
+                    </div>
+
+                </div>
             {% endfor %}
-        {# {% else %}
-            <a href="{{ path('profilR')}}" class="btn btn-sm btn-primary ">Modifier</a>
-        {% endif %} #}
+            {# {% else %}
+                        <a href="{{ path('profilR')}}" class="btn btn-sm btn-primary ">Modifier</a>
+                    {% endif %} #}
 
             {# {{ user.recruiters.nameCompany }} #}
-
-
+                </div>
+            </div>
         </section>
 
         
+
+        
     </main>
+</body>
 {% endblock %}
