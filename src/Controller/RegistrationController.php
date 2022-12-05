@@ -103,7 +103,7 @@ class RegistrationController extends AbstractController
             
             // On verif que user existe et n'a pas encore son compte
             if($user && $user->isActive() ){
-                $this->addFlash('success', 'Bienvenue !! <br> Connectez vous ');
+                $this->addFlash('success', 'Bienvenue !! <br> Connectez vous pour accéder à votre compte');
                 //Probleme il est bien rediriger la 
                 return $this->redirectToRoute('app_login');
             }

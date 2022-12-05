@@ -9,50 +9,36 @@
 
 	<main class="container">
 
+	{% if applies %}
+		<div class="applies">
+			<h1> {{ titlepage }} </h1>
 
-		{% if applies %}
-			<div class="applies">
-				<h1> {{ titlepage }} </h1>
-
-				{% for apply in applies %}
-
-					{# {% for row in array %}
-								
-							{% endfor %} #}
-					<div class="apply row">
-						<div class="col-8 text-center">
-							{{ apply.jobOffer.title }}
-							{{ apply.jobOffer.recruiter.nameCompany }}
-							{{ apply.candidate.lastname }}
-							{{ apply.candidate.cv }}
-							<pre>
+			{% for apply in applies %}
+				<div class="apply row">
+					<div class="col-8 text-center">
+						{{ apply.jobOffer.title }}
+						{{ apply.jobOffer.recruiter.nameCompany }}
+						{{ apply.candidate.lastname }}
+						{{ apply.candidate.cv }}
+<pre>
 {{ dump(apply.id) }}
 {{ dump(apply.isActive) }}
-
-                            </pre>
-							{# {{apply.}} #}
-						</div>
-						<div
-							class="col-4">
-							{# <a href="#" type="button" class="btn btn-primary btn-sm">VALIDER</a> #}
-                <a href="{{ path('active_apply', { id : apply.id }) }}" type="button" class="btn btn-primary btn-sm">VALIDER</a>
-
-						</div>
+</pre>
 					</div>
-				{% endfor %}
-			</div>
-			{# {% include "_partials/_footer.html.twig" %} #}
-		{% else %}
+					<div class="col-4">
+						<a href="{{ path('active_apply', { id : apply.id }) }}" type="button" class="btn btn-primary btn-sm">VALIDER</a>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	{% else %}
 			<div class="alert alert-success" role="alert">
-				<div class="alert-message">
-					Aucune ..... à valider.
+				<div class="alert-message text-center">
+					<h1>Aucune Candidatures à valider.</h1>
 				</div>
 			</div>
 
-		{% endif %}
-
-	</section>
-
-
-</main>{% endblock %}
+	{% endif %}
+	</main>
+{% endblock %}
 

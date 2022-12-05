@@ -10,7 +10,7 @@
 		<h2>{{ titlepage }} !
 		</h2>
 
-
+{% if joboffers %}
 
 {% for joboffer in joboffers %}
 
@@ -19,21 +19,29 @@
 
 <p>{{ joboffer.content }}</p>
 
-{% if app.user %}
-{# LIEN TEST #}
-<a href="{{ path('apply', { id : joboffer.id }) }}" type="button" class="btn btn-primary btn-sm">Postuler</a>
+	{% if app.user %}
+	{# LIEN TEST #}
+	<a href="{{ path('apply', { id : joboffer.id }) }}" type="button" class="btn btn-primary btn-sm">Postuler</a>
 
 
 
-{# <a href="{{ path('active')}}" class="btn btn-primary btn-sm" type="button" alt="Cliquez ici pour postuler" title="Cliquez ici pour postuler">Postuler</a> #}
+	{# <a href="{{ path('active')}}" class="btn btn-primary btn-sm" type="button" alt="Cliquez ici pour postuler" title="Cliquez ici pour postuler">Postuler</a> #}
+	{% else %}
+	<div class="alert alert-success mt-4 text-center">
+		<p>Vous devez être connecté pour postuler à une annonce !!</p>
+	</div>
+
+	{% endif %}
+{% endfor %}
+
 {% else %}
-<div class="alert alert-success mt-4 text-center">
-	<p>Vous devez être connecté pour postuler à une annonce !!</p>
-</div>
+
+	<div class="alert alert-info mt-4 text-center">
+		<p>Aucunes offres actuellement</p>
+	</div>
+
 
 {% endif %}
-
-{% endfor %}
 
 	</main>
 {% endblock %}

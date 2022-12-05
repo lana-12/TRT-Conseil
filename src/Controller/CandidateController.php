@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Candidate;
 use App\Form\CandidateType;
+use App\Repository\CandidateRepository;
 use Doctrine\ORM\EntityManager;
 use App\Service\SendMailService;
 use App\Repository\UserRepository;
@@ -31,7 +32,7 @@ class CandidateController extends AbstractController
     ) {
     }
     #[Route('/', name: 'candidate')]
-    public function index(): Response
+    public function index(CandidateRepository $candidateRepo): Response
     {
         /**
          * @var User $user
@@ -41,15 +42,22 @@ class CandidateController extends AbstractController
             return $this->redirectToRoute('app_login');
         } 
         
-        $candidates = $user->getCandidates();
-        $this->array->arrayEmpty($candidates);
-        if($candidates === true){
+        $candidate = $user->getCandidates();
+        $name = $candidateRepo->findOneByName($candidate);
+dump($name);
+        if ($name == null) {
+            $this->addFlash('danger', 'Vous devez mettre votre profil à jour.');
+            return $this->redirectToRoute('profilC');
+        } 
+        
+        $this->array->arrayEmpty($candidate);
+        if($candidate === true){
             // $candidate = $user->getCandidates();
             $this->addFlash('alert', 'Vous devez mettre votre profil à jour.');
             return $this->redirectToRoute('profilC');
         }
             
-            dump($this->array->arrayEmpty($candidates));
+            // dump($this->array->arrayEmpty($candidate));
         
         // dump($candidate);
 

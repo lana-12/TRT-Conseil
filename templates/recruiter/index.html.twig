@@ -5,9 +5,57 @@
 {% block body %}
 	{{ parent() }}
 
-
     <main class="container">
-        <h2>{{ titlepage }}!</h2>
+    
+        <section>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page" alt="Page active" title="Page active">Mon Profil
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a class="" href="{{ path('jobOffers')}}" alt="Accéder à mes annonces" title="Accéder à mes annonces">Mes Annonces</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a class="" href="{{ path('post')}}" alt="Poster une annonces" title="Poster une annonces">Poster une annonce</a>
+                    </li>
+
+                </ol>
+            </nav>
+
+
+            {# <a class="activePage" aria-current="page" alt="Accéder à votre profil" title="Accéder à votre profil" href="{{ path('profilR')}}">Mon Profil</a>
+            <a class="" href="{{ path('jobOffers')}}" alt="Accéder aux annonces" title="Accéder aux annonces">Mes Annonces</a>
+            <a class="" href="{{ path('post')}}" alt="Accéder aux annonces" title="Accéder aux annonces">Poster une annonce</a> #}
+        </section>
+
+        <h2>{{ titlepage }}</h2>
+
+        <section>
+        <pre>
+            {{ dump(user) }}
+        </pre>
+        {# {% if recruiters %} #}
+            {% for recruiter in recruiters %}
+            <div class="card">
+                <h5 class="card-header text-center"> {{ recruiter.nameCompany }}</h5>
+                <div class="card-body">
+                    <h5 class="card-title">{{ recruiter.address }}</h5>
+                    <p class="card-text"> {{ recruiter.zipcode }}, {{ recruiter.city }}</p>
+                </div>
+                <div class="text-end m-4">
+                    <a href="{{ path('editR',{'id': recruiter.id })}}" class="btn btn-sm btn-warning ">Modifier</a>
+                </div>
+
+            </div>
+            {% endfor %}
+        {# {% else %}
+            <a href="{{ path('profilR')}}" class="btn btn-sm btn-primary ">Modifier</a>
+        {% endif %} #}
+
+            {# {{ user.recruiters.nameCompany }} #}
+
+
+        </section>
 
         
     </main>

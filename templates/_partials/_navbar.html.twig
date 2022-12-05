@@ -22,25 +22,28 @@
 				</ul>
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
-
 				{% if app.user %}
+					{{ app.user.Active ? '
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle active" href="#" aria-current="page" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mon Compte</a>
+					': ''}}
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 							{% if is_granted('ROLE_RECRUITER') %}
+
 								<li>
 									<a class="dropdown-item" href="{{ path('recruiter')}}" alt="Accéder aux annonces" title="Accéder aux annonces">Mon Espace</a>
 								</li>
 								<li>
 									<a class="dropdown-item" href="{{ path('jobOffers')}}" alt="Accéder aux annonces" title="Accéder aux annonces">Mes Annonces</a>
 								</li>
-								<li>
+								{# <li>
 									<a class="dropdown-item" alt="Accéder à votre profil" title="Accéder à votre profil" href="{{ path('profilR')}}">Mon Profil</a>
-								</li>
+								</li> #}
 
 								<li>
 									<a class="dropdown-item" href="{{ path('post')}}" alt="Accéder aux annonces" title="Accéder aux annonces">Poster une annonce</a>
 								</li>
+
 
 							{% elseif is_granted('ROLE_CANDIDATE') %}
 								<li>
@@ -60,6 +63,8 @@
 							</li>
 						</ul>
 					</li>
+
+
 				{% else %}
 					<li class="nav-item">
 						<a class="nav-link" href="{{ path('app_register') }}" alt="Lien pour créer un compte" title="Lien pour créer un compte">M'inscrire</a>

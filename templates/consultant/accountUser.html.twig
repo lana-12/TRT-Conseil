@@ -11,41 +11,29 @@
 
 
 {% if accounts %} 
-	<div class="accounts">
-		<h1>Comptes à valider</h1>
+		<div class="accounts">
+			<h1>Comptes à valider</h1>
 
-		{% for account in accounts %}
+			{% for account in accounts %}
 
-		{# {% for row in array %}
-			
-		{% endfor %} #}
-			<div class="account row">
-				<div class="col-8 text-center">
-					{{ account.email }}
-					{# {{account.}} #}
+				<div class="account row">
+					<div class="col-8 text-center">
+						{{ account.email }}
+					</div>
+					<div class="col-4">
+						<a href="{{ path('active_user', { id : account.id }) }}" type="button" class="btn btn-primary btn-sm">VALIDER</a>
+					</div>
 				</div>
-				<div class="col-4">
-					{# <a href="#" type="button" class="btn btn-primary btn-sm">VALIDER</a> #}
-<a href="{{ path('active_user', { id : account.id }) }}" type="button" class="btn btn-primary btn-sm">VALIDER</a>
-
-				</div>
-			</div>
-		{% endfor %}
-	</div>
-	{# {% include "_partials/_footer.html.twig" %} #}
-{% else %}
-	<div class="alert alert-success" role="alert">
-		<div class="alert-message">
-			Aucun compte à valider.
+			{% endfor %}
 		</div>
-	</div>
+{% else %}
+		<div class="alert alert-success" role="alert">
+			<div class="alert-message text-center">
+				<h1>Aucun Comptes à valider.</h1>
+			</div>
+		</div>
 	
 {% endif %}
-
-</section>
-
-
-
 	</main>
 {% endblock %}
 

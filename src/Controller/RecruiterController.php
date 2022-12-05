@@ -28,33 +28,33 @@ class RecruiterController extends AbstractController
     ){}
     
     #[Route('/', name: 'recruiter')]
-    public function index(): Response
+    public function index(RecruiterRepository $recruiterRepo): Response
     {
         /**
          * @var User $user
          */
         $user = $this->getUser();
         if (!$this->getUser()) {
-            $this->addFlash('alert', 'Vous devez être connecté.');
+            $this->addFlash('danger', 'Vous devez être connecté.');
             return $this->redirectToRoute('app_login');
             } 
         
-            //if user->getRecruiters() ==""
+            $recruiter = $user->getRecruiters();            
+            $name = $recruiterRepo->findOneByName($recruiter);
             
-            //$recruiters = $user->getRecruiters();
-            // $this->array->arrayEmpty($recruiters);
-            //     if($recruiters === true){
-            //         $this->addFlash('alert', 'Vous devez mettre votre profil à jour.');
-            //     return $this->redirectToRoute('profilR');
-            //     }else{
+            if ($name == null) {
+                $this->addFlash('danger', 'Vous devez mettre votre profil à jour.');
+                return $this->redirectToRoute('profilR');
+            } 
+            // else {
             //     $this->addFlash('info', 'Profil ok.');
-            //     }
-            
-            // $profil='profil ok mettre description du recruteur';
+            // }
             
 
         return $this->render('recruiter/index.html.twig', [
             'titlepage' => 'Mon Espace',
+            'user'=>$user,
+            'recruiters' =>$recruiter,
         ]);
     }
     
@@ -63,11 +63,9 @@ class RecruiterController extends AbstractController
     public function profil(Request $request, Recruiter $recruiter=null): Response
     {
         if (!$this->getUser()) {
-            $this->addFlash('alert', 'Vous devez être connecté.');
+            $this->addFlash('danger', 'Vous devez être connecté.');
             return $this->redirectToRoute('app_login');
             }
-        
-            
         if(!$recruiter){
             $recruiter = new Recruiter();
             }
@@ -76,17 +74,52 @@ class RecruiterController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-
             $recruiter->setActive(true);            
             $this->em->persist($recruiter);
             $this->em->flush();
             
             $this->addFlash('success', 'Profil modifié, vous pouvez maintenant déposer une annonce.');
+            return $this->redirectToRoute('recruiter');
         }
     
         return $this->render('recruiter/profil.html.twig', [
-            'titlepage' => 'Profil',
             'recruiterForm'=> $form->createView(),
+            'editMode'=> $recruiter->getId() !== null,
+            'recruiter'=> $recruiter
+
+        ]);
+    }
+    
+    #[Route('/modifier/{id}', name: 'editR')]
+    public function editProfil(Request $request, Recruiter $recruiter=null): Response
+    {
+        if (!$this->getUser()) {
+            $this->addFlash('danger', 'Vous devez être connecté.');
+            return $this->redirectToRoute('app_login');
+            }
+        if(!$recruiter){
+            $recruiter = new Recruiter();
+            }
+        $recruiter->setUser($this->getUser());
+        $form = $this->createForm(RecruiterType::class, $recruiter);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            if(!$recruiter->getId()){
+                
+            }
+            $recruiter->setActive(true);            
+            $this->em->persist($recruiter);
+            $this->em->flush();
+            
+            $this->addFlash('success', 'Profil modifié, vous pouvez maintenant déposer une annonce.');
+            return $this->redirectToRoute('recruiter');
+        }
+    
+        return $this->render('recruiter/profil.html.twig', [
+            'recruiterForm'=> $form->createView(),
+            'editMode'=> $recruiter->getId() !== null,
+            'recruiter'=> $recruiter
         ]);
     }
 
@@ -98,10 +131,10 @@ class RecruiterController extends AbstractController
          */
         $user = $this->getUser();
         if (!$this->getUser()) {
-            $this->addFlash('alert', 'Vous devez être connecté.');
+            $this->addFlash('danger', 'Vous devez être connecté.');
             return $this->redirectToRoute('app_login');
             // } elseif ($user->isActive() == false) {
-            //     $this->addFlash('alert', 'Votre compte n\'est pas encore activé.');
+            //     $this->addFlash('danger', 'Votre compte n\'est pas encore activé.');
             //     return $this->redirectToRoute('home');
         } 
         /**
@@ -111,7 +144,7 @@ class RecruiterController extends AbstractController
         $recruiters = $user->getRecruiters();
         $this->array->arrayEmpty($recruiters);
         if($recruiters === true){
-            $this->addFlash('alert', 'Vous devez mettre votre profil à jour.');
+            $this->addFlash('danger', 'Vous devez mettre votre profil à jour.');
         return $this->redirectToRoute('profilR');
         }
         return $this->render('recruiter/index.html.twig', [

@@ -2,10 +2,11 @@
 
 {% block title %}Accueil | {{parent()}}{% endblock %}
 
-
+    
 {% block body %}
 	{{ parent() }}
 
+<body class="home">
     <main class="container mt-3">
         <div class="btnCreate">
 {% if app.user %}
@@ -20,11 +21,18 @@
     </p>
 
     {% else %}
-            <a href="{{ path('app_register') }}" type="button" class="btn btn-info" alt="Créer un compte" title="Créer un compte" type="submit">Créer un compte</ahref="#"type="button">
+            <a href="{{ path('app_register') }}" class="text-primary" alt="M'inscrire" title="M'inscrire" type="submit">M'inscrire</a>
 
-            <a href="#" type="button" class="btn btn-info" alt="Connectez-vous à votre espace" title="Connectez-vous à votre espace" type="submit">Connectez-vous</a href="#" type="button">
+            <a href="#" class="text-primary" alt="Me Connecter à votre espace" title="Me Connecter à votre espace" type="submit">Me Connecter</a >
 {% endif %}
+<pre>
+    {{ dump(app.user) }}
 
+    {% for recruiter in recruiters %}
+        
+    {{ dump(recruiter.nameCompany) }}
+    {% endfor %}
+</pre>
         </div>
 
         <section>
@@ -35,7 +43,7 @@
 
         <section>
 
-            <p>TRT Cnseil est une agence de recrutement spécialisée dans l'hottellerie et restauration. Fondée en 2014, la société s'est agrandie au fil des ans et possède dorénavant plus de 12 centres dispersés aux quatre coins de la France.</p>
+            <p>TRT Conseil est une agence de recrutement spécialisée dans l'hottellerie et restauration. Fondée en 2014, la société s'est agrandie au fil des ans et possède dorénavant plus de 12 centres dispersés aux quatre coins de la France.</p>
             <p>Nous sommes là pour vous aider dans vos recherches.</p>
 
         </section>
@@ -47,15 +55,27 @@
                 <li>En agence, sur Rendez-vous, avec un de nos conseillers.</li>
                 <li>En créant un compte sur notre site</li>
             </ul>
-            <p> Une fois la création de votre compte validé, vous pouvez déposer votre offre d'emploi ou postuler pour une annonce.</p>
+            <p> Une fois que vous avez créé votre compte et qu'il a été validé, vous pouvez mettre votre profil mis à jour pour déposer une offre d'emploi ou postuler à une annonce.</p>
 
             
+{# <pre>
+    {{ dump(countJobOffer) }}
+{{ dump(countApply) }}
 
+</pre> #}
+{# {{  countApply }} #}
 
-            {# <p>Actuellement, nous avons {{ countJobOffer }} d'offres d'emploi et {{  countApply }} candidats.</p> #}
+{# {% for countApply in countApplies %}
+{% for countJobOffer in countJobOffers %}
+    
+            <p>Actuellement, nous avons {{ countJobOffer }} d'offres d'emploi et {{  countApply }} candidats.</p>
+{% endfor %}
+    
+{% endfor %} #}
         </section>
 
 
     </main>
+</body>
 {% endblock %}
 
