@@ -35,9 +35,6 @@
             "./migrations/.gitignore"
         ]
     },
-    "nat/deploy": {
-        "version": "1.3.3"
-    },
     "phpunit/phpunit": {
         "version": "9.5",
         "recipe": {

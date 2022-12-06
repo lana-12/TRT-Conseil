@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f54ddbf1812e7e0086b144ab6407d895",
+    "content-hash": "1e2f83088329b7fa00f44f374dd5f534",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1756,57 +1756,6 @@
                 }
             ],
             "time": "2022-07-24T12:00:55+00:00"
-        },
-        {
-            "name": "nat/deploy",
-            "version": "1.3.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Nathalie-Verdavoir/deploy-heroku.git",
-                "reference": "91328f9b3da25a5aa033de608e4cf4d7660b41fa"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Nathalie-Verdavoir/deploy-heroku/zipball/91328f9b3da25a5aa033de608e4cf4d7660b41fa",
-                "reference": "91328f9b3da25a5aa033de608e4cf4d7660b41fa",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2.5|>=8.0.0",
-                "symfony/process": ">=5.1.0|^6.1.0"
-            },
-            "type": "package",
-            "autoload": {
-                "psr-4": {
-                    "Nat\\DeployBundle\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "mit"
-            ],
-            "authors": [
-                {
-                    "name": "Nathalie Verdavoir",
-                    "email": "nathalie.verdavoir@laposte.net",
-                    "homepage": "https://www.linkedin.com/in/nathalie-verdavoir/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Add command line to deploy a symfony project on Heroku",
-            "homepage": "https://www.linkedin.com/in/nathalie-verdavoir/",
-            "keywords": [
-                "ClearDB",
-                "bundle",
-                "deploy",
-                "heroku",
-                "symfony"
-            ],
-            "support": {
-                "issues": "https://github.com/Nathalie-Verdavoir/deploy-heroku/issues",
-                "source": "https://github.com/Nathalie-Verdavoir/deploy-heroku/tree/1.3.3"
-            },
-            "time": "2022-08-08T19:06:13+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
