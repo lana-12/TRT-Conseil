@@ -30,10 +30,10 @@ class HomeController extends AbstractController
          */
         $user = $this->getUser();
         if ($user) {
-            $recruiter= $user->getRecruiters();
+            // $recruiter= $user->getRecruiters();
             
-            $name = $this->recruiterRepo->findOneByName($recruiter);
-            dump($name);
+            // $name = $this->recruiterRepo->findOneByName($recruiter);
+            // dump($name);
         } 
         
         $countJobOffer = $this->jobOfferRepo->countJobOffer();
@@ -44,7 +44,7 @@ class HomeController extends AbstractController
             'titlepage' => 'Page d\'accueil',
             'countApplies'=> $countApply,
             'countJobOffers'=> $countJobOffer,
-            'recruiters'=>$recruiter,
+            // 'recruiters'=>$recruiter,
         ]);
     }
 }

@@ -4,7 +4,9 @@
 
 {% block body %}
 {{ parent() }}
+<body class="register">
 
+    
 
     <section class="container">
         <div class="row">
@@ -14,26 +16,39 @@
 
             {{ form_start(registrationForm) }}
 
-                <fieldset class="mb-3">
-                    <legend>Mon Compte de connexion</legend>
+                <fieldset class="mb-3 legend">
+                    <legend class="center">Créé votre Compte de connexion</legend>
+                    <div>
                         {{ form_row(registrationForm.roles,{'label':'Vous êtes un : ',}) }}
+                    </div>
+
+                    <div>
                         {{ form_row(registrationForm.email, {'label':'E-mail','attr': {'placeholder':'exemple@exemple.fr'}}) }}
+                    </div>
+
+                    <div>
                         {{ form_row(registrationForm.password, {
                                 label: 'Mot de passe'
                             }) }}
-                        {{ form_row(registrationForm.rgpdConsent, {
-                                label: 'En m\'inscrivant sur ce site, j\'accepte voir ce que je mets'
-                            }) }}
-                
-                </fieldset>
+                    </div>
 
-                <button type="submit" class="btn btn-lg btn-info my-3">M'inscrire</button>
+                    <div>
+                        {{ form_row(registrationForm.rgpdConsent, {
+                                label: 'En m\'inscrivant sur ce site, j\'accepte ...'
+                            }) }}
+                    </div>
+                    
+                
+
+                <button type="submit" class="btn btn-sm btn-info my-3">M'inscrire</button>
                 {{ form_end(registrationForm) }}
                 
+                </fieldset>
             </div>
-
         </div>
     </section>
 
-    
+</body>
+
+
 {% endblock %}
