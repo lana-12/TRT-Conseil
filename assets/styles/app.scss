@@ -4,13 +4,16 @@
 
 // Folder generals
 @import "./generals/body.sass";
-@import "./generals/reset.sass";
 @import "./generals/variables.sass";
+@import "./generals/reset.sass";
 @import "./generals/class.sass";
+@import "./generals/mixins.sass";
 
 // Folder components
 
 // Folder pages
 @import "./pages/home.sass";
+@import "./pages/login.sass";
 @import "./pages/espace.sass";
 @import "./pages/register.sass";
+@import "./pages/consultant.sass";

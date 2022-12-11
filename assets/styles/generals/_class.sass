@@ -4,14 +4,57 @@
 .legend
     border: solid 2px black
     padding: 20px
-    // background-color: rgb(238, 85, 34)
     background: rgba(87, 174, 224, 0.4)
+
 
 
     // a mettre ds mediaquery
     // max-width: 450px
+
+// STYLE TITLE start
+.titleCustom
+    font-size: 20px
+    font-weight: 700
+    & .conseil
+        color: $blue
+        text-transform: uppercase
     
+.titleRegister
+    color: white
+    margin: 20px 0
+    font-size: 2em
+    font-weight: 700
+// STYLE TITLE end
     
+// STYLE btn start
+.btnCustom
+    background-color: $blueDark
+    color: #fff 
+    font-weight: 800
+    transition: 0.3s
+    transition-property: color, background-color
+    text-align: center
+    margin: auto
+    display: flex
+    align-items: center
+    &:hover 
+        background-color: white
+        color: $blueDark
+
+.btnValidate
+    background-color: $blue
+    color: #000
+    transition: 0.3s
+    transition-property: color, background-color, font-weight
+    text-align: center
+    &:hover 
+        background-color: white
+        color: $blueDark
+        font-weight: 800
+
+    
+// STYLE btn end
+
     // STYLE SEPARATOR START
 .separator
     height: 7px
@@ -23,3 +66,14 @@
     margin-bottom: 50px
 
 // STYLE SEPARATOR END
+
+// STYLE breadcrumb START
+.breadcrumb
+    margin-left: 1px
+    color: #000
+    font-size: 0.9em
+    & .breadcrumb-link:hover
+        color: #fff
+
+
+// STYLE breadcrumb END

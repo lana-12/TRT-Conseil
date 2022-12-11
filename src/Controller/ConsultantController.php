@@ -34,9 +34,18 @@ class ConsultantController extends AbstractController
     #[Route('/', name: 'consultant')]
     public function index(): Response
     {
+        // if ($this->getUser() === ) {
+
+            
+        //     return $this->redirectToRoute('app_login');
+        // } else {
+
+        
+        // }
+
     
         return $this->render('consultant/index.html.twig', [
-            'titlepage' => 'Consultant',
+            // 'titlepage' => '',
         
         ]);
     }

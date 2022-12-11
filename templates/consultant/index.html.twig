@@ -4,26 +4,46 @@
 
 {% block body %}
 	{{ parent() }}
+<body class="consultant">
 
-
-    <main class="container">
-        <h2>{{ titlepage }}!</h2>
-
-        <h3>Vous pouvez validez : </h3>
-
-        <ul>
-            <li>
-                <a href="{{ path('valid_account') }}">Des comptes de connexion</a>
-            </li>
-            <li>
-                <a href="{{ path('valid_apply') }}">Des candidatures</a>
-            </li>
-            <li>
-                <a href="{{ path('valid_jobOffer') }}">Des Offres d'emploi</li>
-            </li>
-
-        </ul>
-
+    {% if app.user %}
+    <div class="d-flex justify-content-end align-item-center px-2">
+        <p class="connected" alt="Vous êtes connecté en tant que {{ app.user.email }}" title="Vous êtes connecté en tant que {{ app.user.email }}">
+        <i class="fas fa-user-circle"></i>
+        {{ app.user.email}}
+        </p>
+    </div>
     
+    <main class="container main-consultant">
+        <section class="box-consultant">
+            <div class="row">
+                <div class="col-12">
+                        <h3>Vous pouvez validez :
+                        </h3>
+                        <ul>
+                            <li>
+                                <a href="{{ path('valid_account') }}" class="" title="Valider des comptes de connexion" alt="Valider des comptes de connexion">Des comptes de connexion</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('valid_apply') }}">Des candidatures</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('valid_jobOffer') }}">Des Offres d'emploi</li>
+                            </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+    {% else %}
+        <div class="container alert alert-danger mt-5" role="alert">
+            <div class="alert-message text-center">
+                <h4 class="text-dark">Vous devez être connecté</h4>
+                    <a class="text-primary" title="Lien pour se connecter" alt="Lien pour se connecter" href=" {{ path('app_login') }} ">Connectez-vous</a>
+            </div>
+        </div>
+
+{% endif %}
+
     </main>
+</body>
 {% endblock %}

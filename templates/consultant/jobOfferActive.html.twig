@@ -6,11 +6,37 @@
 
 {% block body %}
 	{{ parent() }}
+<body class="consultant">
+{% if app.user %}
+	<div class="d-flex justify-content-end align-item-center px-2">
+		<p class="connected" alt="Vous êtes connecté en tant que {{ app.user.email }}" title="Vous êtes connecté en tant que {{ app.user.email }}">
+			<i class="fas fa-user-circle"></i>
+			{{ app.user.email}}
+		</p>
+	</div>
+
+	<section class="breadcrumb">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a class="breadcrumb-link" href=" {{ path('consultant') }} ">Accueil</a>
+				</li>
+				<li class="breadcrumb-item"><a class="breadcrumb-link" href=" {{ path('valid_account') }} ">Compte à Valider</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a class="breadcrumb-link" href=" {{ path('valid_apply') }} ">Candidature à Valider</a>
+				</li>
+				<li class="breadcrumb-item  active " aria-current="page">
+					Offre à Valider
+				</li>
+			</ol>
+		</nav>
+	</section>
 
 	<main class="container">
 	{% if jobOffers %}
 		<div class="jobOffers">
-			<h1>Offre d'emploi à valider</h1>
+			<h2>Offre d'emploi à valider</h2>
 
 			{% for jobOffer in jobOffers %}
 				<div class="jobOffer row">
@@ -30,11 +56,22 @@
 	{% else %}
 		<div class="alert alert-success" role="alert">
 			<div class="alert-message text-center">
-				<h1>Aucune Offres d'emploi à valider</h1>
+				<h4>Aucune Offres d'emploi à valider</h4>
 			</div>
 		</div>
 
 	{% endif %}
+{% else %}
+	<div class="container alert alert-danger mt-5" role="alert">
+		<div class="alert-message text-center">
+			<h4 class="text-dark">Vous devez être connecté</h4>
+			<a class="text-primary" title="Lien pour se connecter" alt="Lien pour se connecter" href=" {{ path('app_login') }} ">Connectez-vous</a>
+		</div>
+	</div>
+{% endif %}
+
 	</main>
+</body>
+
 {% endblock %}
 

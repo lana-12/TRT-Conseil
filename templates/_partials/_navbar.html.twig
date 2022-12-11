@@ -1,14 +1,15 @@
 <header>
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">TRT Conseil</a>
+			<a class="navbar-brand" href="{{ path('home') }}" alt="Retour vers Accueil" title="Retour vers Accueil"><h1 class="titleCustom">Trt<span class="conseil">Conseil</span></h1></a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="{{ path('home') }}" alt="Retour vers Accueil" title="Retour vers Accueil">Accueil</a>
+						<a class="nav-link active" aria-current="page" href="{{ path('accueil') }}" alt="Retour vers Accueil" title="Retour vers Accueil">Accueil</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link "  href="{{ path('jobOffer') }}" alt="Liste d'offres d'emploi" title="Liste d'offres d'emploi">Offres d'emploi</a>
@@ -43,24 +44,32 @@
 								<li>
 									<a class="dropdown-item" href="{{ path('post')}}" alt="Accéder aux annonces" title="Accéder aux annonces">Poster une annonce</a>
 								</li>
+								<li>
+									<a class="dropdown-item" href="{{ path('app_logout') }}" alt="Me déconnecter" title="Me déconnecter">Me Déconnecter</a>
+								</li>
 
 
 							{% elseif is_granted('ROLE_CANDIDATE') %}
 								<li>
-									<a class="dropdown-item" alt="Accéder à votre profil" title="Accéder à votre profil" href="{{ path('candidate')}}">Mon Espace</a>
+									<a class="dropdown-item" alt="Accéder à votre profil" title="Accéder à votre profil" href="{{ path('candidate')}}">Activer un compte de connexion</a>
 								</li>
 								<li>
-									<a class="dropdown-item" alt="Accéder à votre profil" title="Accéder à votre profil" href="{{ path('profilC')}}">Mon Profil</a>
+									<a class="dropdown-item" alt="Accéder à votre profil" title="Accéder à votre profil" href="{{ path('profilC')}}">Activer une offre</a>
 								</li>
 
 								<li>
-									<a class="dropdown-item" href="#" alt="Postuler à une annonce" title="Postuler à une annonce">Mes Annonces</a>
+									<a class="dropdown-item" href="#" alt="Postuler à une annonce" title="Postuler à une annonce">Activer une candidature</a>
 								</li>
+								<li>
+									<a class="dropdown-item" href="{{ path('app_logout') }}" alt="Me déconnecter" title="Me déconnecter">Me Déconnecter</a>
+								</li>
+
+							{% elseif is_granted('ROLE_CONSULTANT') %}
+								<li>
+									<a class="dropdown-item" href="{{ path('app_logout') }}" alt="Me déconnecter" title="Me déconnecter">Me Déconnecter</a>
+								</li>
+							
 							{% endif %}
-
-							<li>
-								<a class="dropdown-item" href="{{ path('app_logout') }}" alt="Me déconnecter" title="Me déconnecter">Me Déconnecter</a>
-							</li>
 						</ul>
 					</li>
 
