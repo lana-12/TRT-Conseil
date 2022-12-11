@@ -11,7 +11,7 @@
     <section class="container">
         <div class="row">
             <div class="col">
-                <h2 class='titleRegister center'>Création de votre Compte de connexion</h2>
+                <h2 class='titleCustom2 center'>Création de votre Compte de connexion</h2>
 
             {{ form_start(registrationForm) }}
 
@@ -40,7 +40,9 @@
 
                 <button type="submit" class="btn btn-sm btnCustom my-3">M'inscrire</button>
                 {{ form_end(registrationForm) }}
-                
+
+                <a class="registerLink" title="Lien pour se connecter" alt="Lien pour se connecter" href=" {{ path('app_login') }} ">Connectez-vous</a>
+
                 </fieldset>
             </div>
         </div>
