@@ -14,25 +14,20 @@
     <p>
     {{ app.user.Active ? 'active': 'inactive'}}
     {{ app.user.email}}
-    {{ app.user.type}}
+    {{ app.user.id}}
 
     
     
     </p>
+
+
 
     {% else %}
             <a href="{{ path('app_register') }}" class="text-primary" alt="M'inscrire" title="M'inscrire" type="submit">M'inscrire</a>
 
             <a href="#" class="text-primary" alt="Me Connecter à votre espace" title="Me Connecter à votre espace" type="submit">Me Connecter</a >
 {% endif %}
-{# <pre>
-    {{ dump(app.user) }}
 
-    {% for recruiter in recruiters %}
-        
-    {{ dump(recruiter.nameCompany) }}
-    {% endfor %}
-</pre> #}
         </div>
 
         <section>

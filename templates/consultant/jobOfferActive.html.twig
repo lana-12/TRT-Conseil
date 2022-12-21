@@ -36,23 +36,100 @@
 	<main class="container">
 	{% if jobOffers %}
 		<div class="jobOffers">
-			<h2>Offre d'emploi à valider</h2>
+			<h2>Annonce à valider</h2>
+<div class="table-responsive">
 
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">Date</th>
+			<th scope="col">Nom</th>
+			<th scope="col">Intitulé</th>
+			<th scope="col">Description</th>
+			<th scope="col"></th>
+		</tr>
+	</thead>
 			{% for jobOffer in jobOffers %}
-				<div class="jobOffer row">
+			{# <pre>
+				{{ dump(jobOffer) }}
+			</pre> #}
+	<tbody>
+		<tr>
+			<th scope="row">{{jobOffer.createdAt | date('d/m/y')}}</th>
+			<td>{{ jobOffer.recruiter.nameCompany }}</td>
+			<td>{{ jobOffer.title }}</td>
+			{# <td>
+
+
+
+			
+			</td> #}
+			{# <td>
+			{{ jobOffer.content }}
+			</td> #}
+			<td>
+				<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Détail
+				</button>
+				<div class="collapse" id="collapseExample">
+					<div class="card card-body">
+						{{ jobOffer.content }}
+					</div>
+				</div>
+
+			
+			</td>
+			<td>
+
+	<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+		Détail
+	</button>
+
+<div style="min-height: 120px;">
+	<div class="collapse collapse-horizontal" id="collapseWidthExample">
+		<div class="card card-body" style="width: 300px;">
+			This is some placeholder content for a horizontal collapse. It's hidden by default and shown when triggered.
+		</div>
+	</div>
+</div>
+
+
+			</td>
+
+
+
+			<td>
+				<a href="{{ path('active_joboffer', { id : jobOffer.id }) }}" type="button" class="btn btn-primary btn-sm">VALIDER</a>
+			</td>
+
+
+
+
+		</tr>
+		
+	</tbody>
+			{% endfor %}
+</table>
+</div>
+				{# <div class="jobOffer row">
 					<div class="col-8 text-center">
 						{{ jobOffer.title }}
 						<pre>
 {{ dump(jobOffer) }}
+{{ dump(jobOffer.createdAt) }}
 						</pre>
-					</div>
-					<div
+					</div> #}
+
+					{# <div
 						class="col-4">
 						<a href="{{ path('active_joboffer', { id : jobOffer.id }) }}" type="button" class="btn btn-primary btn-sm">VALIDER</a>
-					</div>
+					</div> #}
 				</div>
-			{% endfor %}
 		</div>
+{# {% else %}
+<tr>
+	<td colspan="5">Pas d'annonces à valider'.</td>
+</tr>{% endfor %} #}
+
 	{% else %}
 		<div class="alert alert-success" role="alert">
 			<div class="alert-message text-center">
@@ -74,4 +151,8 @@
 </body>
 
 {% endblock %}
+
+
+
+
 

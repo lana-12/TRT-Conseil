@@ -38,29 +38,22 @@ class RecruiterController extends AbstractController
             $this->addFlash('danger', 'Vous devez être connecté.');
             return $this->redirectToRoute('app_login');
             } 
-        
-            $recruiter = $user->getRecruiters();            
-            $name = $recruiterRepo->findOneByName($recruiter);
-            
-            if ($name == null) {
-                $this->addFlash('danger', 'Vous devez mettre votre profil à jour.');
-                return $this->redirectToRoute('profilR');
-            } 
-            // else {
-            //     $this->addFlash('info', 'Profil ok.');
-            // }
-            
-
+        // $recruiters = $recruiterRepo->findAll();
+            $recruiters = $user->getRecruiters();
+            foreach ($recruiters as $recruiter){
+                
+                dump($recruiter->getJobOffers());
+            }
         return $this->render('recruiter/index.html.twig', [
             'titlepage' => 'Mon Espace',
             'user'=>$user,
-            'recruiters' =>$recruiter,
+            'recruiters' =>$recruiters,
         ]);
     }
     
     
     #[Route('/profil', name: 'profilR')]
-    public function profil(Request $request, Recruiter $recruiter=null): Response
+    public function profil(Request $request, Recruiter $recruiter=null, EntityManagerInterface $entityManager): Response
     {
         if (!$this->getUser()) {
             $this->addFlash('danger', 'Vous devez être connecté.');
@@ -70,18 +63,18 @@ class RecruiterController extends AbstractController
             $recruiter = new Recruiter();
             }
         $recruiter->setUser($this->getUser());
+        $recruiter->setActive(true);            
         $form = $this->createForm(RecruiterType::class, $recruiter);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-            $recruiter->setActive(true);            
-            $this->em->persist($recruiter);
-            $this->em->flush();
+            $entityManager->persist($recruiter);
+            $entityManager->flush();
             
-            $this->addFlash('success', 'Profil modifié, vous pouvez maintenant déposer une annonce.');
+            $this->addFlash('success', 'Profil complété, vous pouvez maintenant déposer une annonce.');
             return $this->redirectToRoute('recruiter');
         }
-    
+    dump($recruiter);
         return $this->render('recruiter/profil.html.twig', [
             'recruiterForm'=> $form->createView(),
             'editMode'=> $recruiter->getId() !== null,
@@ -112,7 +105,7 @@ class RecruiterController extends AbstractController
             $this->em->persist($recruiter);
             $this->em->flush();
             
-            $this->addFlash('success', 'Profil modifié, vous pouvez maintenant déposer une annonce.');
+            $this->addFlash('success', 'Profil modifié');
             return $this->redirectToRoute('recruiter');
         }
     
@@ -124,7 +117,7 @@ class RecruiterController extends AbstractController
     }
 
     #[Route('/mesannonces', name: 'jobOffers')]
-    public function index2(): Response
+    public function jobOffer(RecruiterRepository $recruiterRepo): Response
     {
         /**
          * @var User $user
@@ -137,16 +130,14 @@ class RecruiterController extends AbstractController
             //     $this->addFlash('danger', 'Votre compte n\'est pas encore activé.');
             //     return $this->redirectToRoute('home');
         } 
-        /**
-         * @var User $user
-         */
-        $user = $this->getUser();
-        $recruiters = $user->getRecruiters();
-        $this->array->arrayEmpty($recruiters);
-        if($recruiters === true){
-            $this->addFlash('danger', 'Vous devez mettre votre profil à jour.');
-        return $this->redirectToRoute('profilR');
-        }
+        
+        $recruiter = $user->getRecruiters();
+        $name = $recruiterRepo->findOneByName($recruiter);
+
+        if ($name == null) {
+            $this->addFlash('danger', 'Vous devez mettre votre profil à jour pour accéder à cette page.');
+            return $this->redirectToRoute('profilR');
+        } 
         return $this->render('recruiter/index.html.twig', [
             'titlepage' => 'Recruiter',
         ]);

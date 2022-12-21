@@ -14,7 +14,7 @@ class SecurityController extends AbstractController
     {
         //Condition qui permet de savoir si user connected de rediriger vers son compte user
         // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
+        //     return $this->redirectToRoute('home');
         // }
 
         // get the login error if there is one
