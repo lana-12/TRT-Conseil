@@ -12,24 +12,24 @@
 
 {% if joboffers %}
 
-{% for joboffer in joboffers %}
+	{% for joboffer in joboffers %}
 
-	<h3>{{ joboffer.title }}</h3>
-<h4>{{ joboffer.city }}</h4>
+		<h3>{{ joboffer.title }}</h3>
+		<h4>{{ joboffer.city }}</h4>
 
-<p>{{ joboffer.content }}</p>
+		<p>{{ joboffer.content }}</p>
 
 	{% if app.user %}
 	{# LIEN TEST #}
-	<a href="{{ path('apply', { id : joboffer.id }) }}" type="button" class="btn btn-primary btn-sm">Postuler</a>
+		<a href="{{ path('apply', { id : joboffer.id }) }}" type="button" class="btn btn-primary btn-sm">Postuler</a>
 
 
 
 	{# <a href="{{ path('active')}}" class="btn btn-primary btn-sm" type="button" alt="Cliquez ici pour postuler" title="Cliquez ici pour postuler">Postuler</a> #}
 	{% else %}
-	<div class="alert alert-success mt-4 text-center">
-		<p>Vous devez être connecté pour postuler à une annonce !!</p>
-	</div>
+		<div class="alert alert-success mt-4 text-center">
+			<p>Vous devez être connecté pour postuler à une annonce !!</p>
+		</div>
 
 	{% endif %}
 {% endfor %}
