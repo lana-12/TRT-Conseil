@@ -56,7 +56,8 @@ class HomeController extends AbstractController
             }
         } else {
             return $this->render('home/index.html.twig', [
-                'titlepage' => 'Page d\'accueil',
+                'titlebox1' => 'Qui nous sommes ?',
+                'titlebox2' => 'Comment Faire ?',
                 'countApplies' => $countApply,
                 'countJobOffers' => $countJobOffer,
                 // 'recruiters' => $recruiter,
