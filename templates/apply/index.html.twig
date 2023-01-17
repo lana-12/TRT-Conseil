@@ -5,13 +5,15 @@
 
 {% block body %}
 		{{ parent() }}
-
-	<main class="container">
+<body class="candidacy">
+	
+	<main class="container ">
 		<h2>{{ titlepage }} !</h2>
 
 {% if candidates %}
 	
 	{% for candidate in candidates %}
+<div class="boxCandidacy">
 
 		<h3>{{ candidate.firstname }}</h3>
 		<h4>{{ candidate.lastname }}</h4>
@@ -24,6 +26,8 @@
 			<div class="alert alert-info mt-4 text-center">
 				<p>Vous devez être connecté pour accéder au cv !!</p>
 			</div>
+</div>
+
 		{% endif %}
 
 	{% endfor %}
@@ -36,5 +40,8 @@
 {% endif %}
 
 	</main>
+</body>
+
+
 {% endblock %}
 

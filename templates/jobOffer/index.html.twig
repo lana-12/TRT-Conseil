@@ -9,7 +9,7 @@
 <body class="jobOffer">
 
 	<main class="container">
-		<h2 class="text-center m-5">{{ titlepage }} 
+		<h2 class="text-center m-4 fs-1">{{ titlepage }} 
 		</h2>
 
 {% if joboffers %}
@@ -17,9 +17,9 @@
 	{% for joboffer in joboffers %}
 
 <div class="box_jobOffer">
-
-		<h3 class="titleJobOffer">{{ joboffer.title }}</h3>
-		<h4>Sur {{ joboffer.city }}</h4>
+		<h3 class="center">La société <strong>{{ joboffer.recruiter.nameCompany}}</strong> recherche</h3>
+		<h4 class="titleJobOffer center">{{ joboffer.title }}</h4>
+		<h5 class="city">Sur {{ joboffer.city }}</h5>
 
 		<p>{{ joboffer.content }}</p>
 

@@ -22,7 +22,9 @@ class ApplyController extends AbstractController
         private EntityManagerInterface $em,
     ) {
     }
-    
+    /**
+     * La liste de tous les candidats
+     */
     #[Route('/', name: 'candidacy')]
     public function index(): Response
     {

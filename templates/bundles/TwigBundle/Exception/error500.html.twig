@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Serveur Introuvable |
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+	{{ parent() }}
+
+	<boby>
+
+		<main class="error container">
+
+			<h2 class="titleError">Erreur 500
+			</h2>
+
+			<p class="textError">Oups<br>Une erreur est survenue, le serveur est introuvable.</p>
+            <p class="textError">Merci de rafraîchir la page ou de revenir ultèrieurement</p>
+            <p>Nous nous excusons de la gêne occasionnée</p>
+
+		</main>
+	</boby>
+
+{% endblock %}
+
