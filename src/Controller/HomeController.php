@@ -48,7 +48,8 @@ class HomeController extends AbstractController
                 // accéder à leur page directement   A parametrer             
 
                 return $this->render('home/index.html.twig', [
-                    'titlepage' => 'Page d\'accueil',
+                    'titlebox1' => 'Qui nous sommes ?',
+                    'titlebox2' => 'Comment Faire ?',
                     'countApplies' => $countApply,
                     'countJobOffers' => $countJobOffer,
                     // 'recruiters' => $recruiter,

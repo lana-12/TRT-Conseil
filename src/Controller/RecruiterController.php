@@ -134,7 +134,7 @@ class RecruiterController extends AbstractController
         $recruiter = $user->getRecruiters();
         $name = $recruiterRepo->findOneByName($recruiter);
 
-        if ($name == null) {
+        if ($name === null) {
             $this->addFlash('danger', 'Vous devez mettre votre profil à jour pour accéder à cette page.');
             return $this->redirectToRoute('profilR');
         } 
