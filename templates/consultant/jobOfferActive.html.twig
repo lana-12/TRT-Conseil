@@ -36,80 +36,33 @@
 	<main class="container">
 	{% if jobOffers %}
 		<div class="jobOffers">
-			<h2>Annonce à valider</h2>
-<div class="table-responsive">
+			<h2 class="mb-4 center">Annonce à valider</h2>
+			<div class="d-flex justify-content-center flex-wrap container ">
 
-<table class="table">
-	<thead>
-		<tr>
-			<th scope="col">Date</th>
-			<th scope="col">Nom</th>
-			<th scope="col">Intitulé</th>
-			<th scope="col">Description</th>
-			<th scope="col"></th>
-		</tr>
-	</thead>
-			{% for jobOffer in jobOffers %}
-			{# <pre>
-				{{ dump(jobOffer) }}
-			</pre> #}
-	<tbody>
-		<tr>
-			<th scope="row">{{jobOffer.createdAt | date('d/m/y')}}</th>
-			<td>{{ jobOffer.recruiter.nameCompany }}</td>
-			<td>{{ jobOffer.title }}</td>
-			{# <td>
-
-
-
+				{% for jobOffer in jobOffers %}
 			
-			</td> #}
-			{# <td>
-			{{ jobOffer.content }}
-			</td> #}
-			<td>
-				<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Détail
-				</button>
-				<div class="collapse" id="collapseExample">
-					<div class="card card-body">
-						{{ jobOffer.content }}
+				<div class="card bg-dark" style="width: 18rem;">
+					<div class="card-header">
+						<h5 class="card-title center">{{ jobOffer.recruiter.nameCompany }}</h5>
+					</div>
+					<div class="card-body">
+						<h6 class="card-subtitle mb-2 text-muted">Lieu : {{ jobOffer.recruiter.city }}</h6>
+						<h6 class="card-subtitle mb-2 text-muted">Créé le : {{jobOffer.createdAt | date('d/m/y')}}</h6>
+						<h6 class="card-subtitle text-muted mb-2 ">Recherche : </h6> 
+						<p class="center">{{jobOffer.title}}</p>
+
+						<p class="card-text">{{ jobOffer.content }}</p>
+					</div>
+
+					<div class="card-footer d-flex justify-content-around">
+						<a href="{{ path('active_joboffer', { id : jobOffer.id }) }}" type="button" class="btn btn-primary btn-sm mx-auto" title="Valider l'annonce" alt="Valider l'annonce">VALIDER</a>
+						{# <a href="#" class="card-link">Another link</a> #}
 					</div>
 				</div>
 
-			
-			</td>
-			<td>
-
-	<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
-		Détail
-	</button>
-
-<div style="min-height: 120px;">
-	<div class="collapse collapse-horizontal" id="collapseWidthExample">
-		<div class="card card-body" style="width: 300px;">
-			This is some placeholder content for a horizontal collapse. It's hidden by default and shown when triggered.
+				{% endfor %}
+			</div>
 		</div>
-	</div>
-</div>
-
-
-			</td>
-
-
-
-			<td>
-				<a href="{{ path('active_joboffer', { id : jobOffer.id }) }}" type="button" class="btn btn-primary btn-sm">VALIDER</a>
-			</td>
-
-
-
-
-		</tr>
-		
-	</tbody>
-			{% endfor %}
-</table>
-</div>
 				{# <div class="jobOffer row">
 					<div class="col-8 text-center">
 						{{ jobOffer.title }}
