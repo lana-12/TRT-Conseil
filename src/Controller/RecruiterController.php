@@ -129,17 +129,39 @@ class RecruiterController extends AbstractController
             // } elseif ($user->isActive() == false) {
             //     $this->addFlash('danger', 'Votre compte n\'est pas encore activé.');
             //     return $this->redirectToRoute('home');
-        } 
+        }
+        $recruiters = $user->getRecruiters();
+    //    if($recruiters === null){
+    //     dump('non');
+    //    }else{
+    //     dump('ok');
+    //    }
+        foreach ($recruiters as $recruiter) {
+            $user = $this->getUser();
+            if ($recruiter === null) {
+                dump('non');
+            } else {
+                dump('ok');
+            }
+            dump($recruiter->getJobOffers());
+        }
         //REVOIR ICI
-        $recruiter = $user->getRecruiters();
-        $name = $recruiterRepo->findOneByName($recruiter);
-dump($name);
-        if ($name === null) {
-            $this->addFlash('danger', 'Vous devez mettre votre profil à jour pour accéder à cette page.');
-            return $this->redirectToRoute('profilR');
-        } 
-        return $this->render('recruiter/index.html.twig', [
+        // $recruiters = $user->getRecruiters();
+        // foreach ($recruiters as $recruiter){
+        //     $test= $recruiter->getNameConmpany();
+        //     $name = $recruiterRepo->findOneByName($recruiter);
+        //     dump($name);
+
+        //     if ($name === null) {
+        //         $this->addFlash('danger', 'Vous devez mettre votre profil à jour pour accéder à cette page.');
+        //         return $this->redirectToRoute('profilR');
+        //     } 
+        // }
+        ////////////////////////////////
+        
+        return $this->render('recruiter/showJobOffer.html.twig', [
             'titlepage' => 'Recruiter',
+            'recruiters'=> $recruiters,
         ]);
     }
     

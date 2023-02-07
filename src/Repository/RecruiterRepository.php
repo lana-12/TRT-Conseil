@@ -60,7 +60,7 @@ class RecruiterRepository extends ServiceEntityRepository
             ->andWhere('r.nameCompany = :val')
             ->setParameter('val', $value)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getOneOrNullResult();
         ;
     }
 }
