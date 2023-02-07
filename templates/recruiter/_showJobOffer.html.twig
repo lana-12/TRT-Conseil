@@ -1,0 +1,37 @@
+{# {% for recruiter in recruiters %}  #}
+
+{# {% if joboffers %} #}
+
+{% for joboffer in joboffers %}
+    <pre>
+        {{ dump(joboffer) }}
+    </pre>
+
+    {% if joboffer.isActive %}
+
+		<div class="box_jobOffer">
+			<h3 class="center">
+				Vous recherchez</h3>
+			<h4 class="titleJobOffer center">{{ joboffer.title }}</h4>
+			<h5 class="city">Sur
+				{{ joboffer.city }}</h5>
+			<p>{{ joboffer.content }}</p>
+
+            <div class="center m-4">
+			    <a href="{{ path('editP',{'id': joboffer.id })}}" class="btn btn-sm btn-warning">Modifier</a>
+		    </div>
+		</div>
+
+    {% else %}
+        <div class="alert alert-info mt-4 text-center">
+            <p>Votre annonce de "{{ joboffer.title }}" n'a pas été vérifié et activé</p>
+        </div>
+    {% endif %}
+
+{% else %}
+        <div class="alert alert-info mt-4 text-center">
+            <p>Vous n'avez posté aucune annonces !</p>
+            <a class="" href="{{ path('post')}}" alt="Poster une annonces" title="Poster une annonces">Poster une annonce</a>
+        </div>
+
+{% endfor %}

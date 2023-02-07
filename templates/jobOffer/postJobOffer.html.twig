@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil |
+{% block title %}Annonce |
 	{{parent()}}
 {% endblock %}
 
@@ -9,22 +9,45 @@
 {{ parent() }}
 <body class="post">
 	
-	<main class="container mt-3">
+	<main class="container mt-3 ">
 	{% for recruiter in recruiters %}
-		<section class="container annonce">
+<section class="container annonce bg-dark">
+
 			<div class="row">
 				<div class="col">
-					<h2>{{ titlepage }}</h2>
-						<p>Pour que votre annonce soit validé, veuillez indiquer dans la description les horaires de travail et le salaire.</p>
+{% if editMode %}
+	<h2 class="center my-3">{{ titlepage }}</h2>
+
+{% else %}
+
+<h2 class="center my-3">{{ titlepage }}</h2>
+
+
+{% endif %}
+<p class="center pt-3">Pour que votre annonce soit validé, veuillez indiquer dans la description les horaires de travail et le salaire.</p>
+
+
+					
 
 					{{ form_start(form) }}
-						<fieldset class="mb-3">
-							<legend>Mon Annonce</legend>
+						<fieldset class="my-5">
+							
 							{{ form_row(form.title,{'label':'Titre de l\'offre',}) }}
 							{{ form_row(form.city, {'label':'Ville','attr': {'placeholder':'Montpellier'}}) }}
 							{{ form_row(form.content, {label: 'Description','attr': {'placeholder':'Tapez votre texte ici...'}}) }}
 						</fieldset>
-						<button type="submit" class="btn btn-sm btn-info my-3 mx-auto">Enregistrer</button>
+
+<div class="center">
+{% if editMode %}
+<button type="submit" class="btn btn-sm btn-info my-3 mx-auto">Modifier</button>
+
+{% else %}
+	<button type="submit" class="btn btn-sm btn-info my-3 ">Enregistrer</button>
+{% endif %}
+</div>
+
+						
+						{# <button type="submit" class="btn btn-sm btn-info my-3 mx-auto">Enregistrer</button> #}
 					{{ form_end(form) }}
 
 	{% else %}

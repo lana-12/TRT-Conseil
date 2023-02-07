@@ -40,7 +40,7 @@ class JobOffer
 
     public function __construct()
     {
-        $this->applies = new ArrayCollection();
+        $this->Applies = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
 

@@ -40,25 +40,24 @@
 			{% else %}
 				<h2 class="center"> Compléter votre profil</h2>
 			{% endif %}
-{# <pre>
-	{{ dump(recruiter.nameCompany) }}
-</pre> #}
-{{ form_start(recruiterForm, { 'attr': {'class': 'formProfil'} }) }}
 
+		{{ form_start(recruiterForm, { 'attr': {'class': 'formProfil'} }) }}
 
-				<fieldset class="mb-3">
-					{{ form_row(recruiterForm.nameCompany,{'label':'Nom de l\'entreprise',}) }}
+			<fieldset class="mb-3">
+				{{ form_row(recruiterForm.nameCompany,{'label':'Nom de l\'entreprise',}) }}
 
-					{{ form_row(recruiterForm.address, {'label':'Adresse','attr': {'placeholder':'1 av du parc'}}) }}
-					{{ form_row(recruiterForm.zipCode, { 'label': 'Code postal','attr': {'placeholder':'34000'}}) }}
-					{{ form_row(recruiterForm.city, {'label': 'Ville', 'attr': {'placeholder':'Montpellier'}}) }}
-				</fieldset>
+				{{ form_row(recruiterForm.address, {'label':'Adresse','attr': {'placeholder':'1 av du parc'}}) }}
+				{{ form_row(recruiterForm.zipCode, { 'label': 'Code postal','attr': {'placeholder':'34000'}}) }}
+				{{ form_row(recruiterForm.city, {'label': 'Ville', 'attr': {'placeholder':'Montpellier'}}) }}
+			</fieldset>
+
 				{% if editMode %}
 					<button type="submit" class="btn btn-sm btn-info my-3 ">Modifier</button>
 				{% else %}
 					<button type="submit" class="btn btn-sm btn-info my-3 ">Enregistrer</button>
 				{% endif %}
-				{{ form_end(recruiterForm) }}
+
+		{{ form_end(recruiterForm) }}
 			</div>
 		</div>
 	</main>

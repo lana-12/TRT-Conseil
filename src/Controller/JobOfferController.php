@@ -37,7 +37,7 @@ class JobOfferController extends AbstractController
 
 
     #[Route('/poster', name: 'post')]
-    public function newJobOffer(Request $request, RecruiterRepository $recruiterRepo): Response
+    public function newJobOffer(Request $request, RecruiterRepository $recruiterRepo, JobOffer $jobOffer = null): Response
     {
         /**
          * @var User $user
@@ -71,10 +71,51 @@ class JobOfferController extends AbstractController
             return $this->redirectToRoute('recruiter');
             }
         
-        return $this->render('jobOffer/newJobOffer.html.twig', [
+        return $this->render('jobOffer/postJobOffer.html.twig', [
             'titlepage' => 'Poster une Annonce',
             'form' => $form->createView(),
             'recruiters'=> $recruiters,
+            'editMode' => $jobOffer->getId() !== null,
+
+        ]);
+    }
+
+
+    #[Route('/modifier/{id}', name: 'editP')]
+    public function editJobOffer(Request $request, RecruiterRepository $recruiterRepo, JobOffer $jobOffer=null): Response
+    {
+        /**
+         * @var User $user
+         */
+        $user = $this->getUser();
+        if (!$this->getUser()) {
+            $this->addFlash('alert', 'Vous devez être connecté.');
+            return $this->redirectToRoute('app_login');
+        }
+        $recruiters = $user->getRecruiters();
+            if(!$jobOffer){
+                $jobOffer = new JobOffer();
+            }
+
+            $form = $this->createForm(JobOfferType::class, $jobOffer);
+            $form->handleRequest($request);
+
+            $jobOffer->setActive(false);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+
+                $this->em->persist($jobOffer);
+                $this->em->flush();
+                $this->addFlash('success', 'Votre annonce a bien été modifier et doit être validé par un de nos consultants.');
+            return $this->redirectToRoute('recruiter');
+            }
+        
+        return $this->render('jobOffer/postJobOffer.html.twig', [
+            'titlepage' => 'Modifier votre Annonce',
+            'form' => $form->createView(),
+            'recruiters'=> $recruiters,
+            'editMode'=> $jobOffer->getId() !== null,
         ]);
     }
 }

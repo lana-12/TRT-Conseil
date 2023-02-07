@@ -25,12 +25,12 @@
 
         </section>
 
-        <h2>{{ titlepage }}</h2>
+        <h2 class="center my-5">{{ titlepage }}</h2>
 
         <section class="espace">
 
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 ">
 
             {% include "recruiter/_recruiter.html.twig" %}
 
@@ -38,11 +38,17 @@
             </div>
         </section>
 
+
+<h2 class="center my-5">Mes Annonces</h2>
+
+
         <section class="espace">
 
             <div class="row">
                 <div class="col-12">
-                    {# {% include "_joboffer.html.twig" %} #}
+
+                    {% include "recruiter/_showJobOffer.html.twig" %} 
+
                 </div>
             </div>
         </section>

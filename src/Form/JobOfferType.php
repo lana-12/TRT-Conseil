@@ -33,7 +33,7 @@ class JobOfferType extends AbstractType
         
             ->add('title', TextType::class, [
             'attr' => [
-                'class' => 'form-control',
+                'class' => 'form-control mb-3',
             ],
             'required' => true,
             'constraints' => [
@@ -43,7 +43,7 @@ class JobOfferType extends AbstractType
         ])
             ->add('city', TextType::class, [
             'attr' => [
-                'class' => 'form-control',
+                'class' => 'form-control mb-3',
             ],
             'required' => true,
             'constraints' => [

@@ -7,10 +7,11 @@ use App\Entity\JobOffer;
 use App\Entity\Recruiter;
 use App\Form\JobOfferType;
 use App\Form\RecruiterType;
-use App\Repository\RecruiterRepository;
-use App\Service\ArrayEmptyService;
 use App\Service\SendMailService;
+use App\Service\ArrayEmptyService;
+use App\Repository\RecruiterRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,7 +29,7 @@ class RecruiterController extends AbstractController
     ){}
     
     #[Route('/', name: 'recruiter')]
-    public function index(RecruiterRepository $recruiterRepo): Response
+    public function index(ManagerRegistry $doctrine, RecruiterRepository $repositoryRecruiter ): Response
     {
         /**
          * @var User $user
@@ -38,16 +39,23 @@ class RecruiterController extends AbstractController
             $this->addFlash('danger', 'Vous devez être connecté.');
             return $this->redirectToRoute('app_login');
             } 
-        // $recruiters = $recruiterRepo->findAll();
             $recruiters = $user->getRecruiters();
-            foreach ($recruiters as $recruiter){
+            foreach($recruiters as $recruiter){
+
+                // $id = $recruiter->getId();
+                // $recruiter = $repositoryRecruiter->find($id);
+
+                $jobOffers = $recruiter->getJobOffers();
                 
-                dump($recruiter->getJobOffers());
+
             }
+            // $repositoryRecruiter = $doctrine->getRepository(Recruiter::class);
+            
         return $this->render('recruiter/index.html.twig', [
             'titlepage' => 'Mon Espace',
             'user'=>$user,
             'recruiters' =>$recruiters,
+            'joboffers'=> $jobOffers,
         ]);
     }
     
@@ -74,7 +82,6 @@ class RecruiterController extends AbstractController
             $this->addFlash('success', 'Profil complété, vous pouvez maintenant déposer une annonce.');
             return $this->redirectToRoute('recruiter');
         }
-    dump($recruiter);
         return $this->render('recruiter/profil.html.twig', [
             'recruiterForm'=> $form->createView(),
             'editMode'=> $recruiter->getId() !== null,
@@ -94,6 +101,7 @@ class RecruiterController extends AbstractController
             $recruiter = new Recruiter();
             }
         $recruiter->setUser($this->getUser());
+
         $form = $this->createForm(RecruiterType::class, $recruiter);
         $form->handleRequest($request);
 
@@ -117,7 +125,7 @@ class RecruiterController extends AbstractController
     }
 
     #[Route('/mesannonces', name: 'jobOffers')]
-    public function jobOffer(RecruiterRepository $recruiterRepo): Response
+    public function jobOffer(): Response
     {
         /**
          * @var User $user
@@ -130,39 +138,24 @@ class RecruiterController extends AbstractController
             //     $this->addFlash('danger', 'Votre compte n\'est pas encore activé.');
             //     return $this->redirectToRoute('home');
         }
-        $recruiters = $user->getRecruiters();
-    //    if($recruiters === null){
-    //     dump('non');
-    //    }else{
-    //     dump('ok');
-    //    }
-        foreach ($recruiters as $recruiter) {
-            $user = $this->getUser();
-            if ($recruiter === null) {
-                dump('non');
-            } else {
-                dump('ok');
-            }
-            dump($recruiter->getJobOffers());
-        }
-        //REVOIR ICI
-        // $recruiters = $user->getRecruiters();
-        // foreach ($recruiters as $recruiter){
-        //     $test= $recruiter->getNameConmpany();
-        //     $name = $recruiterRepo->findOneByName($recruiter);
-        //     dump($name);
 
-        //     if ($name === null) {
-        //         $this->addFlash('danger', 'Vous devez mettre votre profil à jour pour accéder à cette page.');
-        //         return $this->redirectToRoute('profilR');
-        //     } 
-        // }
-        ////////////////////////////////
-        
-        return $this->render('recruiter/showJobOffer.html.twig', [
-            'titlepage' => 'Recruiter',
-            'recruiters'=> $recruiters,
-        ]);
+        $recruiters = $user->getRecruiters();
+
+            foreach ($recruiters as $recruiter){
+                $jobOffers = $recruiter->getJobOffers();
+
+                foreach($jobOffers as $jobOffer){
+                    if(!$jobOffer->isActive()){
+                        $this->addFlash('danger', 'Votre annonce de ' .$jobOffer->getTitle().' n\'a pas été validé.');
+                    }
+                }
+
+                return $this->render('recruiter/myJobOffer.html.twig', [
+                    'titlepage' => 'Recruiter',
+                    'recruiters' => $recruiters,
+                    'joboffers' => $jobOffers,
+                ]);
+            }
+
     }
-    
 }
