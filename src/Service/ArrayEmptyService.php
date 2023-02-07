@@ -11,7 +11,7 @@ class ArrayEmptyService
     public function arrayEmpty($array): bool
     {
         if (!empty($array)){
-            foreach ($array as $valeur){
+            foreach ($array as $key => $valeur){
                 if ($valeur !== null){
                     return false;
                     }

@@ -8,6 +8,29 @@
 {% block body %}
 	{{ parent() }}
 <body class="compte">
+	<section>
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				{% if editMode %}
+				<li class="breadcrumb-item active" aria-current="page" alt="Page active" title="Page active">Modifier mon Profil</li>
+				{% else %}
+				<li class="breadcrumb-item active" aria-current="page" alt="Page active" title="Page active">Compléter mon Profil</li>
+				{% endif %}
+
+				<li class="breadcrumb-item">
+					<a class="" href="{{ path('recruiter',{'id': recruiter.id })}}" alt="Accéder à mes annonces" title="Accéder à mes annonces">Mon espace</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a class="" href="{{ path('jobOffers')}}" alt="Accéder à mes annonces" title="Accéder à mes annonces">Mes Annonces</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a class="" href="{{ path('post')}}" alt="Poster une annonces" title="Poster une annonces">Poster une annonce</a>
+				</li>
+
+			</ol>
+		</nav>
+	</section>
+
 
 	<main class="container mt-3">
 		<div class="row">

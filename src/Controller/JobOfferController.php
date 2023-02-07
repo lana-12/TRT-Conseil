@@ -47,16 +47,10 @@ class JobOfferController extends AbstractController
             $this->addFlash('alert', 'Vous devez être connecté.');
             return $this->redirectToRoute('app_login');
         }
-        
         $recruiters = $user->getRecruiters();
-        $this->array->arrayEmpty($recruiters);
-
-        if($recruiters === true){
-            $this->addFlash('alert', 'Vous devez mettre votre profil à jour.');
-        }
             $jobOffer = new JobOffer();
 
-            $recruiters = $user->getRecruiters();
+            // $recruiters = $user->getRecruiters();
             foreach ($recruiters as $recruiter) {
 
                 $id = $recruiter->getId();
@@ -80,6 +74,7 @@ class JobOfferController extends AbstractController
         return $this->render('jobOffer/newJobOffer.html.twig', [
             'titlepage' => 'Poster une Annonce',
             'form' => $form->createView(),
+            'recruiters'=> $recruiters,
         ]);
     }
 }

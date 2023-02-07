@@ -32,6 +32,13 @@
 	{% else %}
 		<div class="alert alert-success mt-4 text-center">
 			<p>Vous devez être connecté pour postuler à cette annonce !!</p>
+			<div class="d-flex d-flex justify-content-around">
+				<a class="" title="Lien pour se connecter" alt="Lien pour se connecter" href=" {{ path('app_login') }} ">Connectez-vous</a>
+				<a class="" title="Lien pour s'inscrire" alt="Lien pour s'inscrire" href=" {{ path('app_register') }} ">Inscrivez-vous</a>
+
+			</div>
+
+
 		</div>
 
 	{% endif %}

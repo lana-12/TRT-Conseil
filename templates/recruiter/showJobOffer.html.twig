@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recruteur |
+	{{ parent() }}!
+{% endblock %}
+
+{% block body %}
+	{{ parent() }}
+	<body class="compte">
+		<main class="container">
+			<section>
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page" alt="Page active" title="Page active">Mes Annonces</li>
+                        <li class="breadcrumb-item">
+                            <a class="" href="{{ path('recruiter',{'id': recruiter.id })}}" alt="Accéder à mes annonces" title="Accéder à mes annonces">Mon espace</a>
+                        </li>
+						<li class="breadcrumb-item">
+							<a class="" href="{{ path('post')}}" alt="Poster une annonces" title="Poster une annonces">Poster une annonce</a>
+						</li>
+					</ol>
+				</nav>
+			</section>
+
+			{# <h2>{{ titlepage }}</h2> #}
+
+			
+
+		</main>
+	</body>
+{% endblock %}
+

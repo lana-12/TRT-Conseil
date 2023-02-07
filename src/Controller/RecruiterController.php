@@ -130,10 +130,10 @@ class RecruiterController extends AbstractController
             //     $this->addFlash('danger', 'Votre compte n\'est pas encore activé.');
             //     return $this->redirectToRoute('home');
         } 
-        
+        //REVOIR ICI
         $recruiter = $user->getRecruiters();
         $name = $recruiterRepo->findOneByName($recruiter);
-
+dump($name);
         if ($name === null) {
             $this->addFlash('danger', 'Vous devez mettre votre profil à jour pour accéder à cette page.');
             return $this->redirectToRoute('profilR');
