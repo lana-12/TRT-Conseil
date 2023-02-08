@@ -1,62 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil |
+{% block title %}Profil |
 	{{parent()}}
 {% endblock %}
 
 
 {% block body %}
 	{{ parent() }}
+<body class="compte">
 
 	<main class="container mt-3">
 
-<pre>
+{# <pre>
 	{{ dump(app.user) }}
-</pre>
-		<section class="container">
-			<div class="row">
-				<div class="col">
-					<h2>{{ titlepage }}</h2>
+</pre> #}
+		
+		<div class="row">
+			<div class="col">
 
-					{# {% for message in app.flashes('success') %}
-															<div class="alert alert-success mt-4 text-center">
-																{{ message }}
-															</div>
-														{% endfor %} #}
+			{% if editMode %}
+				<h2 class="center my-4 txtShadow">
+					Modifier votre profil</h2>
+			{% else %}
+				<h2 class="center my-4 txtShadow">
+					Compléter votre profil</h2>
+			{% endif %}
 
-					{{ form_start(candidateForm) }}
+		{{ form_start(candidateForm, { 'attr': {'class': 'formProfil bg-black'} }) }}
 
-					<fieldset class="mb-3">
-						<legend>Mon Compte de connexion</legend>
-					
-						{{ form_row(candidateForm.firstname,{'label':'Nom ',}) }}
+			<fieldset class="mb-3">
+				{{ form_row(candidateForm.firstname,{'label':'Nom ',}) }}
 
-						{{ form_row(candidateForm.lastname, {'label':'Prénom'}) }}
-						
-						{{ form_row(candidateForm.cv, {
-										label: 'CV'}) }}
+				{{ form_row(candidateForm.lastname, {'label':'Prénom'}) }}
+				
+				{{ form_row(candidateForm.cv,  ) }}
+			</fieldset>
 
-                        {# <div>
-						{{ form_row(candidateForm.cvFile, {
-										label: 'CV'}) }}
-                        </div> #}
-					{# {% if app.user %}
-						{{ form_row(candidateForm.user, {
-										label: 'Compte utilisateur',value: '{{ app.user.email }}'
-															}) }}
+				<div class="text-center">
+				{% if editMode %}
+					<button type="submit" class="btn btn-sm btn-warning my-3  ">Modifier</button>
+				{% else %}
+					<button type="submit" class="btn btn-sm btn-info my-3 ">Enregistrer</button>
+				{% endif %}
+				</div>
 
-					{% endif %}
-					#}
-
-				</fieldset>
-
-				<button type="submit" class="btn btn-lg btn-info my-3">Enregistrer</button>
-				{{ form_end(candidateForm) }}
-
+		{{ form_end(candidateForm) }}
+				</div>
 			</div>
+		</section>
+	</main>
+</body>
 
-		</div>
-	</section>
 
-</main>{% endblock %}
+{% endblock %}
 

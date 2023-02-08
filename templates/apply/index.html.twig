@@ -7,41 +7,40 @@
 		{{ parent() }}
 <body class="candidacy">
 	
-	<main class="container ">
-		<h2>{{ titlepage }} !</h2>
+	<main class="container center my-4">
+		<h2>{{ titlepage }}</h2>
+		<section class="test">
+		{% if candidates %}
+			{% for candidate in candidates %}
+			<div class="boxCandidacy">
+				<h3 class="center">
+					<strong>{{ candidate.firstname }} {{ candidate.lastname }}
+					</strong>
+				</h3>
+				<p> est disponible pour une future collaboration.</p>
+				<p>Localisation : {{candidate.city }}</p>
 
-{% if candidates %}
-	
-	{% for candidate in candidates %}
-<div class="boxCandidacy">
+				{% if app.user %}
+				<p>
+					<a href=" {{ asset('uploads/cvs/' ~ candidate.cv ) }} " target=" _blank" class="btn btn-primary btn-sm" type="button" alt="Cliquez ici pour voir le cv" title="Cliquez ici pour voir le cv">Visualiser son CV</a>
+				</p>
+				{% else %}
+				<div class="alert alert-info mt-4 text-center">
+					<p>Vous devez être connecté pour accéder au cv !!</p>
+				</div>
 
-		<h3>{{ candidate.firstname }}</h3>
-		<h4>{{ candidate.lastname }}</h4>
-
-		{% if app.user %}
-			<p>
-				<a href=" {{ asset('uploads/cvs/' ~ candidate.cv ) }} " target=" _blank" class="btn btn-primary btn-sm" type="button" alt="Cliquez ici pour Voir le cv" title="Cliquez ici pour Voir le cv">Voir le cv</a>
-			</p>
-		{% else %}
-			<div class="alert alert-info mt-4 text-center">
-				<p>Vous devez être connecté pour accéder au cv !!</p>
+				{% endif %}
 			</div>
-</div>
+			{% endfor %}
 
-		{% endif %}
-
-	{% endfor %}
-
-{% else %}
+		{% else %}
 
 			<div class="alert alert-info mt-4 text-center">
 				<p>Aucune candidatures actuellement</p>
 			</div>
-{% endif %}
-
+		{% endif %}
+		</section>
 	</main>
 </body>
-
-
 {% endblock %}
 

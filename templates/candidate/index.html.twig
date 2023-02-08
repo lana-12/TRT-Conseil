@@ -1,35 +1,63 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Candidatures | {{ parent() }}{% endblock %}
+{% block title %}Candidat | {{ parent() }}{% endblock %}
 
 {% block body %}
 	{{ parent() }}
 
-
-<main class="container">
-    <h2>{{ titlepage }}! </h2>
-
-    {# {% if app.user %} #}
-
-{# <pre>
-    {{ dump(candidates) }}
-</pre> #}
-{# <pre>
-    {{ dump(candidate) }}
-</pre> #}
-{# <div>
-{% for candidate in candidates %}
+<body class="compte">
     
-{{ candidate.firstname}}
 
-{{ candidate.lastname}}
+    <main class="container">
+<h2 class="center my-5 txtShadow">{{ titlepage }}
+</h2>
 
-    {{ candidate.cv}}
-<p><a href="{{ asset('uploads/cvs/' ~ candidate.cv ) }} " target="_blank">Voir le CV</a></p>
-{% endfor %}
-</div>
+{% for candidate in candidates %}
+
+	{% include "candidate/_candidate.html.twig" %}
+
+        <section class="espace">
+            <div class="row">
+                <div class="col-12">
+        
+
+	
+
+
+                    
+                </div>
+            </div>
+        </section >
+
+<h2 class="center my-4 text-black txtShadow">Mes Annonces
+
+</h2>
+
+        <section class="espace">
+            <div class="row">
+                <div class="col-12">
+
+
+                </div>
+            </div>
+        </section >
 {% else %}
-aucun cv
-    {% endif %} #}
-</main>
+
+<div class="container alert alert-danger mt-5" role="alert">
+
+	<div class="alert-message text-center">
+
+		<h4 class="text-dark">Vous devez mettre à jour votre profil pour accéder à cette page</h4>
+
+		<a class="text-primary" title="Lien pour se connecter" alt="Lien pour se connecter" href=" {{ path('profilR') }} ">Complétez votre profil</a>
+
+	</div>
+
+</div>{% endfor %}
+
+
+
+    </main>
+</body>
+
 {% endblock %}

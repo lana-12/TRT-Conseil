@@ -42,11 +42,20 @@ class CandidateRepository extends ServiceEntityRepository
     public function findOneByName($value): ?Candidate
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.lastname = :val')
+            ->andWhere('c.lastname =:val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    // public function findIsActive($isActive)
+    // {
+    //     return $this->createQueryBuilder('c')
+    //         ->select('c.isActive = :isActive')
+    //         ->setParameter('isActive', $isActive)
+    //         ->getQuery()
+    //         ->getResult();
+    // }
 //    /**
 //     * @return Candidate[] Returns an array of Candidate objects
 //     */

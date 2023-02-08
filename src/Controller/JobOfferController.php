@@ -29,9 +29,30 @@ class JobOfferController extends AbstractController
     public function index(): Response
     {
         $jobOffers = $this->jobOfferRepo->findAll();
+        /**
+         * @var User $user
+         */
+        $user = $this->getUser();
+
+        // $candidates= $user->getCandidates();
+        // dump($user);
+        // $candidates = $user->getCandidates();
+        // foreach ($candidates as $candidate) {
+        //     dump(!$candidate);
+        // }
+        // if (!$this->getUser()) {
+        //     $this->addFlash('danger', 'Vous devez être connecté.');
+        //     return $this->redirectToRoute('app_login');
+        // }
+        // if (!isset($candidates)) {
+        //     dump('oups');
+        // }
+        
         return $this->render('jobOffer/index.html.twig', [
             'titlepage' => 'Offres d\'emploi',
             'joboffers'=> $jobOffers,
+            'user'=> $user,
+            // 'candidates'=> $candidates,
         ]);
     }
 

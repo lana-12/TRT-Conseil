@@ -20,7 +20,7 @@ class CandidateType extends AbstractType
         $builder
             ->add('firstname', TextType::class, [
                 'attr'=>[
-                    'class'=>'form-control',
+                    'class'=> 'form-control mb-5',
                 ],
                 'required' => true,
                 'constraints' => [
@@ -30,7 +30,7 @@ class CandidateType extends AbstractType
             ])
             ->add('lastname', TextType::class, [
                 'attr'=>[
-                    'class'=>'form-control',
+                    'class'=> 'form-control mb-5' ,
                 ],
                 'required' => true,
                 'constraints' => [
@@ -48,10 +48,11 @@ class CandidateType extends AbstractType
             ->add('cv', FileType::class, [
                 'label' => 'CV (fichier PDF - taille maximale : 1024 Ko)',
                 'attr' => [
-                    'maxlength' => 100
+                    'maxlength' => 100,
+                    'class' => 'form-control ',
                 ],
-                'mapped' => false,
-                'required' => false,
+                'mapped' => true,
+                'required' => true,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
@@ -60,7 +61,8 @@ class CandidateType extends AbstractType
                             'application/x-pdf',
                         ],
                         'mimeTypesMessage' => 'Veuillez choisir un document au format PDF.',
-                    ])
+                    ]),
+                    new NotBlank(['message' => 'Il manque votre CV !!']),
                 ],
             ]) 
         ;

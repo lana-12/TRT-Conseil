@@ -60,12 +60,19 @@ class ConsultantController extends AbstractController
 
         //     //Mettre tout le code que j'ai créer ci-dessous  ici
         $accounts = $this->userRepo->findBy(['active' => false]);
-        // }
 
+        $counts= $this->userRepo->findAll();
+        
+        foreach ($counts as $count){
+            $role= $count->getRoles();
+            dump($role[0]);
+            $roleStr = implode(" ", $role);
+        }
         
         return $this->render('consultant/accountUser.html.twig', [
             'titlepage' => 'Validez les comptes d\'utilisateurs',
             'accounts' => $accounts,
+            'role'=> $roleStr,
         ]);
     }
 

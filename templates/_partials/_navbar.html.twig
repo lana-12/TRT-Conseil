@@ -32,17 +32,13 @@
 							{% if is_granted('ROLE_RECRUITER') %}
 
 								<li>
-									<a class="dropdown-item" href="{{ path('recruiter')}}" alt="Accéder aux annonces" title="Accéder aux annonces">Mon Espace</a>
+									<a class="dropdown-item" href="{{ path('recruiter')}}" alt="Accéder mon espace" title="Accéder mon espace">Mon Espace</a>
 								</li>
 								<li>
-									<a class="dropdown-item" href="{{ path('jobOffers')}}" alt="Accéder aux annonces" title="Accéder aux annonces">Mes Annonces</a>
+									<a class="dropdown-item" href="{{ path('jobOffers')}}" alt="Accéder à mes annonces" title="Accéder à mes annonces">Mes Annonces</a>
 								</li>
-								{# <li>
-									<a class="dropdown-item" alt="Accéder à votre profil" title="Accéder à votre profil" href="{{ path('profilR')}}">Mon Profil</a>
-								</li> #}
-
 								<li>
-									<a class="dropdown-item" href="{{ path('post')}}" alt="Accéder aux annonces" title="Accéder aux annonces">Poster une annonce</a>
+									<a class="dropdown-item" href="{{ path('post')}}" alt="Poster une annonce" title="Poster une annonce">Poster une annonce</a>
 								</li>
 								<li>
 									<a class="dropdown-item" href="{{ path('app_logout') }}" alt="Me déconnecter" title="Me déconnecter">Me Déconnecter</a>
@@ -51,14 +47,10 @@
 
 							{% elseif is_granted('ROLE_CANDIDATE') %}
 								<li>
-									<a class="dropdown-item" alt="Accéder à votre profil" title="Accéder à votre profil" href="{{ path('candidate')}}">Activer un compte de connexion</a>
+									<a class="dropdown-item" alt="Accéder à mon profil" title="Accéder à mon profil" href="{{ path('candidate')}}">Mon Espace</a>
 								</li>
 								<li>
-									<a class="dropdown-item" alt="Accéder à votre profil" title="Accéder à votre profil" href="{{ path('profilC')}}">Activer une offre</a>
-								</li>
-
-								<li>
-									<a class="dropdown-item" href="#" alt="Postuler à une annonce" title="Postuler à une annonce">Activer une candidature</a>
+									<a class="dropdown-item" alt="Accéder à votre profil" title="Accéder à votre profil" href="{{ path('dashboard')}}">Tableau de bord</a>
 								</li>
 								<li>
 									<a class="dropdown-item" href="{{ path('app_logout') }}" alt="Me déconnecter" title="Me déconnecter">Me Déconnecter</a>

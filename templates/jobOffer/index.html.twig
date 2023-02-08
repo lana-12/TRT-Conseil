@@ -11,52 +11,80 @@
 	<main class="container">
 		<h2 class="text-center m-4 fs-1">{{ titlepage }} 
 		</h2>
-
 {% if joboffers %}
-
 	{% for joboffer in joboffers %}
+		<div class="box_jobOffer">
+			<h3 class="center">La société <strong>{{ joboffer.recruiter.nameCompany}}</strong> recherche</h3>
+			<h4 class="titleJobOffer center">{{ joboffer.title }}</h4>
+			<h5 class="city">Sur {{ joboffer.city }}</h5>
 
-<div class="box_jobOffer">
-		<h3 class="center">La société <strong>{{ joboffer.recruiter.nameCompany}}</strong> recherche</h3>
-		<h4 class="titleJobOffer center">{{ joboffer.title }}</h4>
-		<h5 class="city">Sur {{ joboffer.city }}</h5>
+			<p>{{ joboffer.content }}</p>
 
-		<p>{{ joboffer.content }}</p>
+		{% if app.user %}
 
-	{% if app.user %}
-	{# LIEN TEST #}
-		<a href="{{ path('apply', { id : joboffer.id }) }}" type="button" class="btn btn-primary btn-sm">Postuler</a>
-
-
-	{# <a href="{{ path('active')}}" class="btn btn-primary btn-sm" type="button" alt="Cliquez ici pour postuler" title="Cliquez ici pour postuler">Postuler</a> #}
-	{% else %}
-		<div class="alert alert-success mt-4 text-center">
-			<p>Vous devez être connecté pour postuler à cette annonce !!</p>
-			<div class="d-flex d-flex justify-content-around">
-				<a class="" title="Lien pour se connecter" alt="Lien pour se connecter" href=" {{ path('app_login') }} ">Connectez-vous</a>
-				<a class="" title="Lien pour s'inscrire" alt="Lien pour s'inscrire" href=" {{ path('app_register') }} ">Inscrivez-vous</a>
-
+			<a href="{{ path('apply', { id : joboffer.id }) }}" type="button" class="btn btn-primary btn-sm">Postuler</a>
+			
+		{% else %}
+			<div class="alert alert-success mt-4 text-center">
+				<p>Vous devez être connecté pour postuler à cette annonce !!</p>
+				<div class="d-flex d-flex justify-content-around">
+					<a class="" title="Lien pour se connecter" alt="Lien pour se connecter" href=" {{ path('app_login') }} ">Connectez-vous</a>
+					<a class="" title="Lien pour s'inscrire" alt="Lien pour s'inscrire" href=" {{ path('app_register') }} ">Inscrivez-vous</a>
+				</div>
 			</div>
-
-
-		</div>
-
-	{% endif %}
+		{% endif %}
 </div>
-
 
 {% endfor %}
 
 {% else %}
 
-	<div class="alert alert-info mt-4 text-center">
-		<p>Aucunes offres actuellement</p>
-	</div>
-
-
+<div class="alert alert-info mt-4 text-center">
+	<p>Aucunes offres actuellement</p>
+</div>
 {% endif %}
-
-	</main>
-</body>	
+</main>
+</body>
 {% endblock %}
+
+
+		{# {% endif %} #}
+
+
+	{# LIEN TEST #}
+		{# {% for candidate in candidates %}
+			{% if candidate.isActive %}
+			<pre>
+				{{ dump(candidate.isActive) }}
+			</pre>
+		<a href="{{ path('apply', { id : joboffer.id }) }}" type="button" class="btn btn-primary btn-sm">Postuler</a>
+			{% else %}
+			<div class="container alert alert-danger mt-5" role="alert">
+				<div class="alert-message text-center">
+					<h4 class="text-dark">Vous devez mettre à jour votre profil pour accéder à cette page</h4>
+					<a class="text-primary" title="Lien pour se connecter" alt="Lien pour se connecter" href=" {{ path('profilR') }} ">Complétez votre profil</a>
+				</div>
+			</div>
+
+			{% endif %}
+		{% endfor %} #}
+
+
+
+	{# <a href="{{ path('active')}}" class="btn btn-primary btn-sm" type="button" alt="Cliquez ici pour postuler" title="Cliquez ici pour postuler">Postuler</a> #}
+	{# {% else %}
+		<div class="alert alert-success mt-4 text-center">
+			<p>Vous devez être connecté pour postuler à cette annonce !!</p>
+			<div class="d-flex d-flex justify-content-around">
+				<a class="" title="Lien pour se connecter" alt="Lien pour se connecter" href=" {{ path('app_login') }} ">Connectez-vous</a>
+				<a class="" title="Lien pour s'inscrire" alt="Lien pour s'inscrire" href=" {{ path('app_register') }} ">Inscrivez-vous</a>
+			</div>
+		</div>
+	{% endif %} #}
+
+
+
+{# {% endfor %} #}
+
+
 

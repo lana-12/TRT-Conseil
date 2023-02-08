@@ -8,10 +8,15 @@
 
 	<main class="container">
 		<h2>{{ titlepage }} !</h2>
-
+<pre>
+	{{ dump(apply) }}
+</pre>
 <p>ici id_jobOffer</p>
 
 {% for candidate in candidates %}
+<pre>
+	{{ dump(candidate) }}
+</pre>
 <p>ici id_candidate</p>
 	{{candidate.id}}
 <p>ici Email_candidate</p>

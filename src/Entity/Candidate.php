@@ -41,6 +41,9 @@ class Candidate
     #[ORM\ManyToOne(inversedBy: 'Candidates')]
     private ?User $user = null;
 
+    #[ORM\Column(length: 100)]
+    private ?string $city = null;
+
 
     public function __construct()
     {
@@ -138,6 +141,18 @@ class Candidate
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }
