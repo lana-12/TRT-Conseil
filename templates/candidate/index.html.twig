@@ -9,51 +9,37 @@
     
 
     <main class="container">
-<h2 class="center my-5 txtShadow">{{ titlepage }}
-</h2>
+        <h2 class="center my-5 txtShadow">{{ titlepage }}</h2>
 
-{% for candidate in candidates %}
+    {% for candidate in candidates %}
 
-	{% include "candidate/_candidate.html.twig" %}
+	    {% include "candidate/_candidate.html.twig" %}
 
         <section class="espace">
             <div class="row">
                 <div class="col-12">
-        
-
-	
-
-
                     
                 </div>
             </div>
         </section >
 
-<h2 class="center my-4 text-black txtShadow">Mes Annonces
-
-</h2>
+        <h2 class="center my-4 text-black txtShadow">Mes Candidatures</h2>
 
         <section class="espace">
             <div class="row">
                 <div class="col-12">
-
-
+                    {% include "candidate/_candidature.html.twig" %}
                 </div>
             </div>
         </section >
-{% else %}
-
-<div class="container alert alert-danger mt-5" role="alert">
-
-	<div class="alert-message text-center">
-
-		<h4 class="text-dark">Vous devez mettre à jour votre profil pour accéder à cette page</h4>
-
-		<a class="text-primary" title="Lien pour se connecter" alt="Lien pour se connecter" href=" {{ path('profilR') }} ">Complétez votre profil</a>
-
-	</div>
-
-</div>{% endfor %}
+    {% else %}
+        <div class="container alert alert-danger mt-5" role="alert">
+            <div class="alert-message text-center">
+                <h4 class="text-dark">Vous devez mettre à jour votre profil pour accéder à cette page</h4>
+                <a class="text-primary" title="Lien pour se connecter" alt="Lien pour se connecter" href=" {{ path('profilC') }} ">Complétez votre profil</a>
+            </div>
+        </div>
+    {% endfor %}
 
 
 

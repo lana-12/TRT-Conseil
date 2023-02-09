@@ -23,11 +23,18 @@
 				<h4 class="titleJobOffer center">{{ joboffer.title }}</h4>
 				<h5 class="city">Sur {{ joboffer.city }}</h5>
 				<p>{{ joboffer.content }}</p>
-
-			{% if app.user %}
+			{% if app.user  %}
+				{% if app.user.active %}
 				<div class="text-center">
 					<a href="{{ path('apply', { id : joboffer.id }) }}" type="button" class="btn btn-primary btn-sm ">Postuler</a>
 				</div>
+			{% else %}
+				<div class="alert alert-success mt-4 text-center">
+					<p>Votre compte n'est pas activé, merci de patienter</p>
+				</div>
+
+					
+				{% endif %}
 			{% else %}
 				<div class="alert alert-success mt-4 text-center">
 					<p>Vous devez être connecté pour postuler à cette annonce !!</p>

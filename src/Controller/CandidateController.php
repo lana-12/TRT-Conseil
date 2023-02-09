@@ -17,9 +17,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
+#[Security("is_granted('ROLE_CANDIDATE')", statusCode: 403)]
 #[Route('/candidat')]
 
 class CandidateController extends AbstractController
@@ -33,7 +35,7 @@ class CandidateController extends AbstractController
     ) {
     }
     #[Route('/', name: 'candidate')]
-    public function index(CandidateRepository $candidateRepo): Response
+    public function index($candidatures = null, $applies = null): Response
     {
         /**
          * @var User $user
@@ -45,12 +47,22 @@ class CandidateController extends AbstractController
         } else{
 
             $candidates = $user->getCandidates();
+            foreach ($candidates as $candidate) {
+                $applies = $candidate->getApplies();
+                foreach ($applies as $apply) {
+                    if (!$apply->isActive()) {
+                        $this->addFlash('danger', 'Votre candidature de ' . $apply->getJobOffer()->getTitle() . ' n\'a pas été validé par nos équipes.');
+                    }
+                    $candidatures = $apply->getJobOffer();
+                }
+            }
         }
-        
         
         return $this->render('candidate/index.html.twig', [
             'titlepage' => 'Mon espace',
             'candidates'=> $candidates,
+            'candidatures' => $candidatures,
+            'applies' => $applies,
         ]);
     }
 
@@ -183,7 +195,7 @@ class CandidateController extends AbstractController
     }
 
     #[Route('/tableau-de-bord', name: 'dashboard')]
-    public function showDashboard(CandidateRepository $candidateRepo): Response
+    public function showDashboard(CandidateRepository $candidateRepo, $candidatures= null, $applies=null ): Response
     {
         /**
          * @var User $user
@@ -195,12 +207,22 @@ class CandidateController extends AbstractController
         } else {
 
             $candidates = $user->getCandidates();
+            foreach ($candidates as $candidate){
+                $applies = $candidate->getApplies();
+                    foreach ($applies as $apply) {
+                        if (!$apply->isActive()) {
+                        $this->addFlash('danger', 'Votre candidature de ' . $apply->getJobOffer()->getTitle() . ' n\'a pas été validé par nos équipes.');
+                        }
+                    $candidatures = $apply->getJobOffer();    
+                    }
+
+            }
         }
-
-
         return $this->render('candidate/dashboard.html.twig', [
             'titlepage' => 'Mon tableau de bord',
             'candidates' => $candidates,
+            'candidatures'=> $candidatures,
+            'applies'=> $applies,
         ]);
     }
 

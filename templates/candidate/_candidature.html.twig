@@ -1,0 +1,26 @@
+<div class="card text-white bg-dark" style="width: 18rem;">
+{% for apply in applies %}
+    
+	<h5 class="card-header center underline">Candidatures :</h5>
+	<div class="card-body">
+		<p class="card-text"> Pour la société :
+			{{ apply.joboffer.recruiter.namecompany }}
+		</p>
+		<p class="card-text">
+			{{ apply.joboffer.title }}
+		</p>
+		<p class="card-text">
+			{{ apply.joboffer.content }}
+		</p>
+	</div>
+{% else %}
+    
+    <div class="container alert alert-danger mt-5" role="alert">
+        <div class="alert-message text-center">
+            <p>Vous n'avez postuler à aucune offre d'emploi</p>
+        </div>
+    </div>
+{% endfor %}
+
+</div>
+

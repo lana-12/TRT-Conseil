@@ -34,7 +34,7 @@ class RecruiterController extends AbstractController
     ){}
     
     #[Route('/', name: 'recruiter')]
-    public function index(ManagerRegistry $doctrine, RecruiterRepository $repositoryRecruiter ): Response
+    public function index(ManagerRegistry $doctrine, RecruiterRepository $repositoryRecruiter, $jobOffers=null, $candidatures=null ): Response
     {
         /**
          * @var User $user
@@ -46,9 +46,14 @@ class RecruiterController extends AbstractController
             } 
             $recruiters = $user->getRecruiters();
             foreach($recruiters as $recruiter){
+
                 $jobOffers = $recruiter->getJobOffers();
-                foreach($jobOffers as $jobOffer){
-                    $candidatures = $jobOffer->getApplies();
+                if($jobOffers != null){
+                    foreach($jobOffers as $jobOffer){
+                        $candidatures = $jobOffer->getApplies();
+                    }
+                }else{
+                    $jobOffers = null;
                 }
                 
             }
@@ -129,7 +134,7 @@ class RecruiterController extends AbstractController
     }
 
     #[Route('/mesannonces', name: 'jobOffers')]
-    public function jobOffer(ApplyRepository $applyRepo): Response
+    public function jobOffer($jobOffers = null, $candidatures = null): Response
     {
         /**
          * @var User $user
@@ -142,8 +147,6 @@ class RecruiterController extends AbstractController
         }
 
         $recruiters = $user->getRecruiters();
-        
-
             foreach ($recruiters as $recruiter){
                 $jobOffers = $recruiter->getJobOffers();
                 foreach($jobOffers as $jobOffer){
@@ -153,14 +156,14 @@ class RecruiterController extends AbstractController
                     $candidatures = $jobOffer->getApplies();
                 }
 
-                return $this->render('recruiter/myJobOffer.html.twig', [
-                    'titlepage' => 'Recruiter',
-                    'recruiters' => $recruiters,
-                    'joboffers' => $jobOffers,
-                    'candidatures'=> $candidatures,
-                    
-                ]);
             }
+            return $this->render('recruiter/myJobOffer.html.twig', [
+                'titlepage' => 'Recruiter',
+                'recruiters' => $recruiters,
+                'joboffers' => $jobOffers,
+                'candidatures'=> $candidatures,
+                
+            ]);
 
     }
 }

@@ -10,21 +10,19 @@
 	<main class="container">
 	
 	{% for recruiter in recruiters %}
-		<section>
-			<nav aria-label="breadcrumb">
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item active" aria-current="page" alt="Page active" title="Page active">Mes Annonces</li>
-					<li class="breadcrumb-item">
-						<a class="" href="{{ path('recruiter',{'id': recruiter.id })}}" alt="Accéder à mes annonces" title="Accéder à mes annonces">Mon espace</a>
-					</li>
-					<li class="breadcrumb-item">
-						<a class="" href="{{ path('post')}}" alt="Poster une annonces" title="Poster une annonces">Poster une annonce</a>
-					</li>
-				</ol>
+		<div class=" d-flex justify-content-center  ">
+			<nav class=" shadow-5-strong ">
+				<a class="underline pe-2" aria-current="page" alt="Page active" title="Page active" href="#">Mon Espace
+				</a>
+				<a class="pe-2" href="{{ path('jobOffers')}}" alt="Accéder à mes annonces" title="Accéder à mes annonces">Mes Annonces
+				</a>
+				<a class="" href="{{ path('post')}}" alt="Poster une annonces" title="Poster une annonces">Poster une annonce
+				</a>
 			</nav>
-		</section>
+		</div>
 
-		<h3 class="center mt-5">Mes annonces</h3>
+
+		<h3 class="center mt-5 txtShadow">Mes annonces</h3>
 		<section>
 			<div class="row">
 				<div class="col-12">

@@ -31,17 +31,10 @@ class HomeController extends AbstractController
          * @var User $user
          */
         $user = $this->getUser();
-        // dump($user->getRecruiters());
-        // $recruiter = $user->getRecruiters();
 
         if ($this->getUser()) {
-            // return $this->redirectToRoute('app_login');
             if (in_array('ROLE_CONSULTANT', $user->getRoles())) {
                 return $this->redirectToRoute('consultant');
-                dump(true);
-                // $recruiter= $user->getRecruiters();
-                // $name = $this->recruiterRepo->findOneByName($recruiter);
-                // dump($name);
             }
 
             if ((in_array('ROLE_CANDIDATE', $user->getRoles())) || (in_array('ROLE_RECRUITER', $user->getRoles()))) {
@@ -66,31 +59,5 @@ class HomeController extends AbstractController
         }
     }
     
-    // #[Route('/', name: 'home')]
-    // public function index(): Response
-    // {
-    //     $countJobOffer = $this->jobOfferRepo->countJobOffer();
-    //     $countApply = $this->applyRepo->countApply();
-        
-    //     /**
-    //      * @var User $user
-    //      */
-    //     $user = $this->getUser();
-        
-    //     if($this->getUser()){
-    //         // $recruiters = $user->getRecruiters();
-    //         // foreach ($recruiters as $recruiter){
-    //         //     $name = $recruiter->getNameCompany();
-    //         //     dump($name);
-    //         // }
-    //         // dump($name);
-    //         } 
-    //     return $this->render('home/index.html.twig', [
-    //         'titlepage' => 'Page d\'accueil',
-    //         'countApplies' => $countApply,
-    //         'countJobOffers' => $countJobOffer,
-    //         // 'recruiters'=>$recruiter,
-    //         ]);
-    // }
     
 }

@@ -7,8 +7,18 @@
 <body class="compte">
     <main class="container">
     
-        <section>
-            <nav aria-label="breadcrumb">
+        <div class=" d-flex justify-content-center  ">
+            <nav class=" shadow-5-strong ">
+                <a class="underline pe-2" aria-current="page" alt="Page active" title="Page active" href="#">Mon Espace 
+                </a>			
+                <a class="pe-2" href="{{ path('jobOffers')}}" alt="Accéder à mes annonces" title="Accéder à mes annonces">Mes Annonces 
+                </a>
+                <a class="" href="{{ path('post')}}" alt="Poster une annonces" title="Poster une annonces">Poster une annonce </a>
+            </nav>
+        </div>
+        
+
+            {# <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page" alt="Page active" title="Page active">Mon Profil
                     </li>
@@ -20,12 +30,10 @@
                     </li>
 
                 </ol>
-            </nav>
+            </nav> #}
 
 
-        </section>
-
-        <h2 class="center my-5">{{ titlepage }}</h2>
+        <h2 class="center my-5 txtShadow">{{ titlepage }}</h2>
 
         <section class="espace">
 
@@ -38,7 +46,7 @@
             </div>
         </section>
 
-
+{% if joboffers and candidatures %}
         <h2 class="center my-3 txtShadow">Mes Annonces</h2>
         <section class="espace">
             <div class="row">
@@ -50,7 +58,7 @@
                 </div>
             </div>
         </section>
-
+{% endif %}
 
 
     </main>

@@ -8,28 +8,7 @@
 
 <body class="home">
     <main class="container mt-3">
-        <div class="btnCreate">
-{% if app.user %}
-
-    <p>
-    {{ app.user.Active ? 'active': 'inactive'}}
-    {{ app.user.email}}
-    {{ app.user.id}}
-
     
-    
-    </p>
-
-
-
-    {# {% else %}
-            <a href="{{ path('app_register') }}" class="text-primary" alt="M'inscrire" title="M'inscrire" type="submit">M'inscrire</a>
-
-            <a href="#" class="text-primary" alt="Me Connecter à votre espace" title="Me Connecter à votre espace" type="submit">Me Connecter</a > #}
-{% endif %}
-
-        </div>
-
         <section class="box_home center">
 
             <h2 class="center"><u>{{ titlebox1 }}</u></h2>
@@ -57,44 +36,21 @@
                     </ul>
                 </li>
 
-                <li>- En créant un compte sur notre site
+                <li class="mt-4">- En créant un compte sur notre site
                     <ul>
-                        <li class="center">Une fois votre compte créé et validé par un consultant,</li>
-                        <li class="center">Vous pouvez mettre votre profil mis à jour </li>
-                        <li class="center">Et déposer une offre d'emploi ou postuler à une annonce
+                        <li class="">Une fois votre compte créé et validé par un consultant,</li>
+                        <li class="">Vous pouvez mettre votre profil mis à jour </li>
+                        <li class="">Et déposer une offre d'emploi ou postuler à une annonce
                         </li>
-<li class="text-end">
-
-<a href="{{ path('app_register') }}" class="linkBox" alt="M'inscrire" title="M'inscrire" type="submit">
-	M'inscrire
-</a>
-
-</li>
-
+                        <li class="text-end">
+                            <a href="{{ path('app_register') }}" class="linkBox" alt="M'inscrire" title="M'inscrire" type="submit">
+                                M'inscrire
+                            </a>
+                        </li>
                     </ul>   
                 </li>
             </ul>
-
         </section>
-
-
-            
-{# <pre>
-    {{ dump(countJobOffer) }}
-{{ dump(countApply) }}
-
-</pre> #}
-{# {{  countApply }} #}
-
-{# {% for countApply in countApplies %}
-{% for countJobOffer in countJobOffers %}
-    
-            <p>Actuellement, nous avons {{ countJobOffer }} d'offres d'emploi et {{  countApply }} candidats.</p>
-{% endfor %}
-    
-{% endfor %} #}
-  
-
 
     </main>
 </body>

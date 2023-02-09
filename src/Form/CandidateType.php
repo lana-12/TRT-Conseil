@@ -38,6 +38,16 @@ class CandidateType extends AbstractType
                     new Length(['min' => 3, 'max' => 100, 'minMessage' => 'Votre prénom doit contenir au moins {{ limit }} caractères']),
                     ]
             ])
+            ->add('city', TextType::class, [
+                'attr'=>[
+                    'class'=> 'form-control mb-5' ,
+                ],
+                'required' => true,
+                'constraints' => [
+                    new NotBlank(['message' => 'Veuillez saisir votre ville.']),
+                    new Length(['min' => 3, 'max' => 100, 'minMessage' => 'Votre ville doit contenir au moins {{ limit }} caractères']),
+                    ]
+            ])
             // ->add('cv', TextType::class, [
             //     'label' => 'CV',
             //     'required' => false,

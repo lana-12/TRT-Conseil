@@ -11,55 +11,43 @@
 	
 	<main class="container mt-3 ">
 	{% for recruiter in recruiters %}
-<section class="container annonce bg-dark">
-
+		<section class="container annonce bg-dark">
 			<div class="row">
 				<div class="col">
-{% if editMode %}
-	<h2 class="center my-3">{{ titlepage }}</h2>
 
-{% else %}
+			{% if editMode %}
+				<h2 class="center my-3 ">{{ titlepage }}</h2>
+			{% else %}
+				<h2 class="center my-3 ">{{ titlepage }}</h2>
+			{% endif %}
+				
+				<p class="center pt-3">Pour que votre annonce soit validé, veuillez indiquer dans la description les horaires de travail et le salaire.</p>
 
-<h2 class="center my-3">{{ titlepage }}</h2>
-
-
-{% endif %}
-<p class="center pt-3">Pour que votre annonce soit validé, veuillez indiquer dans la description les horaires de travail et le salaire.</p>
-
-
+			{{ form_start(form) }}
+				<fieldset class="my-5">
 					
+					{{ form_row(form.title,{'label':'Titre de l\'offre', 'attr': {'placeholder':'Serveur(se)'}}) }}
+					{{ form_row(form.city, {'label':'Ville','attr': {'placeholder':'Montpellier'}}) }}
+					{{ form_row(form.content, {label: 'Description','attr': {'placeholder':'Tapez votre texte ici...'}}) }}
+				</fieldset>
 
-					{{ form_start(form) }}
-						<fieldset class="my-5">
-							
-							{{ form_row(form.title,{'label':'Titre de l\'offre',}) }}
-							{{ form_row(form.city, {'label':'Ville','attr': {'placeholder':'Montpellier'}}) }}
-							{{ form_row(form.content, {label: 'Description','attr': {'placeholder':'Tapez votre texte ici...'}}) }}
-						</fieldset>
-
-<div class="center">
-{% if editMode %}
-<button type="submit" class="btn btn-sm btn-info my-3 mx-auto">Modifier</button>
-
-{% else %}
-	<button type="submit" class="btn btn-sm btn-info my-3 ">Enregistrer</button>
-{% endif %}
-</div>
-
-						
-						{# <button type="submit" class="btn btn-sm btn-info my-3 mx-auto">Enregistrer</button> #}
-					{{ form_end(form) }}
+				<div class="center">
+				{% if editMode %}
+					<button type="submit" class="btn btn-sm btn-info my-3 mx-auto">Modifier</button>
+				{% else %}
+					<button type="submit" class="btn btn-sm btn-info my-3 ">Enregistrer</button>
+				{% endif %}
+				</div>
+			{{ form_end(form) }}
 
 	{% else %}
-		<div class="container alert alert-danger mt-5" role="alert">
-			<div class="alert-message text-center">
-				<h4 class="text-dark">Vous devez mettre vous profil à jour pour accéder à cette page</h4>
-				<a class="text-primary" title="Lien pour se connecter" alt="Lien pour se connecter" href=" {{ path('profilR') }} ">Complétez votre profil</a>
-			</div>
-		</div>
+				<div class="container alert alert-danger mt-5" role="alert">
+					<div class="alert-message text-center">
+						<h4 class="text-dark">Vous devez mettre vous profil à jour pour accéder à cette page</h4>
+						<a class="text-primary" title="Lien pour se connecter" alt="Lien pour se connecter" href=" {{ path('profilR') }} ">Complétez votre profil</a>
+					</div>
+				</div>
 	{% endfor %}
-
-
 				</div>
 			</div>
 		</section>
