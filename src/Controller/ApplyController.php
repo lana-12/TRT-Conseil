@@ -2,16 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Apply;
 use App\Entity\User;
-use App\Entity\Candidate;
+use App\Entity\Apply;
 use App\Entity\JobOffer;
-use App\Repository\CandidateRepository;
+use App\Entity\Candidate;
 use App\Repository\JobOfferRepository;
+use App\Repository\CandidateRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/candidature')]
@@ -36,7 +37,8 @@ class ApplyController extends AbstractController
             'candidates'=> $candidates,
         ]);
     }
-    
+
+    #[Security("is_granted('ROLE_CANDIDATE')", statusCode: 403)]
     #[Route('/postuler/{id}', name: 'apply')]
     public function test(CandidateRepository $candidateRepo, JobOfferRepository $jobOfferRepo, int $id, ManagerRegistry $doctrine ): Response
     {

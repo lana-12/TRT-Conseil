@@ -1,0 +1,24 @@
+<div class="header-sidebar">
+	<div class="header-menu">
+		<div>
+			<h1 class="titleCustom text-white">TRT<span class='conseil'>Conseil</span>
+			</h1>
+		</div>
+		<ul class="icon-fas d-flex flex-column flex-sm-row  ">
+			<li>
+				<a class="fas-fa" title='Déconnexion' href="{{ path('app_logout') }}">
+					<i class="fas fa-power-off"></i>
+				</a>
+			</li>
+			<li>
+				{# {% if app.user %}
+					<a class='fas-fa text-white' href='{{ path('app_admin', {'id': app.user.id}) }}' alt="Retour accueil et Vous êtes connecté en tant que {{ app.user.username }}" title="Retour accueil et Vous êtes connecté en tant que {{ app.user.username }}">
+						<i class="fas fa-user-circle text-dark"></i>
+						<p class='d-none d-sm-block textConnected'>{{ app.user.username }}</p>
+					</a>
+				{% endif %} #}
+			</li>
+		</ul>
+	</div>
+</div>
+

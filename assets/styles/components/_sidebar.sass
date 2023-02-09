@@ -1,0 +1,117 @@
+// thE HEADER top start 
+.wrapper 
+    & .header-sidebar
+        z-index: 1
+        background-color: #000
+        position: fixed
+        width: 100%
+        height: 80px
+        display: flex
+        top: 0
+        right: 0
+        & .header-menu
+            width: 100%
+            height: 100%
+            display: flex
+            justify-content: space-between
+            align-items: center
+            padding: 0 10px
+            & .icon-fas
+                display: flex
+                margin-top: 10px
+                & .fas-fa
+                    background-color: #fff
+                    color: #000
+                    display: block
+                    margin-top: 5px
+                    font-size: 18px
+                    width: 34px
+                    height: 34px
+                    line-height: 35px
+                    text-align: center
+                    border-radius: 50%
+                    transition: 0.3s
+                    transition-property: background, color
+                    &:hover 
+                        color: #fff
+                        background-color: $blue
+                & .connected
+                    color: #fff
+                    font-size: 0.8em
+
+    // SIDEBAR start
+.sidebar   
+    z-index: 1
+    background-color: #000
+    position: fixed
+    top: 80px
+    width: 50px
+    height: 90%
+    transition: 0.3s
+    transition-property: width
+    overflow-y: auto
+    & .sidebar-menu
+        // overflow: hidden
+        & .item
+            width: 255px
+            overflow: hidden
+            & .menu-btn
+                display: block
+                color: #fff
+                position: relative
+                padding: 25px 18px
+                transition: 0.3s
+                transition-property: color
+                &:hover
+                    color: $blue
+            & .sub-menu
+                background-color: $blue
+                max-height: 0
+                overflow: hidden
+                transition: 0.3s
+                transition-property: background, max-height 
+                & a
+                    display: block
+                    position: relative
+                    color: #000
+                    white-space: nowrap
+                    font-size: 15px
+                    padding: 20px
+                    border-bottom: 1px solid #66e2a8
+                    transition: 0.3s
+                    transition-property: background
+                    &:hover
+                        background-color: #000
+                & i
+                    padding-right: 30px
+                    font-size: 10px
+        & .item:target .sub-menu
+            // Chevron actif   
+            max-height: 500px
+
+
+/********MEDIA QUERY POUR ECRAN 576PX  ***********/
+/******min-width 576px**************/
+@include media($sm)
+    .fas-fa
+        margin-right: 20px
+
+    .textConnected
+        font-size: 0.6em
+        padding: 0
+        margin: 0
+
+/********MEDIA QUERY POUR ECRAN 768PX  ***********/
+/******min-width 768px**************/
+@include media($md)
+    .sidebar  
+        width: 150px
+        transition: 0.3s
+        & .drop-down
+            margin-right: 50px
+            padding-right: 50px
+            float: right
+            font-size: 12px
+            margin-top: 3px
+
+
