@@ -49,8 +49,8 @@ class ApplyRepository extends ServiceEntityRepository
                     ->getQuery()
                     ->getResult();
     }
-    
 
+    
 //    /**
 //     * @return Apply[] Returns an array of Apply objects
 //     */

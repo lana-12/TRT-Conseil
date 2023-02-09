@@ -36,7 +36,7 @@
 	<main class="container">
 	{% if jobOffers %}
 		<div class="jobOffers">
-			<h2 class="mb-4 center">Annonce à valider</h2>
+			<h2 class="mb-4 center">{{titlepage}}</h2>
 			<div class="d-flex justify-content-center flex-wrap container ">
 
 				{% for jobOffer in jobOffers %}
@@ -50,38 +50,18 @@
 						<h6 class="card-subtitle mb-2 text-muted">Créé le : {{jobOffer.createdAt | date('d/m/y')}}</h6>
 						<h6 class="card-subtitle text-muted mb-2 ">Recherche : </h6> 
 						<p class="center">{{jobOffer.title}}</p>
-
 						<p class="card-text">{{ jobOffer.content }}</p>
 					</div>
 
 					<div class="card-footer d-flex justify-content-around">
 						<a href="{{ path('active_joboffer', { id : jobOffer.id }) }}" type="button" class="btn btn-primary btn-sm mx-auto" title="Valider l'annonce" alt="Valider l'annonce">VALIDER</a>
-						{# <a href="#" class="card-link">Another link</a> #}
 					</div>
 				</div>
 
 				{% endfor %}
 			</div>
 		</div>
-				{# <div class="jobOffer row">
-					<div class="col-8 text-center">
-						{{ jobOffer.title }}
-						<pre>
-{{ dump(jobOffer) }}
-{{ dump(jobOffer.createdAt) }}
-						</pre>
-					</div> #}
-
-					{# <div
-						class="col-4">
-						<a href="{{ path('active_joboffer', { id : jobOffer.id }) }}" type="button" class="btn btn-primary btn-sm">VALIDER</a>
-					</div> #}
-				</div>
-		</div>
-{# {% else %}
-<tr>
-	<td colspan="5">Pas d'annonces à valider'.</td>
-</tr>{% endfor %} #}
+				
 
 	{% else %}
 		<div class="alert alert-success" role="alert">
@@ -89,8 +69,8 @@
 				<h4>Aucune Offres d'emploi à valider</h4>
 			</div>
 		</div>
-
 	{% endif %}
+	
 {% else %}
 	<div class="container alert alert-danger mt-5" role="alert">
 		<div class="alert-message text-center">

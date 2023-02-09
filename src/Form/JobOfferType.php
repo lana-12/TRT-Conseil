@@ -18,19 +18,6 @@ class JobOfferType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        //     ->add('recruiter', EntityType::class, [
-        //         'class'=> Recruiter::class,
-        //         'attr' => [
-        //             'class' => 'form-control',
-        //         ],
-        //         'required' => true,
-        //         'query_builder'=> function(){
-                    
-        //         }
-        // ])
-
-
-        
             ->add('title', TextType::class, [
             'attr' => [
                 'class' => 'form-control mb-3',

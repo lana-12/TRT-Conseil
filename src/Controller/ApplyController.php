@@ -64,10 +64,8 @@ class ApplyController extends AbstractController
                 $candidate = $candidateRepo->find($idCandidate);
                 $apply->setCandidate($candidate);
                 $candidate->addApply($apply);
-                // dump($candidate);
             } 
 
-        // dump($apply);
         $candApply = $apply->getCandidate();
         if($candApply === null){
             $this->addFlash('danger', 'Vous ne pouvez pas postuler à cette annonce, votre profil n\'est pas à jour.');
@@ -78,13 +76,8 @@ class ApplyController extends AbstractController
             $this->em->persist($apply);
             $this->em->flush();
             $this->addFlash('success', 'Votre candidature a bien été enregistrer.');
-
-            return $this->render('apply/test.html.twig', [
-            'titlepage' => 'postulation à valider',
-            'candidates' => $candidates,
-            'user' => $user,
-            'apply' => $apply
-            ]);
+            
+            return $this->redirectToRoute('jobOffer');
         }        
     }
 

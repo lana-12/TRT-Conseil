@@ -1,12 +1,6 @@
-{# {% for recruiter in recruiters %}  #}
-
-{# {% if joboffers %} #}
-
+<div class="d-flex justify-content-center flex-wrap container ">
 {% for joboffer in joboffers %}
-    <pre>
-        {{ dump(joboffer) }}
-    </pre>
-
+   
     {% if joboffer.isActive %}
 
 		<div class="box_jobOffer">
@@ -17,8 +11,9 @@
 				{{ joboffer.city }}</h5>
 			<p>{{ joboffer.content }}</p>
 
-            <div class="center m-4">
-			    <a href="{{ path('editP',{'id': joboffer.id })}}" class="btn btn-sm btn-warning">Modifier</a>
+            <div class="d-flex justify-content-around m-4">
+			    <a href="{{ path('editP',{'id': joboffer.id })}}" class="mr-5 btn btn-sm btn-warning">Modifier</a>
+			    <a href="{{ path('removeP',{'id': joboffer.id })}}" class="btn btn-sm btn-danger">Supprimer</a>
 		    </div>
 		</div>
 
@@ -35,3 +30,6 @@
         </div>
 
 {% endfor %}
+</div>
+
+

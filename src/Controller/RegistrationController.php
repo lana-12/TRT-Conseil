@@ -5,28 +5,25 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
-use App\Security\UserAuthenticator;
 use App\Service\JWTService;
 use App\Service\SendMailService;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationController extends AbstractController
 {
     public function __construct(
         private SendMailService $mail,
         private JWTService $jwt,
+        private EntityManagerInterface $em,
     ){}
     
     #[Route('/inscription', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -45,7 +42,6 @@ class RegistrationController extends AbstractController
                 $user->addCandidate($candidate);
             }
 
-            
             $recruiters = $user->getRecruiters();
             foreach ($recruiters as $recruiter){
                 $user->addRecruiter($recruiter);
@@ -53,24 +49,10 @@ class RegistrationController extends AbstractController
 
             $this->addFlash('success', 'Votre compte de connexion a bien été créé');
             $this->addFlash('info', 'Un consultant va valider votre compte, surveillez votre messagerie');
-            $entityManager->persist($user);
-            $entityManager->flush();
-            
-            //On génère le JWT de l'user 
-            // On crée le header
-            // $header = [
-            //     'type'=>'JWT',
-            //     'alg'=> 'HS256'
-            // ];
-            // //On crée le payload
-            // $payload =[
-            //     'user_id'=> $user->getId()
-            // ];
-            // //On génère le token 
-            // $token = $jwt->generate($header, $payload, $this->getParameter('app.jwtsecret'));
-            // // dd($token);
-            
-            // on envoi le mail
+            $this->em->persist($user);
+            $this->em->flush();
+                        
+            // Envoi Email
             $this->mail->send(
                 'no-reply@trt-conseil.fr',
                 $user->getEmail(),

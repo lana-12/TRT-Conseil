@@ -4,14 +4,15 @@ namespace App\Controller;
 
 use App\Entity\JobOffer;
 use App\Form\JobOfferType;
+use App\Service\SendMailService;
+use App\Service\ArrayEmptyService;
 use App\Repository\JobOfferRepository;
 use App\Repository\RecruiterRepository;
-use App\Service\ArrayEmptyService;
-use App\Service\SendMailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/offre')]
@@ -28,35 +29,20 @@ class JobOfferController extends AbstractController
     #[Route('/', name: 'jobOffer')]
     public function index(): Response
     {
-        $jobOffers = $this->jobOfferRepo->findAll();
+        $jobOffers = $this->jobOfferRepo->findBy(['active' => true]);
         /**
          * @var User $user
          */
         $user = $this->getUser();
-
-        // $candidates= $user->getCandidates();
-        // dump($user);
-        // $candidates = $user->getCandidates();
-        // foreach ($candidates as $candidate) {
-        //     dump(!$candidate);
-        // }
-        // if (!$this->getUser()) {
-        //     $this->addFlash('danger', 'Vous devez être connecté.');
-        //     return $this->redirectToRoute('app_login');
-        // }
-        // if (!isset($candidates)) {
-        //     dump('oups');
-        // }
         
         return $this->render('jobOffer/index.html.twig', [
             'titlepage' => 'Offres d\'emploi',
             'joboffers'=> $jobOffers,
             'user'=> $user,
-            // 'candidates'=> $candidates,
         ]);
     }
 
-
+    #[Security("is_granted('ROLE_RECRUITER')", statusCode: 403)]
     #[Route('/poster', name: 'post')]
     public function newJobOffer(Request $request, RecruiterRepository $recruiterRepo, JobOffer $jobOffer = null): Response
     {
@@ -101,7 +87,7 @@ class JobOfferController extends AbstractController
         ]);
     }
 
-
+    #[Security("is_granted('ROLE_RECRUITER')", statusCode: 403)]
     #[Route('/modifier/{id}', name: 'editP')]
     public function editJobOffer(Request $request, RecruiterRepository $recruiterRepo, JobOffer $jobOffer=null): Response
     {
@@ -138,5 +124,23 @@ class JobOfferController extends AbstractController
             'recruiters'=> $recruiters,
             'editMode'=> $jobOffer->getId() !== null,
         ]);
+    }
+
+    #[Security("is_granted('ROLE_RECRUITER')", statusCode: 403)]
+    #[Route('/supprimer/{id}', name: 'removeP')]
+    public function removeJobOffer(JobOffer $jobOffer, JobOfferRepository $jobRepo): Response
+    {
+        if (!$this->getUser()) {
+            $this->addFlash('alert', 'Vous devez être connecté.');
+            return $this->redirectToRoute('app_login');
+
+        } else {
+
+            $jobRepo->remove($jobOffer);
+            $this->em->flush();
+            $this->addFlash('success', 'Votre annonce a bien été supprimé.');
+
+            return $this->redirectToRoute('recruiter');
+        }
     }
 }

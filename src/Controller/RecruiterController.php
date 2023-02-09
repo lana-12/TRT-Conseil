@@ -7,6 +7,8 @@ use App\Entity\JobOffer;
 use App\Entity\Recruiter;
 use App\Form\JobOfferType;
 use App\Form\RecruiterType;
+use App\Repository\ApplyRepository;
+use App\Repository\CandidateRepository;
 use App\Service\SendMailService;
 use App\Service\ArrayEmptyService;
 use App\Repository\RecruiterRepository;
@@ -15,9 +17,11 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
+#[Security("is_granted('ROLE_RECRUITER')", statusCode: 403)]
 #[Route('/recruteur')]
 
 class RecruiterController extends AbstractController
@@ -26,6 +30,7 @@ class RecruiterController extends AbstractController
         private EntityManagerInterface $em,
         private  SendMailService $mail,
         private ArrayEmptyService $array,
+    
     ){}
     
     #[Route('/', name: 'recruiter')]
@@ -41,21 +46,20 @@ class RecruiterController extends AbstractController
             } 
             $recruiters = $user->getRecruiters();
             foreach($recruiters as $recruiter){
-
-                // $id = $recruiter->getId();
-                // $recruiter = $repositoryRecruiter->find($id);
-
                 $jobOffers = $recruiter->getJobOffers();
+                foreach($jobOffers as $jobOffer){
+                    $candidatures = $jobOffer->getApplies();
+                }
                 
-
             }
             // $repositoryRecruiter = $doctrine->getRepository(Recruiter::class);
             
-        return $this->render('recruiter/index.html.twig', [
-            'titlepage' => 'Mon Espace',
-            'user'=>$user,
-            'recruiters' =>$recruiters,
-            'joboffers'=> $jobOffers,
+            return $this->render('recruiter/index.html.twig', [
+                'titlepage' => 'Mon Espace',
+                'user'=>$user,
+                'recruiters' =>$recruiters,
+                'joboffers'=> $jobOffers,
+                'candidatures'=> $candidatures,
         ]);
     }
     
@@ -125,7 +129,7 @@ class RecruiterController extends AbstractController
     }
 
     #[Route('/mesannonces', name: 'jobOffers')]
-    public function jobOffer(): Response
+    public function jobOffer(ApplyRepository $applyRepo): Response
     {
         /**
          * @var User $user
@@ -134,26 +138,27 @@ class RecruiterController extends AbstractController
         if (!$this->getUser()) {
             $this->addFlash('danger', 'Vous devez être connecté.');
             return $this->redirectToRoute('app_login');
-            // } elseif ($user->isActive() == false) {
-            //     $this->addFlash('danger', 'Votre compte n\'est pas encore activé.');
-            //     return $this->redirectToRoute('home');
+        
         }
 
         $recruiters = $user->getRecruiters();
+        
 
             foreach ($recruiters as $recruiter){
                 $jobOffers = $recruiter->getJobOffers();
-
                 foreach($jobOffers as $jobOffer){
                     if(!$jobOffer->isActive()){
                         $this->addFlash('danger', 'Votre annonce de ' .$jobOffer->getTitle().' n\'a pas été validé.');
                     }
+                    $candidatures = $jobOffer->getApplies();
                 }
 
                 return $this->render('recruiter/myJobOffer.html.twig', [
                     'titlepage' => 'Recruiter',
                     'recruiters' => $recruiters,
                     'joboffers' => $jobOffers,
+                    'candidatures'=> $candidatures,
+                    
                 ]);
             }
 

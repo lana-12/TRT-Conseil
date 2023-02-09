@@ -5,21 +5,20 @@
 	<li>{{ jobOffer.content }}</li>
 </ul>
 <p>Candidat :</p>
-{# mettre le firstname
-mettre le lastname
-mettre le cv #}
-<p>
-	{{ candidate.lastname|upper }}
-</p>
 
-<p> {{candidate.firstname|capitalize}} </p>
+<p>{{ candidate.lastname|upper }}
+	{{candidate.firstname|capitalize}}</p>
+
 <p>{{candidate.user.email}}</p>
 
-{# <p>
+{#Ne marche pas
+<p>{{candidate.cv}}</p>
+
+<p>
 	<a href="{{ asset('uploads/cvs/' ~ candidate.cv ) }} " target="_blank">Voir le CV</a>
 </p> #}
 
-</p>
+
 <p>Nous vous remercions de votre confiance.</p>
 <p>Cordialement</p>
 <p>L'equipe TRT Conseil</p>

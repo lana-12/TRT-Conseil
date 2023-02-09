@@ -47,7 +47,7 @@ class CandidateRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
-
+    
     // public function findIsActive($isActive)
     // {
     //     return $this->createQueryBuilder('c')

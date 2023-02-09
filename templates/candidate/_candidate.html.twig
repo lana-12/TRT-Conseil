@@ -1,16 +1,14 @@
-	<div class="card text-white bg-dark" style="width: 18rem;">
-		<h5 class="card-header center">{{ candidate.firstname }} {{ candidate.lastname }}</h5>
-
-
-		<div class="card-body">
-			<p class="card-text">
-				<a href="{{ asset('uploads/cvs/' ~ candidate.cv ) }} " target="_blank">Cliquez ici pour visualiser votre CV
-                </a>
-            </p>
-		</div>
-
-		<div class="center m-4">
-			<a href="{{ path('editCandidate',{'id': candidate.id })}}" class="btn btn-sm btn-warning ">Modifier</a>
-		</div>
-
+<div class="card text-white bg-dark" style="width: 18rem;">
+	<h5 class="card-header center">{{ candidate.firstname }} {{ candidate.lastname }}</h5>
+	<div class="card-body">
+		<p class="card-text">
+			<a href="{{ asset('uploads/cvs/' ~ candidate.cv ) }} " target="_blank">Cliquez ici pour visualiser votre CV
+			</a>
+		</p>
 	</div>
+
+	<div class="center m-4">
+		<a href="{{ path('editCandidate',{'id': candidate.id })}}" class="btn btn-sm btn-warning ">Modifier</a>
+	</div>
+
+</div>

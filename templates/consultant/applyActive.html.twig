@@ -35,37 +35,53 @@
 	</section>
 
 	<main class="container">
-
 	{% if applies %}
-		<div class="applies">
-			<h2> {{ titlepage }} </h2>
 
-			{% for apply in applies %}
-				<div class="apply row">
-					<div class="col-8 text-center">
-						{{ apply.jobOffer.title }}
-						{{ apply.jobOffer.recruiter.nameCompany }}
-						{{ apply.candidate.lastname }}
-						{{ apply.candidate.cv }}
-<pre>
-{{ dump(apply.id) }}
-{{ dump(apply.isActive) }}
-</pre>
+		<div class="jobOffers">
+			<h2 class="mb-4 center">{{ titlepage }}</h2>
+
+			<div class="d-flex justify-content-center flex-wrap container ">
+
+				{% for apply in applies %}
+
+				<div class="card bg-dark" style="width: 18rem;">
+					<div class="card-header">
+					<h5 class="card-title center">{{ apply.candidate.firstname }} vient de postuler pour le poste de : {{ apply.jobOffer.title }}</h5>
+
 					</div>
-					<div class="col-4">
-						<a href="{{ path('active_apply', { id : apply.id }) }}" type="button" class="btn btn-primary btn-sm">VALIDER</a>
+					<div class="card-body">
+						<h6 class="card-subtitle mb-2 text-muted">Ville de la Société :
+							{{ apply.jobOffer.city }}</h6>
+						<h6 class="card-subtitle mb-2 text-muted">Ville du candidat :
+							{{ apply.candidate.city }}</h6>
+						
+						<h6 class="card-subtitle text-muted mb-2 ">Société :
+							{{ apply.jobOffer.recruiter.nameCompany }}</h6>
+						<p class="card-text">{{ apply.jobOffer.content }}</p>
+						<p class="card-text">
+							<a href="{{ asset('uploads/cvs/' ~ apply.candidate.cv ) }} " target="_blank">Cliquez ici pour visualiser votre CV
+							</a>
+						</p>
+					</div>
+
+					<div class="card-footer d-flex justify-content-around">
+						<a href="{{ path('active_apply', { id : apply.id }) }}" type="button" class="btn btn-primary btn-sm mb-5" title="Valider la candidature" alt="Valider la candidature">VALIDER</a>
+						<a href="{{ path('remove_apply', { id : apply.id }) }}" type="button" class="btn btn-danger btn-sm mb-5" title="Supprimer la candidature" alt="Supprimer la candidature">Supprimer</a>
 					</div>
 				</div>
-			{% endfor %}
+				{% endfor %}
+
+			</div>
 		</div>
+
 	{% else %}
 			<div class="alert alert-success" role="alert">
 				<div class="alert-message text-center">
 					<h4>Aucune Candidatures à valider</h4>
 				</div>
 			</div>
-
 	{% endif %}
+
 {% else %}
 	<div class="container alert alert-danger mt-5" role="alert">
 		<div class="alert-message text-center">
