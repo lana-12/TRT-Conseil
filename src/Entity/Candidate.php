@@ -1,20 +1,15 @@
 <?php
-
 namespace App\Entity;
 
 use App\Entity\Apply;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CandidateRepository;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Vich\UploaderBundle\Mapping\Annotation\Uploadable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[UniqueEntity(fields: ['lastname'], message: 'Un compte a déjà été créé avec ce nom')]
 #[ORM\Entity(repositoryClass: CandidateRepository::class)]
-
 
 class Candidate
 {
@@ -43,7 +38,6 @@ class Candidate
 
     #[ORM\Column(length: 100)]
     private ?string $city = null;
-
 
     public function __construct()
     {
