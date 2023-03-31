@@ -30,7 +30,9 @@
 					': ''}}
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 							{% if is_granted('ROLE_RECRUITER') %}
-
+								<li>
+									<a class="dropdown-item" href="{{ path('recruiter')}}" alt="Connecté en tant que: {{ app.user.email }}" title="Connecté en tant que: {{ app.user.email }}">{{ app.user.email }}</a>
+								</li>
 								<li>
 									<a class="dropdown-item" href="{{ path('recruiter')}}" alt="Accéder mon espace" title="Accéder mon espace">Mon Espace</a>
 								</li>
