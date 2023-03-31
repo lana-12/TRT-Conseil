@@ -3,12 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\JobOffer;
 use App\Entity\Recruiter;
-use App\Form\JobOfferType;
 use App\Form\RecruiterType;
-use App\Repository\ApplyRepository;
-use App\Repository\CandidateRepository;
 use App\Service\SendMailService;
 use App\Service\ArrayEmptyService;
 use App\Repository\RecruiterRepository;

@@ -48,15 +48,15 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
             // comme quoi user est ok qu on lui prenne ses data perso pour son inscription
-            ->add('rgpdConsent', CheckboxType::class, [
+            // ->add('rgpdConsent', CheckboxType::class, [
                 
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
+            //     'mapped' => false,
+            //     'constraints' => [
+            //         new IsTrue([
+            //             'message' => 'You should agree to our terms.',
+            //         ]),
+            //     ],
+            // ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'mapped' => false,

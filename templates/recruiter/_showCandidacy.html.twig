@@ -1,22 +1,26 @@
-<hr class="separatorWhite">
 <div class="d-flex justify-content-center flex-wrap container ">
 
 {% for candidature in candidatures %}
+
+    <h3 class="center ">Vous avez des candidatures: </h3>
     <div class="box_jobOffer">
-        <h3 class="center">
-            Vous avez des candidatures : </h3>
+        <p class="text-muted">Pour l'annonce n°{{ candidature.jobOffer.id }}</p>
+
         <h4 class="titleJobOffer center my-4">{{ candidature.candidate.firstname }}</h4>
         <h5 class="city ">Lieu d'habitation : 
-        {{ candidature.candidate.city }}</h5>
+        {{ candidature.candidate.city }} </h5>
         <h5 class="city ">Postuler le : 
         {{ candidature.createdAt | date('d/m/y') }}</h5>
         <p class="underline"><a href="{{ asset('uploads/cvs/' ~ candidature.candidate.cv ) }} " target="_blank">Cliquez ici pour visualiser son CV</a></p>
     </div>
-	
+
 {% else %}
+
     <div class="alert alert-info mt-4 text-center">
-        <p>Vous n'avez aucune candidature !</p>
+        <p>Vous n'avez aucune candidatures !</p>
     </div>
+    
 {% endfor %}
 </div>
+	
 

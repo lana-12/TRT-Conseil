@@ -12,28 +12,30 @@
 	{% for recruiter in recruiters %}
 		<div class=" d-flex justify-content-center  ">
 			<nav class=" shadow-5-strong ">
-				<a class="underline pe-2" aria-current="page" alt="Page active" title="Page active" href="#">Mon Espace
+				<a class=" pe-2" href="{{ path('recruiter')}}" alt="Accéder à mes annonces" title="Accéder à mes annonces">Mon Espace
+
 				</a>
-				<a class="pe-2" href="{{ path('jobOffers')}}" alt="Accéder à mes annonces" title="Accéder à mes annonces">Mes Annonces
+				<a class="underline pe-2" href="{{ path('jobOffers')}}" aria-current="page" alt="Page active" title="Page active">Mes Annonces
+
 				</a>
 				<a class="" href="{{ path('post')}}" alt="Poster une annonces" title="Poster une annonces">Poster une annonce
 				</a>
 			</nav>
 		</div>
 
-
-		<h3 class="center mt-5 txtShadow">Mes annonces</h3>
 		<section>
 			<div class="row">
 				<div class="col-12">
+					<h3 class="center fs-1 mt-5 blue">Mes annonces</h3>
 					{% include "recruiter/_showJobOffer.html.twig" %}
 				</div>
 			</div>
 		</section>
-
+		<hr class="separatorWhite">
 		<section>
 			<div class="row">
 				<div class="col-12">
+					<h3 class="center mt-5 blue fs-1">Mes candidatures</h3>
 
 					{% include "recruiter/_showCandidacy.html.twig" %}
 

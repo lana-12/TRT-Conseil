@@ -9,38 +9,38 @@
 <body class="jobOffer">
 
 	<main class="container">
-		<h2 class="text-center m-4 fs-1">{{ titlepage }} </h2>
+		<h2 class="center m-4 fs-1 blue">{{ titlepage }} </h2>
 
 	{% if joboffers %}
-		<div class="d-flex justify-content-center flex-wrap container ">
+		<div class="d-flex justify-content-center flex-wrap container  ">
 
 		{% for joboffer in joboffers %}
 			<div class="box_jobOffer">
-				<h3 class="center">La société 
+				<h3 class="">La société : 
 					<strong>{{ joboffer.recruiter.nameCompany}}
-					</strong> recherche
+					</strong> 
 				</h3>
-				<h4 class="titleJobOffer center">{{ joboffer.title }}</h4>
-				<h5 class="city">Sur {{ joboffer.city }}</h5>
+				<p class="center">recherche</p>
+				<h4 class="titleJobOffer center">un(e) {{ joboffer.title }}</h4>
+				<h5 class="py-3 city">Sur {{ joboffer.city }}</h5>
 				<p>{{ joboffer.content }}</p>
 			{% if app.user  %}
 				{% if app.user.active %}
-				<div class="text-center">
+				<div class="text-center ">
 					<a href="{{ path('apply', { id : joboffer.id }) }}" type="button" class="btn btn-primary btn-sm ">Postuler</a>
 				</div>
-			{% else %}
+				{% else %}
 				<div class="alert alert-success mt-4 text-center">
 					<p>Votre compte n'est pas activé, merci de patienter</p>
 				</div>
 
-					
 				{% endif %}
 			{% else %}
-				<div class="alert alert-success mt-4 text-center">
+				<div class="alert alert-success mt-4 text-center ">
 					<p>Vous devez être connecté pour postuler à cette annonce !!</p>
 					<div class="d-flex d-flex justify-content-around">
-						<a class="" title="Lien pour se connecter" alt="Lien pour se connecter" href=" {{ path('app_login') }} ">Connectez-vous</a>
-						<a class="" title="Lien pour s'inscrire" alt="Lien pour s'inscrire" href=" {{ path('app_register') }} ">Inscrivez-vous</a>
+						<a type="button" class="btn btn-success btn-sm " title="Lien pour se connecter" alt="Lien pour se connecter" href=" {{ path('app_login') }} ">Connectez-vous</a>
+						<a type="button" class="btn btn-success btn-sm " title="Lien pour s'inscrire" alt="Lien pour s'inscrire" href=" {{ path('app_register') }} ">Inscrivez-vous</a>
 					</div>
 				</div>
 			{% endif %}

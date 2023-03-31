@@ -17,22 +17,6 @@
             </nav>
         </div>
         
-
-            {# <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page" alt="Page active" title="Page active">Mon Profil
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a class="" href="{{ path('jobOffers')}}" alt="Accéder à mes annonces" title="Accéder à mes annonces">Mes Annonces</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a class="" href="{{ path('post')}}" alt="Poster une annonces" title="Poster une annonces">Poster une annonce</a>
-                    </li>
-
-                </ol>
-            </nav> #}
-
-
         <h2 class="center my-5 txtShadow">{{ titlepage }}</h2>
 
         <section class="espace">
@@ -52,8 +36,8 @@
             <div class="row">
                 <div class="col-12">
 
-                    {% include "recruiter/_showJobOffer.html.twig" %} 
-                    {% include "recruiter/_showCandidacy.html.twig" %}
+                {% include "recruiter/_showJobOffer.html.twig" %} 
+                {% include "recruiter/_showCandidacy.html.twig" %}
 
                 </div>
             </div>

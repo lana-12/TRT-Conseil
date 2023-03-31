@@ -11,16 +11,16 @@
 	
 	<main class="container mt-3 ">
 	{% for recruiter in recruiters %}
+			{% if editMode %}
+				<h2 class="center blue my-5 ">{{ titlepage }}</h2>
+			{% else %}
+				<h2 class="center blue my-5 ">{{ titlepage }}</h2>
+			{% endif %}
+				
 		<section class="container annonce bg-dark">
 			<div class="row">
 				<div class="col">
 
-			{% if editMode %}
-				<h2 class="center my-3 ">{{ titlepage }}</h2>
-			{% else %}
-				<h2 class="center my-3 ">{{ titlepage }}</h2>
-			{% endif %}
-				
 				<p class="center pt-3">Pour que votre annonce soit validé, veuillez indiquer dans la description les horaires de travail et le salaire.</p>
 
 			{{ form_start(form) }}

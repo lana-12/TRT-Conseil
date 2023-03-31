@@ -21,12 +21,12 @@
 						<a class="nav-link" href="{{ path('contact') }}" alt="Formulaire de contact" title="Formulaire de contact">Contact</a>
 					</li>
 				</ul>
-				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0 px-md-5">
 
 				{% if app.user %}
 					{{ app.user.Active ? '
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle active" href="#" aria-current="page" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mon Compte</a>
+						<a class="nav-link dropdown-toggle active " href="#" aria-current="page" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mon Compte</a>
 					': ''}}
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 							{% if is_granted('ROLE_RECRUITER') %}
