@@ -5,7 +5,6 @@ J'ai réalisé ce projet, dans le cadre de ma formation de Développeur Web, pou
 
 L’objectif du projet est d’analyser les besoins et de développer l’application. Seul la partie backend de mon site a été évalué. Les langages utilisés sont principalement du PHP avec le framework Symfony.
 
-Toujours en cours de développement(la partie candidat, admin et quelques fonctionnalités) mais le site est en ligne.
 ## Code d'Accès 
 ---
     Recruteur
