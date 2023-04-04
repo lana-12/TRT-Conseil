@@ -35,15 +35,23 @@
 	</section>
 
 	<main class="container ">
-
+	
 	{% if accounts %} 
-		<h2 class="center m-3">Comptes à valider</h2>
+		<h2 class="center m-3">{{ titlepage }}</h2>
 		{% for account in accounts %}
+
+
 		<section class="account border border-dark p-3">
 			<div class="row">
-				<div class="col-12 d-flex justify-content-around flex-wrap">
+				<div class="col-12 d-flex justify-content-around flex-wrap"  >
 					<p>{{ account.email }} - </p>
-					<p>{{ account.roles[0] | lower }}</p>	
+
+				{% if account.roles[0] == "ROLE_RECRUITER" %}
+					<p>Recruteur</p>
+				{% else %}
+					<p>Candidat</p>
+				{% endif %}
+					{# <p>{{ account.roles[0] | lower }}</p>	 #}
 					<a href="{{ path('active_user', { id : account.id }) }}" type="button" class="btn btnValidate btn-sm " title="Valider un compte de connexion" alt="Valider un compte de connexion">Valider</a>
 				</div>
 			</div>

@@ -63,7 +63,7 @@ class ConsultantController extends AbstractController
             }
         
             return $this->render('consultant/accountUser.html.twig', [
-                'titlepage' => 'Validez les comptes d\'utilisateurs',
+                'titlepage' => 'Comptes à valider',
                 'accounts' => $accounts,
                 'role'=> $roleStr,
             ]);
