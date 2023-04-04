@@ -17,10 +17,10 @@
             </nav>
         </div>
         
-        <h2 class="center my-5 txtShadow">{{ titlepage }}</h2>
+        <h2 class="center my-5 blue">{{ titlepage }}</h2>
 
-        <section class="espace">
-
+        <section class="espace ">
+ 
             <div class="row">
                 <div class="col-12 ">
 
@@ -30,13 +30,16 @@
             </div>
         </section>
 
+        <h2 class="center my-5 blue">Mes Annonces</h2>
 {% if joboffers and candidatures %}
-        <h2 class="center my-3 txtShadow">Mes Annonces</h2>
-        <section class="espace">
+        <section class="espace bg-white rounded">
             <div class="row">
                 <div class="col-12">
 
                 {% include "recruiter/_showJobOffer.html.twig" %} 
+<h3 class="center mt-5">Candidatures:</h3>
+
+
                 {% include "recruiter/_showCandidacy.html.twig" %}
 
                 </div>
