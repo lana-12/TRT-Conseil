@@ -15,6 +15,10 @@ L’objectif du projet est d’analyser les besoins et de développer l’applic
         id  : candidat1@exemple.fr
         mdp : candidat1
 
+    Consultant
+        id  : consultant-trt-conseil@outlook.fr
+        mdp : consultant
+
 ---
 
 ## Projet
@@ -34,8 +38,6 @@ Il y a 4 acteurs:
 
     -   Les consultants => missionnés par TRTConseil pour gérer la laison sur le back-office entre candidats et recruteurs. 
     Ils valideront les créations de compte et les offres d'emploi.
-
-    -   L'administrateur => Personne en charge de la maintenance de l'application.
 
 
 Les fonctionnalités désirées sont :
