@@ -18,6 +18,8 @@ php -S localhost:8000 -t public
 
 symfony serve:stop
 
+npm run watch
+
 ```
 
 ## Code d'Accès 
