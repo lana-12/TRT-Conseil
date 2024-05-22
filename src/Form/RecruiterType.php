@@ -22,7 +22,7 @@ class RecruiterType extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new NotBlank(['message' => 'Veuillez saisir un nom d\'entreprise.']),
-                    new Length(['min' => 5, 'max' => 100, 'minMessage' => 'Le nom de la société doit contenir au moins {{ limit }} caractères']),
+                    new Length(['min' => 2, 'max' => 100, 'minMessage' => 'Le nom de la société doit contenir au moins {{ limit }} caractères']),
                     ]
             ])
             ->add('address', TextType::class, [
@@ -52,7 +52,7 @@ class RecruiterType extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new NotBlank(['message' => 'Veuillez saisir une ville.']),
-                    new Length(['min' => 8, 'max' => 250, 'minMessage' => 'Le nom de votre ville doit contenir au moins {{ limit }} caractères']),
+                    new Length(['min' => 2, 'max' => 250, 'minMessage' => 'Le nom de votre ville doit contenir au moins {{ limit }} caractères']),
                     ]
             ])
             // ->add('active')

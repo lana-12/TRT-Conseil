@@ -45,7 +45,6 @@ class ApplyController extends AbstractController
         /**
          * @var User $user
          */
-        // Recup id_Candidate and email
         $user = $this->getUser();
         $candidates = $user->getCandidates();
 
@@ -53,14 +52,19 @@ class ApplyController extends AbstractController
             $this->addFlash('danger', 'Vous devez être connecté.');
             return $this->redirectToRoute('app_login');
         }
+
+        $role = $user->getRoles();
+        if (!in_array("ROLE_CANDIDATE", $role, true)) {
+            $this->addFlash('alert', 'Vous ne disposez pas des droits pour accéder à cette page');
+            return $this->redirectToRoute('home');
+        }
+
         
         $apply = new Apply();
-            //Recup id_joboffer
         $jobOffer = $jobOfferRepo->find($id);
         $apply->setJobOffer($jobOffer);
         $jobOffer->addApply($apply);
         
-        //lier candidate à apply
         foreach ($candidates as $candidate) {
                 $idCandidate = $candidate->getId();
                 $candidate = $candidateRepo->find($idCandidate);
@@ -71,7 +75,6 @@ class ApplyController extends AbstractController
         $candApply = $apply->getCandidate();
         if($candApply === null){
             $this->addFlash('danger', 'Vous ne pouvez pas postuler à cette annonce, votre profil n\'est pas à jour.');
-
             return $this->redirectToRoute('profilC');
 
         }else{

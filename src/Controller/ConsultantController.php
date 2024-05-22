@@ -41,7 +41,6 @@ class ConsultantController extends AbstractController
         }  else {
             
             return $this->render('consultant/index.html.twig', [
-                // 'titlepage' => '',
             ]);
         }    
     }
@@ -85,17 +84,17 @@ class ConsultantController extends AbstractController
             $this->em->flush();
             $this->addFlash('success', 'Compte activé');
 
-            //On génère le JWT de l'user 
-            // On crée le header
+            //Create token
+            //Create header
             $header = [
                 'type' => 'JWT',
                 'alg' => 'HS256'
             ];
-            //On crée le payload
+            //Create payload
             $payload = [
                 'user_id' => $user->getId()
             ];
-            //On génère le token 
+            //Generer le token 
             $token = $this->jwt->generate($header, $payload, $this->getParameter('app.jwtsecret'));
 
             $this->mail->send(
@@ -141,19 +140,19 @@ class ConsultantController extends AbstractController
         $this->em->flush();
         $this->addFlash('success', 'Annonce activée');
 
-        // On génère le JWT de l'user 
-        // On crée le header
+        // Create token
+        // Create header
         $header = [
             'type' => 'JWT',
             'alg' => 'HS256'
         ];
 
-        //On crée le payload
+        //Create payload
         $payload = [
             'user_id' => $userId
         ];
 
-        //On génère le token 
+        //Generer le token 
         $token = $this->jwt->generate($header, $payload, $this->getParameter('app.jwtsecret'));
 
         // dd($token);

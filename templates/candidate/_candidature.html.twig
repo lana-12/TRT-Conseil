@@ -1,6 +1,6 @@
 {% for apply in applies %}
 
-<div class="card text-white bg-dark" style="width: 18rem;">
+<div class="card text-white bg-dark m-4" style="width: 18rem;">
 
 	<h5 class="card-header center underline">Candidatures :</h5>
 	<div class="card-body">
@@ -13,6 +13,10 @@
 		<p class="card-text">
 			{{ apply.joboffer.content }}
 		</p>
+		
+		<a href="{{ path('remove_candidature', { id : apply.id }) }}" type="button" class="btn btn-danger btn-sm mb-5" title="Supprimer la candidature" alt="Supprimer la candidature">Supprimer</a>
+
+
 	</div>
 
 </div>

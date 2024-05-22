@@ -52,10 +52,17 @@ class JobOfferController extends AbstractController
         $user = $this->getUser();
         if (!$this->getUser()) {
             $this->addFlash('alert', 'Vous devez être connecté.');
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('home');
         }
+
+        $role = $user->getRoles();
+        if (!in_array("ROLE_RECRUITER", $role, true)) {
+            $this->addFlash('alert', 'Vous ne disposez pas des droits pour accéder à cette page');
+            return $this->redirectToRoute('recruiter');
+        }
+
         $recruiters = $user->getRecruiters();
-            $jobOffer = new JobOffer();
+        $jobOffer = new JobOffer();
 
             // $recruiters = $user->getRecruiters();
             foreach ($recruiters as $recruiter) {
@@ -95,11 +102,27 @@ class JobOfferController extends AbstractController
          * @var User $user
          */
         $user = $this->getUser();
+        $recruiter = $recruiterRepo->find($jobOffer->getRecruiter()->getId());
+
         if (!$this->getUser()) {
             $this->addFlash('alert', 'Vous devez être connecté.');
             return $this->redirectToRoute('app_login');
         }
+
+        $role = $user->getRoles();
+        if (!in_array("ROLE_RECRUITER", $role, true)) {
+            $this->addFlash('alert', 'Vous ne disposez pas des droits pour accéder à cette page');
+            return $this->redirectToRoute('recruiter');
+        }
+
+
+        if($recruiter->getUser()->getId() !== $user->getId()) {
+            $this->addFlash('alert', 'Cette annonce ne vous appartient pas !!');
+            return $this->redirectToRoute('recruiter');
+        }
+
         $recruiters = $user->getRecruiters();
+
             if(!$jobOffer){
                 $jobOffer = new JobOffer();
             }

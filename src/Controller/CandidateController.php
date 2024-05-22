@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Apply;
 use App\Entity\Candidate;
 use App\Form\CandidateType;
 use Doctrine\ORM\EntityManager;
 use App\Service\SendMailService;
 use App\Repository\UserRepository;
 use App\Service\ArrayEmptyService;
+use App\Repository\ApplyRepository;
 use App\Repository\CandidateRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -73,8 +75,13 @@ class CandidateController extends AbstractController
         if (!$this->getUser()) {
             $this->addFlash('danger', 'Vous devez être connecté.');
             return $this->redirectToRoute('app_login');
-        } else {
+        }
 
+        $role = $user->getRoles();
+        if (!in_array("ROLE_CANDIDATE", $role, true)) {
+            $this->addFlash('alert', 'Vous ne disposez pas des droits pour accéder à cette page');
+            return $this->redirectToRoute('home');
+        }
             
         if (!$candidate) {
             $candidate = new Candidate();
@@ -124,7 +131,7 @@ class CandidateController extends AbstractController
             $this->addFlash('success', 'Profil modifié, vous pouvez maintenant postuler à une annonce');
             return $this->redirectToRoute('candidate');
         }
-    }
+    
         return $this->render('candidate/profil.html.twig', [
             'titlepage' => 'Profil',
             'candidateForm' => $form->createView(),
@@ -140,6 +147,14 @@ class CandidateController extends AbstractController
             $this->addFlash('danger', 'Vous devez être connecté.');
             return $this->redirectToRoute('app_login');
         }
+
+
+        $role = $this->getUser()->getRoles();
+        if (!in_array("ROLE_CANDIDATE", $role, true)) {
+            $this->addFlash('alert', 'Vous ne disposez pas des droits pour accéder à cette page');
+            return $this->redirectToRoute('home');
+        }
+
         if (!$candidate) {
             $candidate = new Candidate();
         }
@@ -226,5 +241,20 @@ class CandidateController extends AbstractController
         ]);
     }
 
+    #[Route('/supprimer-candidature/{id}', name: 'remove_candidature')]
+    public function removeApply(Apply $apply, ApplyRepository $applyRepo): Response
+    {
+        if (!$this->getUser()) {
+            $this->addFlash('danger', 'Vous devez être connecté.');
+            return $this->redirectToRoute('app_login');
+        } else {
+
+            $applyRepo->remove($apply);
+
+            $this->em->flush();
+            $this->addFlash('success', 'Candidature supprimé');
+            return $this->redirectToRoute('dashboard');
+        }
+    }
 
 }
